@@ -1,22 +1,23 @@
 <html>
 <head>
 <title></title>
-<link	rel="icon"
-		type="image/png"
-		href="http://ladaat.org.il/wp-content/themes/qs-starter-child/images/favicon/favicon-16x16.png"
-		sizes="16x16">
-<link	rel="icon"
-		type="image/png"
-		href="http://ladaat.org.il/wp-content/themes/qs-starter-child/images/favicon/favicon-32x32.png"
-		sizes="32x32">
-<link	rel="icon"
-		type="image/png"
-		href="http://ladaat.org.il/wp-content/themes/qs-starter-child/images/favicon/favicon-96x96.png"
-		sizes="96x96">
-<link	rel="icon"
-		type="image/png"
-		href="http://ladaat.org.il/wp-content/themes/qs-starter-child/images/favicon/android-chrome-192x192.png"
-		sizes="192x192">
+<link rel="apple-touch-icon" sizes="57x57" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="http://ladaat.org.il/wp-content/themes/qs-starter-child/images/favicon/favicon-16x16.png" sizes="16x16">
+	<link rel="icon" type="image/png" href="http://ladaat.org.il/wp-content/themes/qs-starter-child/images/favicon/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="http://ladaat.org.il/wp-content/themes/qs-starter-child/images/favicon/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="http://ladaat.org.il/wp-content/themes/qs-starter-child/images/favicon/android-chrome-192x192.png" sizes="192x192">
+	<meta name="msapplication-square70x70logo" content="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/smalltile.png" />
+	<meta name="msapplication-square150x150logo" content="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/mediumtile.png" />
+	<meta name="msapplication-wide310x150logo" content="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/widetile.png" />
+	<meta name="msapplication-square310x310logo" content="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/largetile.png" />
 
 <link id="langstyle" rel="stylesheet" type="text/css" href="css/main.css">
 
@@ -30,14 +31,96 @@
 	<div>
 	<img src="http://ladaat.org.il/wp-content/uploads/2018/11/Logo-01.svg" class="site-logo" />
 	<nav class="sitenav">
-	<button>צוות</button>
-	<button>תורמים</button>
-	<button>אירועים</button>
-	<button>שיעורים</button>
+		<button>צוות</button>
+		<button>תורמים</button>
+		<button>אירועים</button>
+		<button>שיעורים</button>
 	</nav>
 	</div>
 </header>
 
+<main>
+<div class="container" id="login">
+	<div class="row">
+		<div class="col-25">
+			<label for="username">שם משתמש</label>
+		</div>
+		<div class="col-75">
+			<input type="text" id="username">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-25">
+			<label for="password">סיסמא</label>
+		</div>
+		<div class="col-75">
+			<input type="text" id="password">
+		</div>
+	</div>
+	<div class="row submit">
+		<button class="button">כניסה</button>
+	</div>
+</div>
 
+<div class="container" id="donors">
+	<table>
+	<tr>
+		<th>#</th>
+		<th>שם פרטי</th>
+		<th>שם משפחה</th> 
+		<th>מספר טלפון</th>
+		<th>גיל</th>
+		<th>התקשרות אחרונה</th>
+		<th>סכום תרומה</th>
+	</tr>
+	<tr>
+		<td>1</td>
+		<td>Jill</td>
+		<td>Smith</td> 
+		<td>05416161</td>
+		<td>25</td>
+		<td>15.02.19</td>
+		<td>₪480</td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td>Eve</td>
+		<td>Jackson</td> 
+		<td>905459654</td>
+		<td>50</td>
+		<td>20.04.19</td>
+		<td>₪720</td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td>david</td>
+		<td>cohen</td> 
+		<td>05620255</td>
+		<td>83</td>
+		<td>27.06.18</td>
+		<td>₪1080</td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td>miryam</td>
+		<td>levi</td> 
+		<td>05241145</td>
+		<td>37</td>
+		<td>27.04.17</td>
+		<td>₪1280</td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td>yosef</td>
+		<td>hacohen</td> 
+		<td>054220001</td>
+		<td>28</td>
+		<td>08.01.19</td>
+		<td>₪1920</td>
+	</tr>
+	</table>
+</div>
+
+</main>
 </body>
 </html>

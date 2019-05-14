@@ -6,9 +6,11 @@ Colors:
 	Dark purple: rgb(172, 49, 150)
 	Light turqoise: rgb(171, 232, 231)
 	Dark turqoise: rgb(111, 183, 182)
-	Black: rgb(33, 33, 33)
-	White: rgba(0, 0, 0, 0)
+	Light Black: rgb(49, 49, 49)
+	Dark lack: rgb(33, 33, 33)
+	White: rgb(255, 255, 255)
 	Cream: rgb(253, 251, 243)
+	Transparent white: rgba(0, 0, 0, 0)
 Fonts:
 	MixtapeAAA
 	Almoni DL AAA
@@ -16,16 +18,24 @@ Fonts:
 
 * {
 	box-sizing: border-box;
+	font-family: Arial;
+	font-size: 21px; 
 }
 
 body {
 	direction: rtl;
-	/* background: #FDFBF3 url('http://ladaat.org.il/wp-content/themes/qs-starter-child/build/images/Bg__main.png') top center no-repeat */
+	background: #FDFBF3 url('http://ladaat.org.il/wp-content/themes/qs-starter-child/build/images/Bg__main.png') top center no-repeat
+	/*
 	background-color: rgb(253, 251, 243);
+	*/
 }
 
+/* Header */
+
 .site-header {
-	margin: 0 auto;
+	margin: auto;
+	margin-top: 66px;
+	margin-bottom: 66px;
 	max-width: 1170px;
 	width: 95%;
 }
@@ -60,4 +70,140 @@ img.site-logo {
 
 .sitenav button:hover {
 	border-bottom-width: 6px;
+}
+
+/* Main */
+
+main {
+    margin: 0 auto;
+    max-width: 1180px;
+}
+
+/* UI Elements */
+
+input[type=text] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+.container {
+  border-radius: 5px;
+  padding: 20px;
+  margin: auto;
+  margin-bottom: 66px;
+  width: 49.3%;
+}
+
+.col-25 {
+  float: right;
+  width: 25%;
+  margin-top: 12px;
+}
+
+.col-75 {
+  float: right;
+  width: 75%;
+  margin-top: 12px;
+}
+
+/* Clear floats after the columns */
+.row:after, .row.submit:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.row.submit {
+	margin-top: 12px;
+}
+
+.row.submit .button {
+	float: left;
+}
+
+.button {
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  padding: 12px 20px;
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+  font-weight: bold;
+  transition: all 1s;
+}
+
+.button:hover {
+  background-color: rgb(255, 255, 255);
+  color: black;
+}
+
+/* Login */
+
+#login {
+	background-color: rgb(111, 183, 182);
+}
+
+
+/* Donors */
+
+#donors {
+	background-color: rgb(253, 251, 243);
+	width: 98.6%;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th, td {
+	text-align: right;
+	padding: 12px;
+}
+
+th {
+	background-color: rgb(172, 49, 150);
+	color: white;
+}
+
+tr:nth-child(odd) td {
+	background-color: rgb(253, 251, 243);
+	
+}
+
+tr:nth-child(even) td {
+	background-color: #f2f2f2;
+}
+
+th:first-child {
+    border-radius: 0 5px 0 0;
+}
+
+th:last-child {
+    border-radius: 5px 0 0 0;
+}
+
+th:only-child {
+    border-radius: 5px 5px 0 0;
+}
+
+tr:last-child td:first-child {
+	border-radius: 0 0 5px 0;
+}
+
+tr:last-child td:last-child {
+	border-radius: 0 0 0 5px;
+}
+tr:last-child td:only-child {
+	border-radius: 0 0 5px 5px;
 }
