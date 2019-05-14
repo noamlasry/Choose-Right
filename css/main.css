@@ -1,0 +1,63 @@
+/*
+The color and font pallette from the public site.
+
+Colors:
+	Light purple: rgb(198, 64, 156)
+	Dark purple: rgb(172, 49, 150)
+	Light turqoise: rgb(171, 232, 231)
+	Dark turqoise: rgb(111, 183, 182)
+	Black: rgb(33, 33, 33)
+	White: rgba(0, 0, 0, 0)
+	Cream: rgb(253, 251, 243)
+Fonts:
+	MixtapeAAA
+	Almoni DL AAA
+*/
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	direction: rtl;
+	/* background: #FDFBF3 url('http://ladaat.org.il/wp-content/themes/qs-starter-child/build/images/Bg__main.png') top center no-repeat */
+	background-color: rgb(253, 251, 243);
+}
+
+.site-header {
+	margin: 0 auto;
+	max-width: 1170px;
+	width: 95%;
+}
+
+.site-header div {
+	display: inline-block;
+	width: 100%;
+}
+
+img.site-logo {
+	max-width: 157px;
+	float: right;
+	margin-left: 50px;
+}
+
+.sitenav {
+	float: left;
+}
+
+.sitenav button {
+	background-color: transparent;
+	border: none;
+	border-bottom: 0px solid rgb(111, 183, 182);
+	color: rgb(33, 33, 33);
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 21px;
+	transition: border 0.3s;
+}
+
+.sitenav button:hover {
+	border-bottom-width: 6px;
+}
