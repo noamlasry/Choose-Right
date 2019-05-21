@@ -1,0 +1,22 @@
+<h1>תורמים</h1>
+
+<div class="toolbar">
+	<button class="button" routerLink="/donor-editor">הוסף תורם</button>
+</div>
+
+<table>
+<tr>
+	<th (click)="sortDonors(compareFirstNames)">שם פרטי</th>
+	<th (click)="sortDonors(compareLastNames)">שם משפחה</th> 
+	<th (click)="sortDonors(comparePhoneNumbers)">מספר טלפון</th>
+	<th (click)="sortDonors(compareAges)">גיל</th>
+	<th (click)="sortDonors(compareAmounts)">סך התרומות</th>
+</tr>
+<tr *ngFor="let donor of donors"  routerLink="/donor/{{donor.id}}">
+	<td>{{ donor.firstName }}</td>
+	<td>{{ donor.lastName }}</td> 
+	<td>{{ donor.telephone }}</td>
+	<td>{{ donor.age }}</td>
+	<td>₪{{ totalDonations(donor) }}</td>
+</tr>
+</table>

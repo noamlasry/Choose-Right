@@ -1,0 +1,100 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+	box-sizing: border-box;
+	font-family: Arial;
+	font-size: 21px; 
+}
+
+body {
+	direction: rtl;
+	background: #FDFBF3 url('http://ladaat.org.il/wp-content/themes/qs-starter-child/build/images/Bg__main.png') top center no-repeat
+	/*
+	background-color: rgb(253, 251, 243);
+	*/
+}
+
+h1 {
+	font-size: 50px;
+}
+
+input[type=text] {
+	width: 100%;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	resize: vertical;
+}
+
+label {
+	padding: 12px 12px 12px 0;
+	display: inline-block;
+}
+
+.col-25 {
+	float: right;
+	width: 25%;
+	margin-top: 12px;
+}
+
+.col-75 {
+	float: right;
+	width: 75%;
+	margin-top: 12px;
+}
+
+.toolbar {
+	display: block;
+	margin-bottom: 21px;
+}
+
+/* Clear floats after the columns */
+.row:after, .row.submit:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.row.submit {
+	margin-top: 12px;
+}
+
+.row.submit .button {
+	float: left;
+}
+
+.button {
+	margin-left: 21px;
+	padding: 12px 20px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 5px;
+	cursor: pointer;
+	font-weight: bold;
+	transition: all 1s;
+	
+	background-color: rgba(0, 0, 0, 0);
+	color: white;
+	border-color: white;
+}
+
+.button:first-child, .toolbar .button:last-child {
+	margin-left: 0px;
+}
+
+.button:hover {
+	background-color: white;
+	color: rgb(111, 183, 182);
+}
+
+.toolbar .button {
+	margin-left: 21px;
+	background-color: rgba(0, 0, 0, 0);
+	color: black;
+	border-color: rgb(0, 0, 0);
+	border-bottom-width: 5px;
+}
+
+.toolbar .button:hover {
+	background-color: rgb(111, 183, 182);
+}

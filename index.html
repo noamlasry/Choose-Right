@@ -1,6 +1,6 @@
 <html>
 <head>
-<title></title>
+<title>לדעת - מערכת ניהול</title>
 <link rel="apple-touch-icon" sizes="57x57" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-60x60.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="http://ladaat.org.il/wp-content/themes/qs-starter/images/favicon/apple-touch-icon-72x72.png">
@@ -23,6 +23,8 @@
 
 <meta charset="UTF8">
 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 </head>
 <body>
 
@@ -39,14 +41,14 @@
 	</div>
 </header>
 
-<main>
-<div class="container" id="login">
+<main ng-app="ladaatApp">
+<div class="container" id="login" ng-controller="loginCtrl">
 	<div class="row">
 		<div class="col-25">
 			<label for="username">שם משתמש</label>
 		</div>
 		<div class="col-75">
-			<input type="text" id="username">
+			<input type="text" id="username" ng-model="username">
 		</div>
 	</div>
 	<div class="row">
@@ -54,15 +56,15 @@
 			<label for="password">סיסמא</label>
 		</div>
 		<div class="col-75">
-			<input type="text" id="password">
+			<input type="text" id="password" ng-model="password">
 		</div>
 	</div>
 	<div class="row submit">
-		<button class="button">כניסה</button>
+		<button class="button" ng-click="login()">כניסה</button>
 	</div>
 </div>
 
-<div class="container" id="donors">
+<div class="container" id="donors" ng-controller="donorsCtrl">
 	<table>
 	<tr>
 		<th>#</th>
@@ -70,57 +72,48 @@
 		<th>שם משפחה</th> 
 		<th>מספר טלפון</th>
 		<th>גיל</th>
-		<th>התקשרות אחרונה</th>
+		<th>תקשורת אחרונה</th>
 		<th>סכום תרומה</th>
 	</tr>
-	<tr>
-		<td>1</td>
-		<td>Jill</td>
-		<td>Smith</td> 
-		<td>05416161</td>
-		<td>25</td>
-		<td>15.02.19</td>
-		<td>₪480</td>
-	</tr>
-	<tr>
-		<td>2</td>
-		<td>Eve</td>
-		<td>Jackson</td> 
-		<td>905459654</td>
-		<td>50</td>
-		<td>20.04.19</td>
-		<td>₪720</td>
-	</tr>
-	<tr>
-		<td>3</td>
-		<td>david</td>
-		<td>cohen</td> 
-		<td>05620255</td>
-		<td>83</td>
-		<td>27.06.18</td>
-		<td>₪1080</td>
-	</tr>
-	<tr>
-		<td>4</td>
-		<td>miryam</td>
-		<td>levi</td> 
-		<td>05241145</td>
-		<td>37</td>
-		<td>27.04.17</td>
-		<td>₪1280</td>
-	</tr>
-	<tr>
-		<td>5</td>
-		<td>yosef</td>
-		<td>hacohen</td> 
-		<td>054220001</td>
-		<td>28</td>
-		<td>08.01.19</td>
-		<td>₪1920</td>
+	<tr ng-repeat="x in donors">
+		<td>{{ $index + 1 }}</td>
+		<td>{{ x.firstName }}</td>
+		<td>{{ x.lastName }}</td> 
+		<td>{{ x.telephone }}</td>
+		<td>{{ x.age }}</td>
+		<td>{{ x.lastCommunication }}</td>
+		<td>₪{{ x.totalDonations }}</td>
 	</tr>
 	</table>
 </div>
 
 </main>
+
+<script>
+
+
+var app = angular.module('ladaatApp', []);
+
+app.controller('loginCtrl', function($scope) {
+	$scope.users = [
+		{firstName: "Noa", lastName: "Levi", telephone: "079-845-2134", username: "noal", email: "noal@ladaat.org", password: "01234", role: 0},
+		{firstName: "Leah", lastName: "Gabri", telephone: "087-234-156", username: "gabi", email: "lgabri@ladaat.org", password: "helloworld", role: 1},
+	];
+	$scope.login = function() {
+		
+	}
+});
+
+app.controller('donorsCtrl', function($scope) {
+	$scope.donors = [
+		{firstName: "Jill", lastName: "Smith", telephone: "05416161", age: 25, lastCommunication: "15.02.19", totalDonations: 480},
+		{firstName: "Eve", lastName: "Jackson", telephone: "905459654", age: 50, lastCommunication: "20.04.19", totalDonations: 720},
+		{firstName: "david", lastName: "cohen", telephone: "05620255", age: 83, lastCommunication: "27.06.18", totalDonations: 1080},
+		{firstName: "miryam", lastName: "levi", telephone: "05241145", age: 37, lastCommunication: "27.04.17", totalDonations: 1280},
+		{firstName: "yosef", lastName: "hacohen", telephone: "054220001", age: 28, lastCommunication: "08.01.19", totalDonations: 1920},
+	];
+});
+</script>
+
 </body>
 </html>

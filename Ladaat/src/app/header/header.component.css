@@ -1,0 +1,31 @@
+:host {
+	margin-top: 66px;
+	margin-bottom: 132px;
+}
+
+img.site-logo {
+	max-width: 157px;
+	float: right;
+	margin-left: 50px;
+}
+
+.sitenav {
+	float: left;
+}
+
+.sitenav button {
+	background-color: transparent;
+	border: none;
+	border-bottom: 0px solid rgb(111, 183, 182);
+	color: rgb(33, 33, 33);
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 21px;
+	transition: border 0.3s;
+}
+
+.sitenav button:hover {
+	border-bottom-width: 6px;
+}
