@@ -1,9 +1,10 @@
+<form>
 <div class="row">
 	<div class="col-25">
-		<label for="username">שם משתמש</label>
+		<label for="email">שם משתמש</label>
 	</div>
 	<div class="col-75">
-		<input type="text" id="username" ng-model="username">
+		<input #email />
 	</div>
 </div>
 <div class="row">
@@ -11,9 +12,10 @@
 		<label for="password">סיסמא</label>
 	</div>
 	<div class="col-75">
-		<input type="text" id="password" ng-model="password">
+		<input #password />
 	</div>
 </div>
 <div class="row submit">
-	<button class="button">כניסה</button>
+	<button class="button" action="enter()" (click)="enter()">כניסה</button>
 </div>
+</form>

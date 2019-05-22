@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 import { Donor } from '../donor';
 import { DonorsService } from '../donors.service';
 
@@ -45,7 +48,8 @@ export class DonorEditorComponent implements OnInit {
 		}
 	}
 	
-	save(): void {		
+	save(): void {
+		
 		if (!this.temp.firstName || !this.temp.lastName) {
 			return;
 		}
