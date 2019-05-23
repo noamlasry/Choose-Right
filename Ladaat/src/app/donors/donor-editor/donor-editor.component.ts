@@ -2,16 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
-
 import { Donor } from '../donor';
 import { DonorsService } from '../donors.service';
 
 @Component({
 	selector: 'app-donor-editor',
 	templateUrl: './donor-editor.component.html',
-	styleUrls: ['../../shared.css', './donor-editor.component.css']
+	styleUrls: ['../../../shared.css', './donor-editor.component.css']
 })
 export class DonorEditorComponent implements OnInit {
 	donor: Donor;
@@ -27,20 +24,17 @@ export class DonorEditorComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.getDonor();
-		
-		this.temp.firstName = this.donor.firstName;
-		this.temp.lastName = this.donor.lastName;
-		this.temp.telephone = this.donor.telephone;
-		this.temp.age = this.donor.age;
-	}
-
-	getDonor(): void {
 		if (this.route.snapshot.paramMap.get('id')) {
 			this.update = true;
-			const id = +this.route.snapshot.paramMap.get('id');
-			this.donorsService.getDonor(id)
-				.subscribe(donor => this.donor = donor);
+			const id = this.route.snapshot.paramMap.get('id');
+			
+			this.donorsService.getDonor(id, donor => {
+				this.donor = donor;
+				this.temp.firstName = this.donor.firstName;
+				this.temp.lastName = this.donor.lastName;
+				this.temp.telephone = this.donor.telephone;
+				this.temp.age = this.donor.age;
+			});
 		}
 		else {
 			this.update = false;
@@ -65,12 +59,10 @@ export class DonorEditorComponent implements OnInit {
 			
 			if (this.update) {
 				
-				this.donorsService.updateDonor(this.donor)
-					.subscribe(() => this.location.back());
+				this.donorsService.updateDonor(this.donor, () => this.location.back());
 			}
 			else {
-				this.donorsService.addDonor(this.temp)
-					.subscribe(() => this.location.back());
+				this.donorsService.addDonor(this.temp, () => this.location.back());
 			}
 		}
 	}

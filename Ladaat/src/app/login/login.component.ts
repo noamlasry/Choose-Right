@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { auth } from 'firebase';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,7 +23,7 @@ export class LoginComponent implements OnInit {
 	enter() {
 	
 		this.userAuth.auth.signInWithEmailAndPassword(this.emailField.nativeElement.value, this.passwordField.nativeElement.value)
-			.then((result) => {this.router.navigate(['/donors'])})
-			.catch((result) => {alert("Invalid email or password")});
+			.then(() => {this.router.navigate(['/donors'])})
+			.catch(() => {alert("Invalid email or password")});
 	}
 }

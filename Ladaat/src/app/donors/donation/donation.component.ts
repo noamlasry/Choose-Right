@@ -8,7 +8,7 @@ import { DonorsService } from '../donors.service';
 @Component({
 	selector: 'app-donation',
 	templateUrl: './donation.component.html',
-	styleUrls: ['../../shared.css', './donation.component.css']
+	styleUrls: ['../../../shared.css', './donation.component.css']
 })
 export class DonationComponent implements OnInit {
 	donor: Donor;
@@ -27,9 +27,10 @@ export class DonationComponent implements OnInit {
 
 	getDonor(): void {
 		if (this.route.snapshot.paramMap.get('id')) {
-			const id = +this.route.snapshot.paramMap.get('id');
-			this.donorsService.getDonor(id)
-				.subscribe(donor => this.donor = donor);
+			const id = this.route.snapshot.paramMap.get('id');
+			this.donorsService.getDonor(id, donor => {
+				this.donor = donor;
+			});
 		}
 		else {
 			this.location.back(); //temporary fix;
@@ -41,8 +42,7 @@ export class DonationComponent implements OnInit {
 			return;
 		}
 		else {
-			this.donorsService.addDonation(this.donor, this.date, +this.amount)
-				.subscribe(() => this.location.back());
+			this.donorsService.addDonation(this.donor, this.date, +this.amount, donation => this.location.back());
 		}
 	}
 }

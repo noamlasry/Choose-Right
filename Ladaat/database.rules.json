@@ -1,7 +1,15 @@
 {
   /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
   "rules": {
-    ".read": false,
-    ".write": false
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "donors": {
+      "donor": {
+        ".validate": "newData.hasChildren(['firstName', 'lastName', 'telephone', 'age']) && newData.child('firstName').isString() && newData.child('lastName').isString() && newData.child('telephone').isNumber() && newData.child('age').isNumber()"
+      }
+    },
+    "donations": {
+      ".validate": "newData.hasChildren(['donor', 'date', 'amount']) && newData.child('donor').isString() && newData.child('date').isString() && newData.child('amount').isNumber()"
+    }
   }
 }

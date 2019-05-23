@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Donor } from '../donor';
-import { DonorsService } from '../donors.service';
+import { Donor, ComplexDonor } from './donor';
+import { DonorsService } from './donors.service';
 
 @Component({
 	selector: 'app-donors',
@@ -8,54 +8,48 @@ import { DonorsService } from '../donors.service';
 	styleUrls: ['../../shared.css', './donors.component.css']
 })
 export class DonorsComponent implements OnInit {
-	donors: Donor[];
-	currentSort: (a: Donor, b: Donor) => number;
+	donorData: ComplexDonor[];
+
+	currentSort: (a: ComplexDonor, b: ComplexDonor) => number;
 	
 	constructor(private donorsService: DonorsService) { }
 
 	ngOnInit() {
-		this.currentSort = this.compareAges;
-		this.getDonors();
+		// this.currentSort = this.compareAges;
+		this.donorsService.getComplexDonors(donors => {
+			this.donorData = donors;
+			this.sortDonors(this.compareAges);
+		});
 	}
 	
-	getDonors(): void {
-		this.donorsService.getDonors()
-				.subscribe(donors => this.donors = donors);
-		this.donors.sort(this.currentSort);
-	}
-	
-	totalDonations(donor: Donor): number {
-		return this.donorsService.totalDonations(donor);
-	}
-	
-	sortDonors(compareFunction: (a: Donor, b: Donor) => number): void {
+	sortDonors(compareFunction: (a: ComplexDonor, b: ComplexDonor) => number): void {
 		if (!this.currentSort || compareFunction != this.currentSort) {
-			this.donors.sort(compareFunction);
+			this.donorData.sort(compareFunction);
 		}
 		else {
-			this.donors.reverse();
+			this.donorData.reverse();
 		}
 		
 		this.currentSort = compareFunction;
 	}
 	
-	compareFirstNames(a: Donor, b: Donor): number {
-		return a.firstName > b.firstName ? 1 : -1;
+	compareFirstNames(a: ComplexDonor, b: ComplexDonor): number {
+		return a.donor.firstName > b.donor.firstName ? 1 : -1;
 	}
 	
-	compareLastNames(a: Donor, b: Donor): number {
-		return a.lastName > b.lastName ? 1 : -1;
+	compareLastNames(a: ComplexDonor, b: ComplexDonor): number {
+		return a.donor.lastName > b.donor.lastName ? 1 : -1;
 	}
 	
-	compareAges(a: Donor, b: Donor): number {
-		return a.age > b.age ? 1 : -1;
+	compareAges(a: ComplexDonor, b: ComplexDonor): number {
+		return a.donor.age - b.donor.age;
 	}
 	
-	comparePhoneNumbers(a: Donor, b: Donor): number {
-		return a.telephone > b.telephone ? 1 : -1;
+	comparePhoneNumbers(a: ComplexDonor, b: ComplexDonor): number {
+		return a.donor.telephone > b.donor.telephone ? 1 : -1;
 	}
 	
-	compareAmounts(a: Donor, b: Donor): number {
-		return this.totalDonations(a) > this.totalDonations(b) ? 1 : -1;
+	compareAmounts(a: ComplexDonor, b: ComplexDonor): number {
+		return a.total - b.total;
 	}
 }

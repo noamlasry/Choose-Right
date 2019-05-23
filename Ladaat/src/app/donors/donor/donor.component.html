@@ -1,0 +1,39 @@
+<div *ngIf="complexDonor">
+<h1>הפרטים של {{complexDonor.donor.firstName + " " + complexDonor.donor.lastName}}</h1>
+
+<div class="toolbar">
+	<button class="button" routerLink="/donor-editor/{{ complexDonor.donor.id }}">ערוך תורם</button>
+	<button class="button" routerLink="/donation/{{ complexDonor.donor.id }}">הוסף תרומה</button>
+</div>
+
+<table>
+<tr>
+	<th>שם פרטי</th>
+	<th>שם משפחה</th> 
+	<th>מספר טלפון</th>
+	<th>גיל</th>
+	<th>סך כל התרומות</th>
+</tr>
+<tr>
+	<td>{{ complexDonor.donor.firstName }}</td>
+	<td>{{ complexDonor.donor.lastName }}</td> 
+	<td>{{ complexDonor.donor.telephone }}</td>
+	<td>{{ complexDonor.donor.age }}</td>
+	<td>₪{{ complexDonor.total }}</td>
+</tr>
+</table>
+
+<h2>תרומות</h2>
+
+<table>
+<tr>
+	<th (click)="sortDonations(compareDates)">תאריך</th>
+	<th (click)="sortDonations(compareAmounts)">סכום</th> 
+</tr>
+<tr *ngFor="let donation of complexDonor.donations">
+	<td>{{ donation.date }}</td>
+	<td>₪{{ donation.amount }}</td> 
+</tr>
+</table>
+
+</div>

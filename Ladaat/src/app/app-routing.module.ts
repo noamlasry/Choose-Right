@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DonorsComponent } from './donors/donors.component';
-import { DonorComponent } from './donor/donor.component';
-import { DonorEditorComponent } from './donor-editor/donor-editor.component';
-import { DonationComponent } from './donation/donation.component';
 import { LoginComponent } from './login/login.component';
+import { DonorsComponent } from './donors/donors.component';
+import { DonorComponent } from './donors/donor/donor.component';
+import { DonorEditorComponent } from './donors/donor-editor/donor-editor.component';
+import { DonationComponent } from './donors/donation/donation.component';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'login', pathMatch: 'full' },

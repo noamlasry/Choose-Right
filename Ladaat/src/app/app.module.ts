@@ -9,12 +9,15 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DonorsComponent } from './donors/donors.component';
+
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
-import { DonorComponent } from './donor/donor.component';
-import { DonorEditorComponent } from './donor-editor/donor-editor.component';
-import { DonationComponent } from './donation/donation.component';
+
+import { DonorsComponent } from './donors/donors.component';
+import { DonorComponent } from './donors/donor/donor.component';
+import { DonorEditorComponent } from './donors/donor-editor/donor-editor.component';
+import { DonationComponent } from './donors/donation/donation.component';
+import * as firebase from 'firebase';
 
 @NgModule({
   declarations: [
