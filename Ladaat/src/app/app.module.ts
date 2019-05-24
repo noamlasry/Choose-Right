@@ -30,9 +30,9 @@ import * as firebase from 'firebase';
     DonationComponent,
   ],
   imports: [
-	AngularFireModule.initializeApp(environment.firebase),
-	AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-	AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     BrowserModule,
     AppRoutingModule,
     FormsModule

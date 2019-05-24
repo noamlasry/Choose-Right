@@ -1,21 +1,24 @@
-<form>
+<form (ngSubmit)="enter()" #loginForm="ngForm">
+<div class="imgcontainer">
+	<img src="../../assets/Logo.svg" alt="Logo" class="avatar">
+</div>
 <div class="row">
 	<div class="col-25">
-		<label for="email">שם משתמש</label>
+		<label for="email"><b>מייל</b></label>
 	</div>
 	<div class="col-75">
-		<input #email />
+		<input type="text" [(ngModel)]="email" name="email" id="email" required>
 	</div>
 </div>
 <div class="row">
 	<div class="col-25">
-		<label for="password">סיסמא</label>
+		<label for="password"><b>סיסמא</b></label>
 	</div>
 	<div class="col-75">
-		<input #password />
+		<input type="password" [(ngModel)]="password" name="password" id="password" required>
 	</div>
 </div>
 <div class="row submit">
-	<button class="button" action="enter()" (click)="enter()">כניסה</button>
+	<button class="button" type="submit" [disabled]="!loginForm.form.valid">כניסה</button>
 </div>
 </form>
