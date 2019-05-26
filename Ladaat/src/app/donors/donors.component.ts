@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Donor, ComplexDonor } from './donor';
+
+import { ComplexDonor } from './donor';
 import { DonorsService } from './donors.service';
 
 @Component({
@@ -9,16 +10,16 @@ import { DonorsService } from './donors.service';
 })
 export class DonorsComponent implements OnInit {
 	donorData: ComplexDonor[];
-
 	currentSort: (a: ComplexDonor, b: ComplexDonor) => number;
 	
-	constructor(private donorsService: DonorsService) { }
-
-	ngOnInit() {
-		// this.currentSort = this.compareAges;
-		this.donorsService.getComplexDonors(donors => {
-			this.donorData = donors;
-			this.sortDonors(this.compareAges);
+	constructor(
+		private donorsService: DonorsService
+		) {}
+		
+		ngOnInit() {
+			this.donorsService.getComplexDonors(donors => {
+				this.donorData = donors;
+				this.sortDonors(this.compareAges);
 		});
 	}
 	

@@ -6,14 +6,15 @@ import { DonorsComponent } from './donors/donors.component';
 import { DonorComponent } from './donors/donor/donor.component';
 import { DonorEditorComponent } from './donors/donor-editor/donor-editor.component';
 import { DonationComponent } from './donors/donation/donation.component';
+import { AuthGuard } from './login/auth.guard';
 
 const routes: Routes = [
 	{ path: '', redirectTo: 'login', pathMatch: 'full' },
-	{ path: 'donors', component: DonorsComponent },
-	{ path: 'donor/:id', component: DonorComponent },
-	{ path: 'donation/:id', component: DonationComponent },
-	{ path: 'donor-editor/:id', component: DonorEditorComponent },
-	{ path: 'donor-editor', component: DonorEditorComponent },
+	{ path: 'donors', canActivate: [AuthGuard], component: DonorsComponent },
+	{ path: 'donor/:id', canActivate: [AuthGuard], component: DonorComponent },
+	{ path: 'donation/:id', canActivate: [AuthGuard], component: DonationComponent },
+	{ path: 'donor-editor/:id', canActivate: [AuthGuard], component: DonorEditorComponent },
+	{ path: 'donor-editor', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'login', component: LoginComponent }
 ];
 

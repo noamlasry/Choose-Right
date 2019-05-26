@@ -17,7 +17,6 @@ import { DonorsComponent } from './donors/donors.component';
 import { DonorComponent } from './donors/donor/donor.component';
 import { DonorEditorComponent } from './donors/donor-editor/donor-editor.component';
 import { DonationComponent } from './donors/donation/donation.component';
-import * as firebase from 'firebase';
 
 @NgModule({
   declarations: [

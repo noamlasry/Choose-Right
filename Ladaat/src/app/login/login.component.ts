@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
 
 @Component({
 	selector: 'app-login',
@@ -9,18 +8,21 @@ import { NgForm } from '@angular/forms';
 	styleUrls: ['../../shared.css', './login.component.css']
 })
 export class LoginComponent implements OnInit {
-	@ViewChild('email') emailField;
-	@ViewChild('password') passwordField;
-
 	email: string = "";
 	password: string = "";
 
 	constructor(
 		private userAuth: AngularFireAuth,
 		private router: Router
-	) { }
-
-	ngOnInit() {}
+	) {}
+	
+	ngOnInit() {
+		this.userAuth.auth.onAuthStateChanged(user => {
+			if (user) {
+				this.router.navigate(["donors"]);
+			}
+		});
+	}
 	
 	enter() {
 		this.userAuth.auth.signInWithEmailAndPassword(this.email, this.password)

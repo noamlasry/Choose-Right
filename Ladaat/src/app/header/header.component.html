@@ -1,7 +1,12 @@
-<img src="http://ladaat.org.il/wp-content/uploads/2018/11/Logo-01.svg" class="site-logo" routerLink="/"/>
+<div *ngIf="show">
+<img src="http://ladaat.org.il/wp-content/uploads/2018/11/Logo-01.svg" class="site-logo" routerLink=""/>
+
 <nav class="sitenav">
 	<button>צוות</button>
 	<button routerLink="/donors">תורמים</button>
 	<button>אירועים</button>
 	<button>שיעורים</button>
+	<button>{{ email }}</button>
+	<button (click)="logout()">יציאה</button>
 </nav>
+</div>
