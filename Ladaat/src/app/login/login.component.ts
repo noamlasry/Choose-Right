@@ -19,14 +19,13 @@ export class LoginComponent implements OnInit {
 	ngOnInit() {
 		this.userAuth.auth.onAuthStateChanged(user => {
 			if (user) {
-				this.router.navigate(["donors"]);
+				this.router.navigate([""]);
 			}
 		});
 	}
 	
 	enter() {
 		this.userAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-			.then(() => {this.router.navigate(['/donors'])})
 			.catch(() => {alert("Invalid email or password")});
 	}
 }
