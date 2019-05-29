@@ -1,0 +1,19 @@
+<form class="container" (ngSubmit)="save()" #profileForm="ngForm">
+  <div class="imgcontainer">
+    <img src="{{avatar}}" alt="Avatar" class="avatar" (click)="selectImage()">
+  </div>
+
+  <div class="row">
+      <div class="col-25">
+        <label for="nick"><b>כינוי</b></label>
+      </div>
+      <div class="col-75">
+        <input type="text" [(ngModel)]="nick" name="nick" id="nick" required>
+      </div>
+  </div>
+
+  <div class="row submit">
+      <button class="button" type="submit" [disabled]="!profileForm.form.valid">שמור</button>
+      <div class="button" (click)="this.location.back()">בטל</div>
+  </div>
+</form>

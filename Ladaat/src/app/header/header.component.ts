@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   show: boolean = false;
   email: string;
+  nick: string;
 
   constructor(
     private userAuth: AngularFireAuth,
@@ -19,12 +20,14 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userAuth.auth.onAuthStateChanged(user => {
 			if (user) {
+        this.nick = user.displayName;
         this.email = user.email.split("@")[0];
 				this.show = true;
       }
       else {
         this.show = false;
         this.email = null;
+        this.nick = null;
       }
     });
   }

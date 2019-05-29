@@ -4,6 +4,6 @@
 	<button routerLink="/donors">תורמים</button>
 	<button>אירועים</button>
 	<button>שיעורים</button>
-	<button>{{ email }}</button>
+	<button routerLink="/profile">{{ nick ? nick : email }}</button>
 	<button (click)="logout()">יציאה</button>
 </nav>
