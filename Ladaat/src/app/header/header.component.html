@@ -1,12 +1,11 @@
-<div *ngIf="show">
-<img src="http://ladaat.org.il/wp-content/uploads/2018/11/Logo-01.svg" class="site-logo" routerLink=""/>
-
-<nav class="sitenav">
-	<button>צוות</button>
-	<button routerLink="/donors">תורמים</button>
-	<button>אירועים</button>
-	<button>שיעורים</button>
-	<button>{{ email }}</button>
-	<button (click)="logout()">יציאה</button>
-</nav>
+<div class="container" *ngIf="show">
+	<nav class="sitenav">
+		<img src="../../assets/logos/Logo-transparent.svg" class="site-logo" routerLink=""/>
+		<button>צוות</button>
+		<button routerLink="/donors">תורמים</button>
+		<button>אירועים</button>
+		<button>שיעורים</button>
+		<button>{{ email }}</button>
+		<button (click)="logout()">יציאה</button>
+	</nav>
 </div>

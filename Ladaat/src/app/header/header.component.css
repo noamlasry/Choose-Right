@@ -1,31 +1,35 @@
-:host {
+.container {
 	margin-top: 66px;
-	margin-bottom: 132px;
-}
-
-img.site-logo {
-	max-width: 157px;
-	float: right;
-	margin-left: 50px;
+	background-color: rgb(172, 49, 150);
 }
 
 .sitenav {
-	float: left;
+	display: table-row;
+	border: 3px solid green;
+	vertical-align: middle;
+}
+
+img.site-logo {
+	display: table-cell;
+	vertical-align: middle;
+	max-width: 157px;
+	padding: 15px 32px;
 }
 
 .sitenav button {
+	display: table-cell;
 	background-color: transparent;
 	border: none;
-	border-bottom: 0px solid rgb(111, 183, 182);
-	color: rgb(33, 33, 33);
+	border-bottom: 6px solid rgb(253, 251, 243, 0);
+	color: white;
 	padding: 15px 32px;
 	text-align: center;
+	vertical-align: middle;
 	text-decoration: none;
-	display: inline-block;
 	font-size: 21px;
-	transition: border 0.3s;
+	transition: border 0.5s;
 }
 
 .sitenav button:hover {
-	border-bottom-width: 6px;
+	border-bottom-color: rgb(253, 251, 243, 1);
 }

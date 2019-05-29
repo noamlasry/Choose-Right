@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Donor } from '../donor';
@@ -12,16 +12,15 @@ import { DonorsService } from '../donors.service';
 })
 export class DonorEditorComponent implements OnInit {
 	donor: Donor;
-	temp: Donor;
+	temp: Donor = new Donor();;
 	update: boolean;
 
 	constructor(
+		private router: Router,
 		private route: ActivatedRoute,
 		private donorsService: DonorsService,
 		private location: Location
-	) {
-		this.temp = new Donor();
-	}
+	) {}
 
 	ngOnInit(): void {
 		if (this.route.snapshot.paramMap.get('id')) {
@@ -43,7 +42,6 @@ export class DonorEditorComponent implements OnInit {
 	}
 	
 	save(): void {
-		
 		if (!this.temp.firstName || !this.temp.lastName) {
 			return;
 		}
@@ -58,12 +56,17 @@ export class DonorEditorComponent implements OnInit {
 			this.donor.age = this.temp.age;
 			
 			if (this.update) {
-				
 				this.donorsService.updateDonor(this.donor, () => this.location.back());
 			}
 			else {
 				this.donorsService.addDonor(this.temp, () => this.location.back());
 			}
+		}
+	}
+
+	delete() {
+		if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
+			this.donorsService.deleteDonor(this.donor, () => this.router.navigate(['donors']));
 		}
 	}
 }

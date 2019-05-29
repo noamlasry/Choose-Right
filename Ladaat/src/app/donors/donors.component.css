@@ -1,8 +1,8 @@
 /* Donors */
 
-:host {
+.container {
 	background-color: rgb(253, 251, 243);
-	width: 98.6%;
+	width: 100%;
 }
 
 table {

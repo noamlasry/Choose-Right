@@ -1,36 +1,39 @@
-<div class="row">
-	<div class="col-25">
-		<label for="firstName">שם פרטי</label>
+<form class="container" (ngSubmit)="save()" #donorForm="ngForm">
+	<div class="row">
+		<div class="col-25">
+			<label for="firstName">שם פרטי</label>
+		</div>
+		<div class="col-75">
+			<input type="text" [(ngModel)]="temp.firstName" name="firstName" id="firstName" required/>
+		</div>
 	</div>
-	<div class="col-75">
-		<input id="firstName" [(ngModel)]="temp.firstName"/>
+	<div class="row">
+		<div class="col-25">
+			<label for="lastName">שם משפחה</label>
+		</div>
+		<div class="col-75">
+			<input type="text" [(ngModel)]="temp.lastName" name="lastName" id="lastName" required/>
+		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-25">
-		<label for="lastName">שם משפחה</label>
+	<div class="row">
+			<div class="col-25">
+				<label for="telephone">מספר טלפון</label>
+			</div>
+			<div class="col-75">
+				<input type="tel" [(ngModel)]="temp.telephone" name="telephone" id="telephone"/>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col-25">
+					<label for="age">גיל</label>
+				</div>
+				<div class="col-75">
+					<input type="number" [(ngModel)]="temp.age" name="age" id="age"/>
+				</div>
+			</div>
+	<div class="row submit">
+		<button class="button" type="submit" [disabled]="!donorForm.form.valid">שמור</button>
+		<div class="button" (click)="this.location.back()">בטל</div>
+		<div class="button" (click)="delete()" *ngIf="update">מחק</div>
 	</div>
-	<div class="col-75">
-		<input id="lastName" [(ngModel)]="temp.lastName"/>
-	</div>
-</div>
-<div class="row">
-	<div class="col-25">
-		<label for="telephone">מספר טלפון</label>
-	</div>
-	<div class="col-75">
-		<input id="telephone" [(ngModel)]="temp.telephone"/>
-	</div>
-</div>
-<div class="row">
-	<div class="col-25">
-		<label for="age">גיל</label>
-	</div>
-	<div class="col-75">
-		<input id="age" [(ngModel)]="temp.age"/>
-	</div>
-</div>
-<div class="row submit">
-	<button class="button" (click)="save()">שמור</button>
-	<button class="button" (click)="this.location.back()">בטל</button>
-</div>
+</form>

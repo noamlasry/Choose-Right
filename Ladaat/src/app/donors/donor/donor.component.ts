@@ -21,8 +21,7 @@ export class DonorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.donorsService.getComplexDonor(id, complexDonor => {
+    this.donorsService.getComplexDonor(this.route.snapshot.paramMap.get('id'), complexDonor => {
       this.complexDonor = complexDonor;
       this.sortDonations(this.compareDates);
     });

@@ -24,9 +24,7 @@ export class DonorsService {
 		.then(snapshot => {
 			var donors: Donor[] = [];
 			snapshot.forEach(element => {
-				var donor = element.toJSON() as Donor;
-				donor.id = element.key;
-				donors.push(donor);
+				donors.push(Donor.create(element.toJSON(), element.key));
 			});
 
 			callback(donors);
@@ -41,9 +39,7 @@ export class DonorsService {
 		.then(donorSnapshot => {
 			var donors: ComplexDonor[] = [];
 			donorSnapshot.forEach(element => {
-				var donor = element.toJSON() as Donor;
-				donor.id = element.key;
-				this.getComplexDonor(donor.id, complexDonor => {
+				this.getComplexDonor(element.key, complexDonor => {
 					donors.push(complexDonor)
 
 					if (donors.length == donorSnapshot.numChildren()) {
@@ -60,9 +56,7 @@ export class DonorsService {
 	getDonor(id: string, callback: (donor: Donor) => void): void {
 		this.donorRef.child(id).once('value')
 		.then(snapshot => {
-			var donor: Donor = snapshot.toJSON() as Donor;
-			donor.id = id;
-			callback(donor);
+			callback(Donor.create(snapshot.toJSON(), snapshot.key));
 		})
 		.catch(error => {
 			console.log(error);
@@ -72,8 +66,7 @@ export class DonorsService {
 	getComplexDonor(id: string, callback: (complexDonor: ComplexDonor) => void): void {
 		this.donorRef.child(id).once('value')
 		.then(snapshot => {
-			var dono: Donor = snapshot.toJSON() as Donor;
-			dono.id = id;
+			var dono: Donor = Donor.create(snapshot.toJSON(), snapshot.key);
 
 			this.getDonations(dono, dona => {
 				var tota: number = 0;
@@ -94,11 +87,10 @@ export class DonorsService {
 			'lastName': donor.lastName,
 			'age': donor.age,
 			'telephone': donor.telephone
-		});
+		  });
 		
 		ref.then(d => {
-			donor.id = ref.key;
-			callback(donor);
+			callback(Donor.create(d.toJSON(), ref.key));
 		})
 		.catch(error => {
 			console.log(error);
@@ -115,26 +107,73 @@ export class DonorsService {
 			'telephone': donor.telephone
 		})
 		.then(d => {
-			callback(donor);
+			callback(d);
+		})
+		.catch(error => {
+			console.log(error);
+		});
+	}
+
+	deleteDonor(donor: Donor, callback: (donor: Donor, donations: Donation[]) => void): void {
+		var donations: Donation[] = [];
+
+		this.donorRef.child(donor.id).remove()
+		.then(() => {
+			this.getDonations(donor, donas => {
+				if (donas.length > 0) {
+					donas.forEach(donation => {
+						this.deleteDonation(donation, d => {
+							donations.push(d);
+	
+							if (donations.length == donas.length) {
+								callback(donor, donations);
+							}
+						})
+					});
+				}
+				else {
+					callback(donor, donations);
+				}
+			});
+		})
+		.catch(error => {
+			console.log(error);
+		});
+	}
+
+	getDonation(id: string, callback: (donation: Donation) => void): void {
+		this.donationRef.child(id).once('value')
+		.then(snapshot => {
+			callback(Donation.create(snapshot.toJSON(), snapshot.key));
 		})
 		.catch(error => {
 			console.log(error);
 		});
 	}
 	
-	addDonation(donor: Donor, date: string, amount: number, callback: (donation: Donation) => void): void {
-		
-		var donation = new Donation();
-		donation.donor = donor.id;
-		donation.date = date;
-		donation.amount = amount;
-		
+	addDonation(donation: Donation, callback: (donation: Donation) => void): void {
 		var ref = this.donationRef.push({
 			'donor': donation.donor,
 			'date': donation.date,
 			'amount': donation.amount
-		});
+		  })
+		  
 		ref.then(d => {
+			callback(Donation.create(d.toJSON(), ref.key));
+		}).catch(error => {
+			console.log(error);
+		});
+	}
+
+	updateDonation(donation: Donation, callback: (donation: Donation) => void): void {
+		var ref = this.donationRef.child(donation.id);
+
+		ref.set({
+			'donor': donation.donor,
+			'date': donation.date,
+			'amount': donation.amount
+		  })
+		.then(() => {
 			callback(donation);
 		})
 		.catch(error => {
@@ -142,13 +181,23 @@ export class DonorsService {
 		});
 	}
 	
+	deleteDonation(donation: Donation, callback: (donation: Donation) => void): void {
+		this.db.ref("donations/" + donation.id).remove()
+		.then(() => {
+			callback(donation);
+		})
+		.catch(error => {
+			console.log(error);
+		});
+	}
+
 	getDonations(donor: Donor, callback: (donations: Donation[]) => void): void {
 		this.donationRef.once('value')
 		.then(snapshot => {
 			var donations: Donation[] = [];
 
 			snapshot.forEach(element => {
-				var donation = element.toJSON() as Donation;
+				var donation = Donation.create(element.toJSON(), element.key);
 				if (donation.donor == donor.id) {
 					donations.push(donation);
 				}

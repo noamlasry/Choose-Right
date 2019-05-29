@@ -8,7 +8,7 @@
 
 body {
 	direction: rtl;
-	background: #FDFBF3 url('http://ladaat.org.il/wp-content/themes/qs-starter-child/build/images/Bg__main.png') top center no-repeat
+	background: #FDFBF3 url('./assets/backgrounds/Bg__main.png') top center no-repeat
 	/*
 	background-color: rgb(253, 251, 243);
 	*/
@@ -18,7 +18,7 @@ h1 {
 	font-size: 50px;
 }
 
-input[type=text] {
+input, input[type=text], input[type=number] {
 	width: 100%;
 	padding: 12px;
 	border: 1px solid #ccc;
