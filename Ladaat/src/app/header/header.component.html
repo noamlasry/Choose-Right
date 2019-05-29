@@ -1,9 +1,17 @@
-<nav class="sitenav" class="sitenav container" *ngIf="show">
-	<img src="../../assets/logos/Logo-transparent.svg" class="site-logo" routerLink=""/>
-	<button>צוות</button>
-	<button routerLink="/donors">תורמים</button>
-	<button>אירועים</button>
-	<button>שיעורים</button>
-	<button routerLink="/profile">{{ nick ? nick : email }}</button>
-	<button (click)="logout()">יציאה</button>
-</nav>
+<div class="navbar container" *ngIf="show">
+    <a><img src="../../assets/logos/Logo-transparent.svg"/></a>
+    <a class="navbtn" routerLink="">דף הבית</a>
+    <a class="navbtn" routerLink="donors">תורמים</a>
+    <a class="navbtn">צוות</a>
+    <a class="navbtn">שיעורים</a>
+    
+    <div class="dropdown navbtn">
+      <a class="dropbtn">{{ nick ? nick : email }} 
+        <i class="fa fa-caret-down"></i>
+      </a>
+      <div class="dropdown-content">
+        <a class="navbtn" routerLink="profile" >פרופיל</a> 
+        <a class="navbtn" (click)="logout()">התנתק</a> 
+      </div>
+    </div>
+</div>

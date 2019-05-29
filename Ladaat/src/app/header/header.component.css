@@ -1,33 +1,73 @@
 .container {
 	margin-top: 66px;
-	background-color: rgb(172, 49, 150);
+	width: 100%;
 }
 
-.sitenav {
+.navbar {
+	overflow: hidden;
+	background-color: rgb(172, 49, 150);
+	color: white;
+	display: block;
+	padding: 0;
+}
+
+.dropdown {
+	padding: 0;
+}
+
+.navbar a, .dropdown .dropbtn {
+	display: table-cell;
+	font-size: 16px;
+	padding: 14px 16px;
+	
+	text-decoration: none;
+	color: white;
+	border: none;
+	border-bottom: 5px solid rgba(255, 255, 255, 0);
+
+	text-align: center;
+	vertical-align: middle;
+
+	transition: background-color 0.3s;
+}
+
+ .dropdown {
+	display: table-cell;
+	vertical-align: middle;
+	overflow: hidden;
+}
+
+.navbtn:hover {
+	background-color: rgb(198, 64, 156);
+	cursor: pointer;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: rgb(172, 49, 150);
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: white;
+	text-decoration: none;
+	display: block;
+	text-align: right;
+	width: 100%;
+	border-bottom: 5px solid rgba(255, 255, 255, 0);
+}
+
+.dropdown:hover .dropdown-content {
 	display: block;
 }
 
-img.site-logo {
-	display: inline-block;
-	vertical-align: middle;
-	max-width: 157px;
-	padding: 0 32px;
+.dropdown-content, .dropdown-content .navbtn:last-child {
+	border-radius: 5px 0 5px 5px;
 }
 
-.sitenav button {
-	display: inline-block;
-	background-color: transparent;
-	border: none;
-	border-bottom: 6px solid rgb(253, 251, 243, 0);
-	color: white;
-	padding: 15px 32px;
-	text-align: center;
-	vertical-align: middle;
-	text-decoration: none;
-	font-size: 21px;
-	transition: border 0.5s;
-}
-
-.sitenav button:hover {
-	border-bottom-color: rgb(253, 251, 243, 1);
+.dropdown-content .navbtn:first-child {
+	border-radius: 5px 0 0 0;
 }
