@@ -1,9 +1,29 @@
 <nav class="sitenav" class="sitenav container" *ngIf="show">
-	<img src="../../assets/logos/Logo-transparent.svg" class="site-logo" routerLink=""/>
-	<button>צוות</button>
-	<button routerLink="/donors">תורמים</button>
-	<button>אירועים</button>
-	<button>שיעורים</button>
-	<button>{{ email }}</button>
-	<button (click)="logout()">יציאה</button>
+		<img src="../../assets/logos/Logo-transparent.svg" class="site-logo" routerLink=""/>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+
+<div class="navbar">
+  <a  routerLink="/home">דף הבית</a>
+  <a routerLink="/donors">תורמים</a>
+  <a href="#news">צוות</a>
+  <a href="#news">שיעורים</a>
+
+  <div  class="dropdown">
+    <button href="#" class="dropbtn">{{email}} 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#" (click)="logout()">התנתק</a> 
+    </div>
+  </div> 
+</div>
+
+
+</body>
+
 </nav>

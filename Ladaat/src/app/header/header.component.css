@@ -1,10 +1,11 @@
 .container {
 	margin-top: 66px;
-	background-color: rgb(172, 49, 150);
+	
 }
 
 .sitenav {
 	display: block;
+	background-color: transparent;
 }
 
 img.site-logo {
@@ -31,3 +32,68 @@ img.site-logo {
 .sitenav button:hover {
 	border-bottom-color: rgb(253, 251, 243, 1);
 }
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .navbar {
+	overflow: hidden;
+	
+	
+  }
+  
+  .navbar a {
+	float: right;
+	font-size: 16px;
+	color: rgb(0, 0, 0);
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+  }
+  
+  .dropdown {
+	float: left;
+	overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+	font-size: 16px;  
+	border: none;
+	outline: none;
+	color:black;
+	padding: 14px 16px;
+	background-color: inherit;
+	font-family: inherit;
+	margin: 0;
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn {
+	background-color:aqua;
+  }
+  
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+  }
+  
+  .dropdown-content a {
+	float: right;
+	color: black;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+	background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+	display: block;
+	
+  }
