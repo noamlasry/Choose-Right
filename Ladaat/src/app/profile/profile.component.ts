@@ -1,65 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/auth';
-import * as firebase from 'firebase';
+import { UserService, User } from '../login/user.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['../../shared.css', './profile.component.css']
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  avatar: string;
-  nick: string;
+	user: User;
+	file: File;
 
   constructor(
-    private userAuth: AngularFireAuth,
-    private location: Location
+		private userAuth: AngularFireAuth,
+		private userService: UserService
   ) { }
 
   ngOnInit() {
-    //load the nick:
-    this.nick = this.userAuth.auth.currentUser.displayName;
-
-    //load the photo url:
-
-		var storage = firebase.storage();
-		var avatarRef = storage.ref("images/avatar");
-
-		// Get the download URL
-		avatarRef.getDownloadURL().then(url => {
-			this.avatar = url;
-		}).catch(error => {
-
-		// A full list of error codes is available at
-		// https://firebase.google.com/docs/storage/web/handle-errors
-		switch (error.code) {
-			case 'storage/object-not-found':
-			// File doesn't exist
-			break;
-
-			case 'storage/unauthorized':
-			// User doesn't have permission to access the object
-			break;
-
-			case 'storage/canceled':
-			// User canceled the upload
-			break;
-
-			case 'storage/unknown':
-			// Unknown error occurred, inspect the server response
-			break;
+		this.userService.onChange(user => {
+      if (user) {
+				this.user = user;
+      }
+      else {
+        this.user = new User();
+      }
+		});
+  }
+	onAvatarChanged(event) {
+		if(event.target.files.length > 0) {
+			this.file = event.target.files[0];
+			this.userService.setAvatar(this.file);
 		}
-		});
-  }
+	}
 
-  selectImage() {
-
-  }
-
-  save() {
-		this.userAuth.auth.currentUser.updateProfile({displayName: this.nick, photoURL: this.avatar}).then(a => {
-			this.location.back();
-		});
+  onNickChanged() {
+		this.userService.setName(this.user.name);
   }
 }

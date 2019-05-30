@@ -18,17 +18,34 @@ h1 {
 	font-size: 50px;
 }
 
-input, input[type=text], input[type=number] {
+input, input[type=text], input[type=password], input[type=number] {
 	width: 100%;
 	padding: 12px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	resize: vertical;
+
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
 }
 
 label {
 	padding: 12px 12px 12px 0;
 	display: inline-block;
+}
+
+.imgcontainer {
+	text-align: center;
+	margin: 24px 0 12px 0;
+}
+
+img.avatar {
+	width: 256px;
+	height: 256px;
+	overflow: hidden;
+	border-radius: 50%;
+	text-align: center;
 }
 
 .col-25 {
@@ -97,4 +114,12 @@ label {
 
 .toolbar .button:hover {
 	background-color: rgb(111, 183, 182);
+}
+
+.container {
+	border-radius: 5px;
+	padding: 20px;
+	margin: auto;
+	margin-bottom: 66px;
+	display: block;
 }

@@ -1,33 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { UserService, User } from '../login/user.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['../../shared.css', './header.component.css']
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  user: User;
   show: boolean = false;
-  email: string;
-  nick: string;
 
   constructor(
     private userAuth: AngularFireAuth,
+    private userService: UserService,
 		private router: Router
   ) {}
 
   ngOnInit() {
-    this.userAuth.auth.onAuthStateChanged(user => {
-			if (user) {
-        this.nick = user.displayName;
-        this.email = user.email.split("@")[0];
-				this.show = true;
+    this.userService.onChange(user => {
+      if (user) {
+        this.user = user;
+        this.show = true;
       }
       else {
+        this.user = new User();
         this.show = false;
-        this.email = null;
-        this.nick = null;
       }
     });
   }

@@ -4,9 +4,11 @@
     <a class="navbtn" routerLink="donors">תורמים</a>
     <a class="navbtn">צוות</a>
     <a class="navbtn">שיעורים</a>
+    <a class="navbtn">אירועים</a>
     
     <div class="dropdown navbtn">
-      <a class="dropbtn">{{ nick ? nick : email }} 
+      <a class="dropbtn"><img src="{{ user.avatar }}" />
+        {{ user.name ? user.name : (user.email ? user.email.split("@")[0] : "" ) }} 
         <i class="fa fa-caret-down"></i>
       </a>
       <div class="dropdown-content">

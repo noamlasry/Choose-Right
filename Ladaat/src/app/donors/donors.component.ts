@@ -6,7 +6,7 @@ import { DonorsService } from './donors.service';
 @Component({
 	selector: 'app-donors',
 	templateUrl: './donors.component.html',
-	styleUrls: ['../../shared.css', './donors.component.css']
+	styleUrls: ['./donors.component.css']
 })
 export class DonorsComponent implements OnInit {
 	donorData: ComplexDonor[];

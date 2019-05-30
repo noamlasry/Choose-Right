@@ -1,6 +1,5 @@
 .container {
 	margin-top: 66px;
-	width: 100%;
 }
 
 .navbar {
@@ -11,11 +10,7 @@
 	padding: 0;
 }
 
-.dropdown {
-	padding: 0;
-}
-
-.navbar a, .dropdown .dropbtn {
+.navbar a, .dropbtn {
 	display: table-cell;
 	font-size: 16px;
 	padding: 14px 16px;
@@ -24,14 +19,24 @@
 	color: white;
 	border: none;
 	border-bottom: 5px solid rgba(255, 255, 255, 0);
-
+	
 	text-align: center;
 	vertical-align: middle;
-
+	
 	transition: background-color 0.3s;
 }
 
- .dropdown {
+.dropbtn img {
+	vertical-align: middle;
+	width: 40px;
+	height: 40px;
+	overflow: hidden;
+	border-radius: 50%;
+	border: 2px solid white;
+}
+
+.dropdown {
+	padding: 0;
 	display: table-cell;
 	vertical-align: middle;
 	overflow: hidden;

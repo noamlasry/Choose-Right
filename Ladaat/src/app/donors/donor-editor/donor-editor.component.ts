@@ -8,7 +8,7 @@ import { DonorsService } from '../donors.service';
 @Component({
 	selector: 'app-donor-editor',
 	templateUrl: './donor-editor.component.html',
-	styleUrls: ['../../../shared.css', './donor-editor.component.css']
+	styleUrls: ['./donor-editor.component.css']
 })
 export class DonorEditorComponent implements OnInit {
 	donor: Donor;

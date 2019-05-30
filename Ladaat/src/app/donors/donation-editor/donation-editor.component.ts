@@ -9,7 +9,7 @@ import { Donation } from '../donation';
 @Component({
 	selector: 'app-donation',
 	templateUrl: './donation-editor.component.html',
-	styleUrls: ['../../../shared.css', './donation-editor.component.css']
+	styleUrls: ['./donation-editor.component.css']
 })
 export class DonationEditorComponent implements OnInit {
 	donor: Donor = new Donor();
