@@ -1,10 +1,18 @@
-<form class="container">
+<form class="container" (ngSubmit)="onSave()" #profileForm="ngForm">
   <div class="imgcontainer">
-      <label for="avatar"><img [src]="user.avatar" alt="Choose Profile Picture File" class="avatar"></label>
-      <input type="file" [(ngModel)]="avatar" name="avatar" id="avatar" (change)="onAvatarChanged($event)" hidden>
+      <label for="avatar">
+        <img [src]="user.avatar" #picture class="avatar"><br/>
+        <small>כדי שהתמונה תוצג כשורה היא חייבת להיות בעלת גובה ורוחב שווים</small>
+      </label>
+      <input type="file" name="avatar" id="avatar" (change)="onAvatarChanged($event)" hidden>
   </div>
 
   <div class="row">
-    <input type="text" [(ngModel)]="user.name" name="nick" id="nick" (change)="onNickChanged($event)">
+    <input type="text" [(ngModel)]="user.name" name="nick" id="nick">
+  </div>
+
+  <div class="row submit">
+    <button class="button" type="submit" [disabled]="!profileForm.form.valid">שמור</button>
+    <div class="button" (click)="this.location.back()">בטל</div>
   </div>
 </form>

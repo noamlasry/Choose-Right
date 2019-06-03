@@ -22,3 +22,15 @@ input[type=text] {
 .imgcontainer label {
 	padding: 0;
 }
+
+.avatar {
+	border: 3px solid white;
+}
+
+.avatar:hover {
+	border: 3px solid rgb(172, 49, 150);
+}
+
+small {
+	font-size: 16px;
+}
