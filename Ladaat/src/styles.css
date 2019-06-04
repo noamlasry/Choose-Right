@@ -41,8 +41,8 @@ label {
 }
 
 img.avatar {
-	width: 256px;
-	height: 256px;
+	width: 50%;
+	height: 50%;
 	overflow: hidden;
 	border-radius: 50%;
 	text-align: center;
@@ -122,4 +122,28 @@ img.avatar {
 	margin: auto;
 	margin-bottom: 66px;
 	display: block;
+}
+
+@media only screen and (max-width: 600px) {
+	.container {
+		min-width: 100%;
+	}
+
+	.col-25 {
+		float: none;
+		width: 100%;
+	}
+
+	.col-75 {
+		float: none;
+		width: 100%;
+	}
+
+	.row.submit .button {
+		float: none;
+		display: block;
+		width: 100%;
+		margin-top: 12px;
+		text-align: center;
+	}
 }
