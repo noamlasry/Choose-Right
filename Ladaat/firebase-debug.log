@@ -1,0 +1,128 @@
+[debug] [2019-06-05T09:18:03.017Z] ----------------------------------------------------------------------
+[debug] [2019-06-05T09:18:03.018Z] Command:       /snap/node/2212/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-06-05T09:18:03.018Z] CLI Version:   6.10.0
+[debug] [2019-06-05T09:18:03.018Z] Platform:      linux
+[debug] [2019-06-05T09:18:03.018Z] Node Version:  v10.16.0
+[debug] [2019-06-05T09:18:03.019Z] Time:          Wed Jun 05 2019 12:18:03 GMT+0300 (Israel Daylight Time)
+[debug] [2019-06-05T09:18:03.019Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-05T09:18:03.024Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-05T09:18:03.024Z] > authorizing via signed-in user
+[debug] [2019-06-05T09:18:03.024Z] [iam] checking project ladaat-298 for permissions ["firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2019-06-05T09:18:03.025Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/ladaat-298:testIamPermissions  
+
+[debug] [2019-06-05T09:18:04.093Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-05T09:18:04.098Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/ladaat-298  
+ 
+[debug] [2019-06-05T09:18:04.853Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'ladaat-298'...
+[info] 
+[info] i  deploying database, storage, hosting
+[info] i  database: checking rules syntax...
+[debug] [2019-06-05T09:18:04.856Z] >>> HTTP REQUEST PUT https://ladaat-298.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "donors": {
+      "$donor": {
+        ".validate": "newData.hasChildren(['firstName', 'lastName', 'telephone', 'age']) && newData.child('firstName').isString() && newData.child('lastName').isString() && newData.child('telephone').isString() && newData.child('age').isNumber()"
+      }
+    },
+    "donations": {
+      "$donation": {
+        ".validate": "newData.hasChildren(['donor', 'date', 'amount']) && newData.child('donor').isString() && newData.child('date').isString() && newData.child('amount').isNumber()"
+      }
+    }
+  }
+}
+[debug] [2019-06-05T09:18:05.633Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database ladaat-298 is valid
+[debug] [2019-06-05T09:18:05.636Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/ladaat-298  
+ 
+[debug] [2019-06-05T09:18:06.819Z] <<< HTTP RESPONSE 200
+[info] i  storage: checking storage.rules for compilation errors...
+[debug] [2019-06-05T09:18:06.820Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/ladaat-298:test  
+
+[debug] [2019-06-05T09:18:07.920Z] <<< HTTP RESPONSE 200
+[info] ✔  storage: rules file storage.rules compiled successfully
+[debug] [2019-06-05T09:18:07.924Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ladaat-298/versions  
+
+[debug] [2019-06-05T09:18:09.542Z] <<< HTTP RESPONSE 200
+[info] i  storage: uploading rules storage.rules...
+[debug] [2019-06-05T09:18:09.546Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/ladaat-298/rulesets  
+
+[debug] [2019-06-05T09:18:10.648Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-05T09:18:10.649Z] [rules] created ruleset projects/ladaat-298/rulesets/95792b10-d32d-4e34-ba87-df84efc92fb9
+[info] i  hosting[ladaat-298]: beginning deploy...
+[info] i  hosting[ladaat-298]: found 37 files in dist/Ladaat
+[debug] [2019-06-05T09:18:10.662Z] [hosting] hash cache [ZGlzdC9MYWRhYXQ] load error: lines is not defined
+[debug] [2019-06-05T09:18:11.302Z] [hosting] hash cache [ZGlzdC9MYWRhYXQ] stored for 37 files
+[debug] [2019-06-05T09:18:11.302Z] [hosting][hash queue][FINAL]
+[debug] [2019-06-05T09:18:11.302Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ladaat-298/versions/ed63149d32f17f23:populateFiles  
+ <request body omitted>
+[debug] [2019-06-05T09:18:13.116Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-05T09:18:13.121Z] [hosting][populate queue][FINAL]
+[debug] [2019-06-05T09:18:13.121Z] [hosting] uploads queued: 4
+[debug] [2019-06-05T09:18:16.520Z] [hosting][upload queue][FINAL]
+[info] ✔  hosting[ladaat-298]: file upload complete
+[debug] [2019-06-05T09:18:16.522Z] [hosting] deploy completed after 5871ms
+[info] i  database: releasing rules...
+[debug] [2019-06-05T09:18:16.525Z] >>> HTTP REQUEST PUT https://ladaat-298.firebaseio.com/.settings/rules.json  
+ {
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null",
+    "donors": {
+      "$donor": {
+        ".validate": "newData.hasChildren(['firstName', 'lastName', 'telephone', 'age']) && newData.child('firstName').isString() && newData.child('lastName').isString() && newData.child('telephone').isString() && newData.child('age').isNumber()"
+      }
+    },
+    "donations": {
+      "$donation": {
+        ".validate": "newData.hasChildren(['donor', 'date', 'amount']) && newData.child('donor').isString() && newData.child('date').isString() && newData.child('amount').isNumber()"
+      }
+    }
+  }
+}
+[debug] [2019-06-05T09:18:17.381Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules for database ladaat-298 released successfully
+[debug] [2019-06-05T09:18:17.385Z] [rules] releasing firebase.storage/ladaat-298.appspot.com with ruleset projects/ladaat-298/rulesets/95792b10-d32d-4e34-ba87-df84efc92fb9
+[debug] [2019-06-05T09:18:17.386Z] >>> HTTP REQUEST PATCH https://firebaserules.googleapis.com/v1/projects/ladaat-298/releases/firebase.storage/ladaat-298.appspot.com  
+
+[debug] [2019-06-05T09:18:18.507Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-05T09:18:18.508Z] [rules] updated release projects/ladaat-298/releases/firebase.storage/ladaat-298.appspot.com
+[info] ✔  storage: released rules storage.rules to firebase.storage/ladaat-298.appspot.com
+[debug] [2019-06-05T09:18:18.509Z] [
+  {
+    "config": {
+      "public": "dist/Ladaat",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "ladaat-298"
+    },
+    "site": "ladaat-298",
+    "version": "sites/ladaat-298/versions/ed63149d32f17f23"
+  }
+]
+[info] i  hosting[ladaat-298]: finalizing version...
+[debug] [2019-06-05T09:18:18.511Z] >>> HTTP REQUEST PATCH https://firebasehosting.googleapis.com/v1beta1/sites/ladaat-298/versions/ed63149d32f17f23?updateMask=status  
+
+[debug] [2019-06-05T09:18:19.898Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-05T09:18:19.899Z] [hosting] finalized version for ladaat-298:
+[info] ✔  hosting[ladaat-298]: version finalized
+[info] i  hosting[ladaat-298]: releasing new version...
+[debug] [2019-06-05T09:18:19.899Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/ladaat-298/releases?version_name=sites/ladaat-298/versions/ed63149d32f17f23  
+
