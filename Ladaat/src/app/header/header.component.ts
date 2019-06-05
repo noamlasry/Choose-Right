@@ -22,18 +22,15 @@ export class HeaderComponent implements OnInit {
     this.userService.onChange(user => {
       if (user) {
         this.user = user;
-        this.show = true;
-      }
-      else {
-        this.user = new User();
-        this.show = false;
       }
     });
   }
 
   logout() {
-    this.userAuth.auth.signOut();
-    this.show = false;
-    this.router.navigate(["login"]);
+    this.userAuth.auth.signOut().then(user => {
+      this.user = null;
+      this.router.navigate(["login"]);
+    });
+
   }
 }

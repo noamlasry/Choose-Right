@@ -14,3 +14,9 @@
 	background-color: white;
 	color: rgb(111, 183, 182);
 }
+
+@media only screen and (max-width: 600px) {
+	.container {
+		margin: 0;
+	}
+}

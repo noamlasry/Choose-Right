@@ -79,3 +79,32 @@
 .dropdown-content .navbtn:first-child {
 	border-radius: 5px 0 0 0;
 }
+
+@media only screen and (max-width: 600px) {
+	.dropdown-content {
+		width: 100%;
+	}
+
+	.navbar .navbtn:nth-of-type(n), .navbar .dropdown {
+		display: none;
+	}
+
+	.navbar a:nth-of-type(1) {
+		display: block;
+	}
+
+	.navbar:hover .navbtn, .dropdown-content:hover .navbtn {
+		display: block;
+		text-align: center;
+	}
+
+	.dropdown-content {
+		position: static;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.container {
+		margin-top: 0;
+	}
+}

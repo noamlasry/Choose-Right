@@ -41,8 +41,8 @@ label {
 }
 
 img.avatar {
-	width: 256px;
-	height: 256px;
+	width: 50%;
+	height: 50%;
 	overflow: hidden;
 	border-radius: 50%;
 	text-align: center;
@@ -122,4 +122,49 @@ img.avatar {
 	margin: auto;
 	margin-bottom: 66px;
 	display: block;
+}
+
+h1 {
+	font-size: 250%;
+}
+
+h2 {
+	font-size: 200%;
+}
+
+h3 {
+	font-size: 150%;
+}
+
+@media only screen and (max-width: 600px) {
+	* {
+		font-size: 100%; 
+	}
+
+
+	.container {
+		margin-bottom: 33px;
+		min-width: 100%;
+		max-width: 100%;
+		overflow-x: scroll;
+		/* overflow-y: visible; */
+	}
+
+	.col-25 {
+		float: none;
+		width: 100%;
+	}
+
+	.col-75 {
+		float: none;
+		width: 100%;
+	}
+
+	.row.submit .button, .toolbar .button {
+		float: none;
+		display: block;
+		width: 100%;
+		margin-top: 12px;
+		text-align: center;
+	}
 }
