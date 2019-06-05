@@ -1,12 +1,11 @@
 <div class="navbar container" *ngIf="user">
-  <div class="row">
-    <a><img src="../../assets/logos/logo.jpg" style="width: 80px; height: auto;"/></a>
+    <a><img class="logo" src="../../assets/logos/Logo-full.svg"/></a>
     <a class="navbtn" routerLink="">דף הבית</a>
     <a class="navbtn" routerLink="donors">תורמים</a>
     <a class="navbtn">צוות</a>
     <a class="navbtn">שיעורים</a>
     <a class="navbtn">אירועים</a>
- 
+    
     <div class="dropdown navbtn">
       <a class="dropbtn"><img src="{{ user.avatar }}" />
         {{ user.name ? user.name : (user.email ? user.email.split("@")[0] : "" ) }} 
@@ -17,5 +16,4 @@
         <a class="navbtn" (click)="logout()">התנתק</a> 
       </div>
     </div>
-  </div>
 </div>
