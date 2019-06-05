@@ -124,15 +124,30 @@ img.avatar {
 	display: block;
 }
 
+h1 {
+	font-size: 250%;
+}
+
+h2 {
+	font-size: 200%;
+}
+
+h3 {
+	font-size: 150%;
+}
+
 @media only screen and (max-width: 600px) {
 	* {
 		font-size: 100%; 
 	}
 
+
 	.container {
-		margin: 0;
+		margin-bottom: 33px;
 		min-width: 100%;
 		max-width: 100%;
+		overflow-x: scroll;
+		/* overflow-y: visible; */
 	}
 
 	.col-25 {
@@ -145,7 +160,7 @@ img.avatar {
 		width: 100%;
 	}
 
-	.row.submit .button {
+	.row.submit .button, .toolbar .button {
 		float: none;
 		display: block;
 		width: 100%;
