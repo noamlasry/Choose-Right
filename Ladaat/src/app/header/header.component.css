@@ -1,6 +1,4 @@
-.container {
-	margin-top: 66px;
-}
+
 
 .navbar {
 	overflow: hidden;
@@ -8,8 +6,11 @@
 	color: white;
 	display: block;
 	padding: 0;
+	height: 70px;
 }
-
+.row{
+	display: inline;
+}
 .navbar a, .dropbtn {
 	display: table-cell;
 	font-size: 16px;
@@ -40,6 +41,8 @@
 	display: table-cell;
 	vertical-align: middle;
 	overflow: hidden;
+	float: left;
+	border-radius: 5px 0 0 0;
 }
 
 .navbtn:hover {
