@@ -29,10 +29,7 @@ export class DonorEditorComponent implements OnInit {
 			
 			this.donorsService.getDonor(id, donor => {
 				this.donor = donor;
-				this.temp.firstName = this.donor.firstName;
-				this.temp.lastName = this.donor.lastName;
-				this.temp.telephone = this.donor.telephone;
-				this.temp.age = this.donor.age;
+				this.temp.copyAll(this.donor);
 			});
 		}
 		else {
@@ -46,14 +43,7 @@ export class DonorEditorComponent implements OnInit {
 			return;
 		}
 		else {
-			if (!this.temp.telephone) {
-				this.temp.telephone = "";
-			}
-			
-			this.donor.firstName = this.temp.firstName.trim();
-			this.donor.lastName = this.temp.lastName.trim();
-			this.donor.telephone = this.temp.telephone.trim();
-			this.donor.age = this.temp.age;
+			this.donor.copy(this.temp);
 			
 			if (this.update) {
 				this.donorsService.updateDonor(this.donor, () => this.location.back());

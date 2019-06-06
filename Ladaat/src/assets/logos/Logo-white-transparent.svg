@@ -16,7 +16,7 @@
    viewBox="0 0 310 150.10001"
    xml:space="preserve"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="Logo-full.svg"
+   sodipodi:docname="Logo-full-transparent.svg"
    width="310"
    height="150.10001"
    inkscape:export-filename="/home/yitz/Documents/עזריאלי/ה'תשע&quot;ט/סמסטר ב/הנדסת תוכנה/פרוייקט/Choose-Right/Ladaat/src/assets/icons/icon-310-150"
@@ -38,13 +38,13 @@
      inkscape:window-height="1053"
      id="namedview55"
      showgrid="false"
-     inkscape:zoom="1.8468045"
-     inkscape:cx="-62.75961"
-     inkscape:cy="-9.580475"
+     inkscape:zoom="1.7115405"
+     inkscape:cx="180.30443"
+     inkscape:cy="-17.784122"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g5" /><style
+     inkscape:current-layer="g4158" /><style
      type="text/css"
      id="style3">
 	.st0{fill:#811E70;}
@@ -54,7 +54,8 @@
      id="g4158"
      transform="matrix(2.9249242,0,0,2.9249242,-0.62695235,-294.95291)"><g
        transform="translate(0,103)"
-       id="g5"><path
+       id="g5"
+       style="fill:#ffffff"><path
          style="fill:#ffffff"
          inkscape:connector-curvature="0"
          id="path7"
@@ -146,14 +147,10 @@
          inkscape:connector-curvature="0"
          id="path41"
          d="m 54.8,0.4 -0.3,0 c -0.1,0 -0.1,0 -0.1,0.1 l -0.1,1.2 c 0,0.2 -0.1,0.4 -0.1,0.5 -0.1,0.1 -0.2,0.2 -0.3,0.3 -0.1,0.1 -0.2,0.1 -0.3,0.2 l 0,0 c 0,-0.3 0,-0.5 -0.1,-0.7 L 53.1,0.5 C 53.1,0.4 53,0.4 53,0.4 l -0.3,0 c -0.1,0 -0.1,0 -0.1,0.1 l 0.7,2.3 0,0 C 53.2,2.9 53,3 52.6,3.2 c 0,0 -0.1,0 -0.1,0.1 0,0 0,0 0,0.1 l 0.1,0.1 c 0,0 0,0 0.1,0 0,0 0.1,0 0.1,0 0.1,0 0.2,-0.1 0.2,-0.1 0.1,0 0.2,-0.1 0.3,-0.1 C 53.5,3.2 53.6,3.2 53.7,3.1 53.9,3 54,2.9 54,2.9 54.1,2.8 54.2,2.7 54.3,2.7 54.4,2.6 54.4,2.5 54.5,2.5 54.6,2.3 54.7,2.1 54.7,1.8 l 0.1,-1.4 c 0.1,0 0.1,0 0,0 z"
-         class="st0" /></g><path
-       style="fill:#ab3593"
-       inkscape:connector-curvature="0"
-       id="path43"
-       d="m 106.2,126.6 c 0,13 -10.5,23.5 -23.5,23.5 -13,0 -23.5,-10.6 -23.5,-23.5 0,-13 10.5,-23.5 23.5,-23.5 13,0 23.5,10.5 23.5,23.5 z"
-       class="st1" /><g
+         class="st0" /></g><g
        transform="translate(0,103)"
-       id="g45"><path
+       id="g45"
+       style="fill:#ffffff"><path
          style="fill:#ffffff"
          inkscape:connector-curvature="0"
          id="path47"

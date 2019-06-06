@@ -1,0 +1,21 @@
+.container {
+	background-color: rgb(253, 251, 243);
+	width: 100%;
+}
+
+.contact {
+    width: fit-content;
+}
+
+.contact th, .contact tr, .contact td {
+    background: none;
+    border: none;
+    border-radius: unset;
+    text-decoration: none;
+    font: unset;
+    color: unset;
+}
+
+.contact tr td:first-child {
+    font-weight: bold;
+}

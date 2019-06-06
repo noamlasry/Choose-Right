@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { ComplexDonor } from '../donor';
+import { Donor } from '../donor';
 import { Donation } from '../donation';
 import { DonorsService } from '../donors.service';
 
 @Component({
   selector: 'app-donor',
   templateUrl: './donor.component.html',
-  styleUrls: ['../donors.component.css', './donor.component.css']
+  styleUrls: ['./donor.component.css']
 })
 export class DonorComponent implements OnInit {
-  complexDonor: ComplexDonor;
+  donor: Donor;
 
   currentSort: (a: Donation, b: Donation) => number;
   
@@ -21,18 +21,18 @@ export class DonorComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.donorsService.getComplexDonor(this.route.snapshot.paramMap.get('id'), complexDonor => {
-      this.complexDonor = complexDonor;
+    this.donorsService.getDonor(this.route.snapshot.paramMap.get('id'), donor => {
+      this.donor = donor;
       this.sortDonations(this.compareDates);
     });
   }
   
   sortDonations(compareFunction: (a: Donation, b: Donation) => number): void {
   	if (!this.currentSort || compareFunction != this.currentSort) {
-      this.complexDonor.donations.sort(compareFunction);
+      this.donor.donations.sort(compareFunction);
   	}
   	else {
-  		this.complexDonor.donations.reverse();
+  		this.donor.donations.reverse();
   	}
   	
   	this.currentSort = compareFunction;

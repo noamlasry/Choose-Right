@@ -1,33 +1,54 @@
+/*
+Client requirements:
+* Organization name
+* email address
+* mailing address
+
+Also keep:
+* Name of contact
+* Phone number
+*/
+
 import { Donation } from './donation';
 
 export class Donor {
 	static create(other: Object, id?: string): Donor {
 		var donor: Donor = new Donor();
-		
-		donor.firstName = (other as Donor).firstName;
-		donor.lastName = (other as Donor).lastName;
-		donor.telephone = (other as Donor).telephone;
-		donor.age = (other as Donor).age;
-		
+		donor.copy(other as Donor);
+
 		if (id) {
 			donor.id = id;
-		}
-		else if ((other as Donor).id) {
-			donor.id = (other as Donor).id;
 		}
 
 		return donor;
 	}
 
+	/* Copies all fields from other donor to this donor, except the ID */
+	copy(other: Donor) {
+		this.firstName = (other as Donor).firstName;
+		this.lastName = (other as Donor).lastName;
+		this.telephone = (other as Donor).telephone;
+		
+		this.orgName = (other as Donor).orgName;
+		this.address = (other as Donor).address;
+		this.email = (other as Donor).email;
+	}
+
+	/* Copies all fields from other donor to this donor, including the ID */
+	copyAll(other: Donor) {
+		this.id = (other as Donor).id;
+		this.copy(other);
+	}
+
 	id: string;
+	
 	firstName: string = "";
 	lastName: string = "";
 	telephone: string = "";
-	age: number = 0;
-}
+	orgName: string = "";
+	address: string = "";
+	email: string = "";
 
-export class ComplexDonor {
-	donor: Donor;
 	donations: Donation[];
 	total: number;
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Donor, ComplexDonor } from './donor';
+import { Donor } from './donor';
 import { Donation } from './donation';
 
 import * as firebase from 'firebase';
@@ -21,25 +21,10 @@ export class DonorsService {
 	
 	getDonors(callback: (donors: Donor[]) => void): void {
 		this.donorRef.once('value')
-		.then(snapshot => {
-			var donors: Donor[] = [];
-			snapshot.forEach(element => {
-				donors.push(Donor.create(element.toJSON(), element.key));
-			});
-
-			callback(donors);
-		})
-		.catch(error => {
-			console.log(error);
-		});
-	}
-
-	getComplexDonors(callback: (donors: ComplexDonor[]) => void): void {
-		this.donorRef.once('value')
 		.then(donorSnapshot => {
-			var donors: ComplexDonor[] = [];
+			var donors: Donor[] = [];
 			donorSnapshot.forEach(element => {
-				this.getComplexDonor(element.key, complexDonor => {
+				this.getDonor(element.key, complexDonor => {
 					donors.push(complexDonor)
 
 					if (donors.length == donorSnapshot.numChildren()) {
@@ -53,17 +38,7 @@ export class DonorsService {
 		});
 	}
 	
-	getDonor(id: string, callback: (donor: Donor) => void): void {
-		this.donorRef.child(id).once('value')
-		.then(snapshot => {
-			callback(Donor.create(snapshot.toJSON(), snapshot.key));
-		})
-		.catch(error => {
-			console.log(error);
-		});
-	}
-	
-	getComplexDonor(id: string, callback: (complexDonor: ComplexDonor) => void): void {
+	getDonor(id: string, callback: (complexDonor: Donor) => void): void {
 		this.donorRef.child(id).once('value')
 		.then(snapshot => {
 			var dono: Donor = Donor.create(snapshot.toJSON(), snapshot.key);
@@ -71,9 +46,10 @@ export class DonorsService {
 			this.getDonations(dono, dona => {
 				var tota: number = 0;
 				dona.forEach(d => tota += d.amount);
-				var complexDonor: ComplexDonor = {donor: dono, donations: dona, total: tota} as ComplexDonor;
+				dono.total = tota;
+				dono.donations = dona;
 
-				callback(complexDonor);
+				callback(dono);
 			});
 		})
 		.catch(error => {
@@ -85,8 +61,10 @@ export class DonorsService {
 		var ref = this.donorRef.push({
 			'firstName': donor.firstName,
 			'lastName': donor.lastName,
-			'age': donor.age,
-			'telephone': donor.telephone
+			'telephone': donor.telephone,
+			'orgName': donor.orgName,
+			'address': donor.address,
+			'email': donor.email
 		  });
 		
 		ref.then(d => {
@@ -103,8 +81,10 @@ export class DonorsService {
 		ref.set({
 			'firstName': donor.firstName,
 			'lastName': donor.lastName,
-			'age': donor.age,
-			'telephone': donor.telephone
+			'telephone': donor.telephone,
+			'orgName': donor.orgName,
+			'address': donor.address,
+			'email': donor.email
 		})
 		.then(d => {
 			callback(d);

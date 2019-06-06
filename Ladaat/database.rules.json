@@ -5,7 +5,7 @@
     ".write": "auth != null",
     "donors": {
       "$donor": {
-        ".validate": "newData.hasChildren(['firstName', 'lastName', 'telephone', 'age']) && newData.child('firstName').isString() && newData.child('lastName').isString() && newData.child('telephone').isString() && newData.child('age').isNumber()"
+        ".validate": "newData.hasChildren(['orgName', 'firstName', 'lastName', 'telephone', 'email', 'address']) && newData.child('orgName').isString() && newData.child('address').isString() && newData.child('email').isString() && newData.child('firstName').isString() && newData.child('lastName').isString() && newData.child('telephone').isString()"
       }
     },
     "donations": {
