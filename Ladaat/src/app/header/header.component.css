@@ -1,17 +1,14 @@
-.container {
-	margin-top: 66px;
-}
-
 .navbar {
 	overflow: hidden;
 	background-color: rgb(172, 49, 150);
 	color: white;
 	display: block;
 	padding: 0;
+	height: 70px;
 }
 
-.logo {
-	max-height: 47px;
+.row {
+	display: inline;
 }
 
 .navbar a, .dropbtn {
@@ -30,6 +27,11 @@
 	transition: background-color 0.3s;
 }
 
+.logo img {
+	width: 80px;
+	height: auto;
+}
+
 .dropbtn img {
 	vertical-align: middle;
 	width: 40px;
@@ -44,6 +46,8 @@
 	display: table-cell;
 	vertical-align: middle;
 	overflow: hidden;
+	float: left;
+	border-radius: 5px 0 0 0;
 }
 
 .navbtn:hover {
@@ -82,28 +86,25 @@
 }
 
 @media only screen and (max-width: 600px) {
-	.dropdown-content {
-		width: 100%;
+	.container {
+		margin-top: 0;
 	}
 
-	.navbar .navbtn:nth-of-type(n), .navbar .dropdown {
+	.navbar {
+		height: fit-content;
+	}
+
+	.row a.navbtn, .dropdown, .dropdown .dropbtn, .dropdown-content, .dropdown-content a.navbtn {
 		display: none;
 	}
-
-	.navbar a:nth-of-type(1) {
-		display: block;
-	}
-
-	.navbar:hover .navbtn, .dropdown-content:hover .navbtn {
-		display: block;
+	
+	.row:hover a.navbtn, .row a.logo, .row:hover .dropdown, .dropdown .dropbtn, .dropdown:hover .dropdown-content, .dropdown:hover .dropdown-content a.navbtn {
 		text-align: center;
+		display: block;
+		float: none;
 	}
 
 	.dropdown-content {
 		position: static;
-	}
-
-	.container {
-		margin-top: 0;
 	}
 }
