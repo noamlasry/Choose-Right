@@ -1,4 +1,8 @@
-<div class="container" *ngIf="donor">
+<div class="container" *ngIf="!donor.id">
+	<h1>התורם המבוקש לא קיים</h1>
+</div>
+
+<div class="container" *ngIf="donor.id">
 <h1 *ngIf="donor.orgName">הפרטים של {{donor.orgName}}</h1>
 <h1 *ngIf="!donor.orgName">הפרטים של {{donor.firstName + " " + donor.lastName}}</h1>
 
@@ -33,16 +37,16 @@
 
 <h2>תרומות</h2>
 <p>
-	<b>סך כל התרומות:</b> ₪{{ donor.total }}
+	<b>סך כל התרומות: </b><span class="number">₪{{ donor.getTotal() }}</span>
 </p>
 <table class="donations">
 <tr>
-	<th (click)="sortDonations(compareDates)">תאריך</th>
-	<th (click)="sortDonations(compareAmounts)">סכום</th> 
+	<th (click)="sortDonations(compareDates); sortField = 'date'">תאריך</th>
+	<th (click)="sortDonations(compareAmounts); sortField = 'amount'">סכום</th> 
 </tr>
 <tr *ngFor="let donation of donor.donations" routerLink="/donation-editor/{{donor.id}}/{{donation.id}}">
-	<td>{{ donation.date }}</td>
-	<td>₪{{ donation.amount }}</td> 
+	<td><span class="number">{{ donation.date }}</span></td>
+	<td><span class="number">₪{{ donation.amount }}</span></td> 
 </tr>
 </table>
 
