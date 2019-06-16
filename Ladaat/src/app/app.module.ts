@@ -26,6 +26,7 @@ import { LectureComponent } from './education/lecture/lecture.component';
 import { LectureEditorComponent } from './education/lecture-editor/lecture-editor.component';
 import { ListingEditorComponent } from './education/listing-editor/listing-editor.component';
 import { AddListingComponent } from './education/add-listing/add-listing.component';
+import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { AddListingComponent } from './education/add-listing/add-listing.compone
     LectureEditorComponent,
     ListingEditorComponent,
     AddListingComponent,
+    ConversationEditorComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

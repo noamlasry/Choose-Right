@@ -10,6 +10,8 @@ Also keep:
 */
 
 import { Donation } from './donation';
+import { DonorConversation } from './conversation';
+import { DonorRecord } from './record';
 
 export class Donor {
 	static create(other: Donor, id?: string): Donor {
@@ -72,4 +74,6 @@ export class Donor {
 	email: string = "";
 
 	donations: Donation[] = [];
+	conversations: DonorConversation[] = [];
+	records: DonorRecord[] = [];
 }

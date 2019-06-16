@@ -1,0 +1,25 @@
+<form class="container" (ngSubmit)="save()" #conversationForm="ngForm">
+  <h1 *ngIf="conversation.id">עריכת שיחה</h1>
+  <h1 *ngIf="!conversation.id">הוספת שיחה</h1>
+  <div class="row">
+    <div class="col-25">
+      <label for="date">תאריך</label>
+    </div>
+    <div class="col-75">
+      <input type="date" [(ngModel)]="conversation.date" name="date" id="date" required/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="summary">סיכום</label>
+    </div>
+    <div class="col-75">
+      <input type="text" [(ngModel)]="conversation.summary" name="summary" id="summary" required/>
+    </div>
+  </div>
+  <div class="row submit">
+    <button class="button" type="submit" [disabled]="!conversationForm.form.valid">שמור</button>
+    <div class="button" routerLink="/donor/{{donor.id}}">בטל</div>
+    <div class="button" (click)="delete()" *ngIf="conversation.id">מחק</div>
+  </div>
+</form>

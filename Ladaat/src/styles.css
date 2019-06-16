@@ -26,6 +26,9 @@ input, input[type=text], input[type=password], input[type=number] {
 	box-sizing: border-box;
 }
 
+input[type=checkbox] {
+	width: auto;
+}
 
 .number {
     display: inline-block;

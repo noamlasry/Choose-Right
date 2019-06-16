@@ -13,6 +13,7 @@ import { DocumentEditorComponent } from './donors/document-editor/document-edito
 import { EducationComponent } from './education/education.component';
 import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
 import { LectureComponent } from "./education/lecture/lecture.component";
+import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
 
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: HomeComponent },
@@ -22,6 +23,8 @@ const routes: Routes = [
 	{ path: 'donation-editor/:donor/:donation', canActivate: [AuthGuard], component: DonationEditorComponent },
 	{ path: 'document-editor/:donor', canActivate: [AuthGuard], component: DocumentEditorComponent },
 	{ path: 'document-editor/:donor/:record', canActivate: [AuthGuard], component: DocumentEditorComponent },
+	{ path: 'conversation-editor/:donor', canActivate: [AuthGuard], component: ConversationEditorComponent },
+	{ path: 'conversation-editor/:donor/:conversation', canActivate: [AuthGuard], component: ConversationEditorComponent },
 	{ path: 'donor-editor/:id', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'donor-editor', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },

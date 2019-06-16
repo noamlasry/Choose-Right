@@ -16,6 +16,7 @@ export class DonorRecord {
 	copy(other: DonorRecord) {
 		this.donor = other.donor;
 		this.date = other.date;
+		this.name = other.name;
 		this.url = other.url;
 		this.incoming = other.incoming;
 	}
@@ -29,6 +30,7 @@ export class DonorRecord {
 		return {
 			'donor': this.donor,
 			'date': this.date,
+			'name': this.name,
 			'url': this.url,
 			'incoming':  this.incoming
 		  }
@@ -36,6 +38,7 @@ export class DonorRecord {
 	id: string;
 	donor: string;
 	date: string;
+	name: string;
 	url: string;
-	incoming: boolean;
+	incoming: boolean = false;
 }
