@@ -43,7 +43,7 @@ export class DonorEditorComponent implements OnInit {
 				this.donorsRef.child(this.donor.id).update(this.donor.toJSON(), () => this.location.back());
 			}
 			else {
-				this.donorsRef.child(this.donor.id).push(this.donor.toJSON(), () => this.location.back());
+				this.donorsRef.push(this.donor.toJSON(), () => this.location.back());
 			}
 		}
 	}
@@ -56,6 +56,7 @@ export class DonorEditorComponent implements OnInit {
 						this.donationsRef.child(donation.key).remove();
 					});
 					
+					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?
 					this.router.navigate(['donors'])
 				});
 			});

@@ -16,7 +16,7 @@
 		<td>{{ d.orgName ? d.orgName : "תורם פרטי" }}</td> 
 		<td>{{ d.lastName }}</td> 
 		<td>{{ d.firstName }}</td>
-		<td><span class="number">₪{{ d.total }}</span></td>
+		<td><span class="number">₪{{ d.getTotal() }}</span></td>
 	</tr>
 	</table>
 </div>

@@ -51,7 +51,7 @@ export class DonationEditorComponent implements OnInit {
 				});
 			}
 			else {
-				var ref = this.donationsRef.push(this.donation.toJSON(), donation => {
+				var ref = this.donationsRef.push(this.donation.toJSON(), () => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}

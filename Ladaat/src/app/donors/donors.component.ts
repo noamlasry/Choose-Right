@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Donor } from './donor';
 import * as firebase from 'firebase';
+import { Donation } from './donation';
 
 @Component({
 	selector: 'app-donors',
@@ -10,58 +11,69 @@ import * as firebase from 'firebase';
 })
 export class DonorsComponent implements OnInit {
 	donorRef: firebase.database.Reference = firebase.database().ref("donors");
+	donationsRef: firebase.database.Reference = firebase.database().ref("donations");
+
 	donorData: Donor[] = [];
 	currentSort: (a: Donor, b: Donor) => number;
 	sortField: string = "lastName";
 	
 	constructor() {}
-		
-		ngOnInit() {
-			this.donorRef.orderByChild(this.sortField).once("value", donors => {
-				this.donorData = [];
+	
+	ngOnInit() {
 
-				donors.forEach(dono => {
-					this.donorData.push(Donor.create(dono.toJSON() as Donor, dono.key));
-				});
+		this.donorRef.orderByChild(this.sortField).once("value", donors => {
+			this.donorData = [];
+
+			donors.forEach(dono => {
+				var donor = Donor.create(dono.toJSON() as Donor, dono.key);
+				this.addDonationUpdaters(donor);
+				this.donorData.push(donor);
 			});
+		});
 
-			this.donorRef.orderByChild(this.sortField).on("child_added", dono => {
-				var exists = false;
-				var donor = Donor.create(dono.toJSON() as Donor, dono.key)
+		this.donorRef.orderByChild(this.sortField).on("child_added", dono => {
+			var exists = false;
+			var donor = Donor.create(dono.toJSON() as Donor, dono.key)
 
-				this.donorData.forEach(d => {
-					if (d.id == donor.id) {
-						exists = true;
-					}
-				})
-				
-				if (!exists) {
-					this.donorData.push(donor);
-					this.donorData.sort(this.currentSort);
+			this.donorData.forEach(d => {
+				if (d.id == donor.id) {
+					exists = true;
+					return;
 				}
-			});
+			})
+			
+			if (!exists) {
+				this.donorData.push(donor);
+				this.addDonationUpdaters(donor);
+				this.donorData.sort(this.currentSort);
+				console.log("All quiet on the western front");
+			}
+		});
 
-			this.donorRef.orderByChild(this.sortField).on("child_changed", dono => {
-				var donor = Donor.create(dono.toJSON() as Donor, dono.key);
+		this.donorRef.orderByChild(this.sortField).on("child_changed", dono => {
+			var donor = Donor.create(dono.toJSON() as Donor, dono.key);
 
-				this.donorData.forEach(d => {
-					if (d.id == donor.id) {
-						d.copy(donor);
-						this.donorData.sort(this.currentSort);
-					}
-				})
-			});
+			this.donorData.forEach(d => {
+				if (d.id == donor.id) {
+					d.copy(donor);
+					this.donorData.sort(this.currentSort);
+					return;
+				}
+			})
+		});
 
-			this.donorRef.orderByChild(this.sortField).on("child_removed", dono => {
-				var donor = Donor.create(dono.toJSON() as Donor, dono.key);
+		this.donorRef.orderByChild(this.sortField).on("child_removed", dono => {
+			var donor = Donor.create(dono.toJSON() as Donor, dono.key);
 
-				this.donorData.forEach(d => {
-					if (d.id == donor.id) {
-						this.donorData.splice(this.donorData.indexOf(d), 1);
-						this.donorData.sort(this.currentSort);
-					}
-				})
-			});
+			this.donorData.forEach(d => {
+				if (d.id == donor.id) {
+					this.donorData.splice(this.donorData.indexOf(d), 1);
+					// this.donationsRef.orderByChild("donor").equalTo(donor.id).off(); //Is this needed?
+					this.donorData.sort(this.currentSort);
+					return;
+				}
+			})
+		});
 	}
 	
 	sortDonors(compareFunction: (a: Donor, b: Donor) => number): void {
@@ -87,11 +99,39 @@ export class DonorsComponent implements OnInit {
 		return a.lastName > b.lastName ? 1 : -1;
 	}
 	
-	comparePhoneNumbers(a: Donor, b: Donor): number {
-		return a.telephone > b.telephone ? 1 : -1;
-	}
-	
 	compareAmounts(a: Donor, b: Donor): number {
 		return a.getTotal() - b.getTotal();
+	}
+
+	private addDonationUpdaters(donor: Donor) {
+		this.donationsRef.orderByChild("donor").equalTo(donor.id).on("child_added", dona => {
+			var donation = Donation.create(dona.toJSON() as Donation, dona.key);
+			donor.donations.push(donation);
+			this.donorData.sort(this.currentSort);
+		});
+		
+		this.donationsRef.orderByChild("donor").equalTo(donor.id).on("child_changed", dona => {
+			var donation = Donation.create(dona.toJSON() as Donation, dona.key);
+			
+			donor.donations.forEach(d => {
+			  if (d.id == donation.id) {
+				d.copy(donation);
+				this.donorData.sort(this.currentSort);
+				return;
+			  }
+			});
+		});
+		  
+		this.donationsRef.orderByChild("donor").equalTo(donor.id).on("child_removed", dona => {
+			var donation = Donation.create(dona.toJSON() as Donation, dona.key);
+			
+			donor.donations.forEach(d => {
+			  if (d.id == donation.id) {
+				donor.donations.splice(donor.donations.indexOf(d), 1);
+				this.donorData.sort(this.currentSort);
+				return;
+			  }
+			});
+		});
 	}
 }

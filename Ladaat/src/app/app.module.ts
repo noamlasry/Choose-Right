@@ -19,6 +19,7 @@ import { DonorEditorComponent } from './donors/donor-editor/donor-editor.compone
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ProfileComponent } from './profile/profile.component';
     DonationEditorComponent,
     HomeComponent,
     ProfileComponent,
+    DocumentEditorComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

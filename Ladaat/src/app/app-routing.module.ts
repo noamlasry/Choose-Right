@@ -9,6 +9,7 @@ import { DonorEditorComponent } from './donors/donor-editor/donor-editor.compone
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
 import { AuthGuard } from './login/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
 
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: HomeComponent },
@@ -16,6 +17,8 @@ const routes: Routes = [
 	{ path: 'donor/:id', canActivate: [AuthGuard], component: DonorComponent },
 	{ path: 'donation-editor/:donor', canActivate: [AuthGuard], component: DonationEditorComponent },
 	{ path: 'donation-editor/:donor/:donation', canActivate: [AuthGuard], component: DonationEditorComponent },
+	{ path: 'document-editor/:donor', canActivate: [AuthGuard], component: DocumentEditorComponent },
+	{ path: 'document-editor/:donor/:record', canActivate: [AuthGuard], component: DocumentEditorComponent },
 	{ path: 'donor-editor/:id', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'donor-editor', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
