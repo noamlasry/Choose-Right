@@ -19,6 +19,12 @@ import { DonorEditorComponent } from './donors/donor-editor/donor-editor.compone
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EducationComponent } from './education/education.component';
+import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
+import { LectureComponent } from './education/lecture/lecture.component';
+import { LectureEditorComponent } from './education/lecture-editor/lecture-editor.component';
+import { ListingEditorComponent } from './education/listing-editor/listing-editor.component';
+import { AddListingComponent } from './education/add-listing/add-listing.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,12 @@ import { ProfileComponent } from './profile/profile.component';
     DonationEditorComponent,
     HomeComponent,
     ProfileComponent,
+    EducationComponent,
+    NewLectureComponent,
+    LectureComponent,
+    LectureEditorComponent,
+    ListingEditorComponent,
+    AddListingComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

@@ -1,0 +1,68 @@
+
+<div class="container" *ngIf="lecture">
+<table class="contact">
+  <tr>
+    <th>שם מוסד</th>
+    <th>שנת לימוד</th>
+    <th>שכבה</th>
+    <th>תכנים</th>
+    <th>תאריך הסדנה</th>
+    <th>שם מרצה</th>
+    <th>מחיר</th>
+  </tr>
+  <tr>
+    <td>{{ lecture.institute}}</td>
+    <td>{{ lecture.year }}</td>
+		<td>{{ lecture.class }}</td> 
+    <td>{{ lecture.content }}</td>
+    <td>{{ lecture.date }}</td>
+		<td>{{ lecture.lecturerName }}</td>
+    <td>{{ lecture.price }}</td>
+  </tr>
+<br>
+  <tr>
+      <th>איש קשר 1</th>
+      <th>מייל</th>
+      <th>טלפון</th>
+  </tr>
+  <tr>
+    <td>{{ lecture.contactName1 }}</td>
+    <td>{{ lecture.email1 }}</td>
+    <td>{{ lecture.phone1 }}</td>
+  </tr>
+  <br>
+  <tr>
+      <th>איש קשר 2</th>
+      <th>מייל</th>
+      <th>טלפון</th>
+  </tr>
+  <tr>
+    <td>{{ lecture.contactName1 }}</td>
+    <td>{{ lecture.email2 }}</td>
+    <td>{{ lecture.phone2 }}</td>
+  </tr>
+</table>
+
+ 
+<div class="toolbar">
+	<button class="button" routerLink="/lecture-editor/{{ lecture.id }}">ערוך סדנה</button>
+	<button class="button" routerLink="/add-listing/{{ lecture.id }}">הוסף רשומה</button>
+</div>
+
+<!--
+<h2>רשומות</h2>
+<p>
+	<b>סך כל התרומות:</b> ₪{{ donor.total }}
+</p>
+<table class="donations">
+<tr>
+	<th (click)="sortDonations(compareDates)">תאריך</th>
+	<th (click)="sortDonations(compareAmounts)">סכום</th> 
+</tr>
+
+<tr *ngFor="let donation of donor.donations" routerLink="/donation-editor/{{donor.id}}/{{donation.id}}">
+	<td>{{ donation.date }}</td>
+	<td>₪{{ donation.amount }}</td> 
+</tr>-->
+
+</div>

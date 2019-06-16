@@ -1,0 +1,20 @@
+<div class="container">
+	<h1>סדנאות</h1>
+	<div class="toolbar">
+		<button class="button" routerLink="/new-lecture">הוסף סדנה</button>
+	</div>
+	<table>
+	<tr>
+		<th (click)="sortLectures(compareInstituteNames)">שם מוסד</th>
+		<th (click)="sortLectures(compareInstituteNames)">שנת לימוד</th>
+		<th (click)="sortLectures(compareInstituteNames)">שכבה</th>
+		<th (click)="sortLectures(compareInstituteNames)">תאריך סדנה</th>
+	</tr>
+	<tr *ngFor="let d of lectureData"  routerLink="/lecture/{{d.id}}">
+		<td>{{ d.institute }}</td> 
+		<td>{{ d.year }}</td> 
+		<td>{{ d.class }}</td>
+		<td>{{ d.date }}</td>
+	</tr>
+	</table>
+</div>
