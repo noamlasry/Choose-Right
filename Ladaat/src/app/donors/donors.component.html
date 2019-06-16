@@ -7,16 +7,16 @@
 	
 	<table>
 	<tr>
-		<th (click)="sortDonors(compareOrgNames)">ארגון</th>
-		<th (click)="sortDonors(compareLastNames)">שם משפחה</th> 
-		<th (click)="sortDonors(compareFirstNames)">שם פרטי</th>
-		<th (click)="sortDonors(compareAmounts)">סך התרומות</th>
+		<th (click)="sortDonors(compareOrgNames); sortField = 'orgName'">ארגון</th>
+		<th (click)="sortDonors(compareLastNames); sortField = 'lastName'">שם משפחה</th> 
+		<th (click)="sortDonors(compareFirstNames); sortField = 'firstName'">שם פרטי</th>
+		<th (click)="sortDonors(compareAmounts); sortField = 'total'">סך התרומות</th>
 	</tr>
 	<tr *ngFor="let d of donorData"  routerLink="/donor/{{d.id}}">
 		<td>{{ d.orgName ? d.orgName : "תורם פרטי" }}</td> 
 		<td>{{ d.lastName }}</td> 
 		<td>{{ d.firstName }}</td>
-		<td>₪{{ d.total }}</td>
+		<td><span class="number">₪{{ d.total }}</span></td>
 	</tr>
 	</table>
 </div>

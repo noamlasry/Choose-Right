@@ -26,6 +26,16 @@ input, input[type=text], input[type=password], input[type=number] {
 	box-sizing: border-box;
 }
 
+
+.number {
+    display: inline-block;
+	direction: ltr;
+}
+
+input[type=password], input[type=date], input[type=number] {
+	direction: ltr;
+}
+
 label {
 	padding: 12px 12px 12px 0;
 	display: inline-block;

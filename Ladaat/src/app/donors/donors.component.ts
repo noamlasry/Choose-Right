@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Donor } from './donor';
-import { DonorsService } from './donors.service';
+import * as firebase from 'firebase';
 
 @Component({
 	selector: 'app-donors',
@@ -9,18 +9,59 @@ import { DonorsService } from './donors.service';
 	styleUrls: ['./donors.component.css']
 })
 export class DonorsComponent implements OnInit {
-	donorData: Donor[];
+	donorRef: firebase.database.Reference = firebase.database().ref("donors");
+	donorData: Donor[] = [];
 	currentSort: (a: Donor, b: Donor) => number;
+	sortField: string = "lastName";
 	
-	constructor(
-		private donorsService: DonorsService
-		) {}
+	constructor() {}
 		
 		ngOnInit() {
-			this.donorsService.getDonors(donors => {
-				this.donorData = donors;
-				this.sortDonors(this.compareLastNames);
-		});
+			this.donorRef.orderByChild(this.sortField).once("value", donors => {
+				this.donorData = [];
+
+				donors.forEach(dono => {
+					this.donorData.push(Donor.create(dono.toJSON() as Donor, dono.key));
+				});
+			});
+
+			this.donorRef.orderByChild(this.sortField).on("child_added", dono => {
+				var exists = false;
+				var donor = Donor.create(dono.toJSON() as Donor, dono.key)
+
+				this.donorData.forEach(d => {
+					if (d.id == donor.id) {
+						exists = true;
+					}
+				})
+				
+				if (!exists) {
+					this.donorData.push(donor);
+					this.donorData.sort(this.currentSort);
+				}
+			});
+
+			this.donorRef.orderByChild(this.sortField).on("child_changed", dono => {
+				var donor = Donor.create(dono.toJSON() as Donor, dono.key);
+
+				this.donorData.forEach(d => {
+					if (d.id == donor.id) {
+						d.copy(donor);
+						this.donorData.sort(this.currentSort);
+					}
+				})
+			});
+
+			this.donorRef.orderByChild(this.sortField).on("child_removed", dono => {
+				var donor = Donor.create(dono.toJSON() as Donor, dono.key);
+
+				this.donorData.forEach(d => {
+					if (d.id == donor.id) {
+						this.donorData.splice(this.donorData.indexOf(d), 1);
+						this.donorData.sort(this.currentSort);
+					}
+				})
+			});
 	}
 	
 	sortDonors(compareFunction: (a: Donor, b: Donor) => number): void {
@@ -51,6 +92,6 @@ export class DonorsComponent implements OnInit {
 	}
 	
 	compareAmounts(a: Donor, b: Donor): number {
-		return a.total - b.total;
+		return a.getTotal() - b.getTotal();
 	}
 }

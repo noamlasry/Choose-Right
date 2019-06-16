@@ -4,7 +4,7 @@
 			<label for="orgName">שם ארגון</label>
 		</div>
 		<div class="col-75">
-			<input type="text" [(ngModel)]="temp.orgName" name="orgName" id="orgName" placeholder="לתורם פרטי, השאר ריק"/>
+			<input type="text" [(ngModel)]="donor.orgName" name="orgName" id="orgName" placeholder="לתורם פרטי, השאר ריק"/>
 		</div>
 	</div>
 	<div class="row">
@@ -12,7 +12,7 @@
 			<label for="firstName">שם פרטי</label>
 		</div>
 		<div class="col-75">
-			<input type="text" [(ngModel)]="temp.firstName" name="firstName" id="firstName" required/>
+			<input type="text" [(ngModel)]="donor.firstName" name="firstName" id="firstName" required/>
 		</div>
 	</div>
 	<div class="row">
@@ -20,7 +20,7 @@
 			<label for="lastName">שם משפחה</label>
 		</div>
 		<div class="col-75">
-			<input type="text" [(ngModel)]="temp.lastName" name="lastName" id="lastName" required/>
+			<input type="text" [(ngModel)]="donor.lastName" name="lastName" id="lastName" required/>
 		</div>
 	</div>
 	<div class="row">
@@ -28,7 +28,7 @@
 			<label for="telephone">מספר טלפון</label>
 		</div>
 		<div class="col-75">
-			<input type="tel" [(ngModel)]="temp.telephone" name="telephone" id="telephone" />
+			<input type="tel" [(ngModel)]="donor.telephone" name="telephone" id="telephone" />
 		</div>
 	</div>
 	<div class="row">
@@ -36,7 +36,7 @@
 			<label for="email">אימייל</label>
 		</div>
 		<div class="col-75">
-			<input type="tel" [(ngModel)]="temp.email" name="email" id="email" />
+			<input type="email" [(ngModel)]="donor.email" name="email" id="email" />
 		</div>
 	</div>
 	<div class="row">
@@ -44,12 +44,12 @@
 			<label for="address">כתובת</label>
 		</div>
 		<div class="col-75">
-			<input type="tel" [(ngModel)]="temp.address" name="address" id="address" />
+			<input type="text" [(ngModel)]="donor.address" name="address" id="address" />
 		</div>
 	</div>
 	<div class="row submit">
 		<button class="button" type="submit" [disabled]="!donorForm.form.valid">שמור</button>
 		<div class="button" (click)="this.location.back()">בטל</div>
-		<div class="button" (click)="delete()" *ngIf="update">מחק</div>
+		<div class="button" (click)="delete()" *ngIf="donor.id">מחק</div>
 	</div>
 </form>

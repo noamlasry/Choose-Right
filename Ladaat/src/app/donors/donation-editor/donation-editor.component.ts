@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Donor } from '../donor';
-import { DonorsService } from '../donors.service';
 import { Donation } from '../donation';
+import * as firebase from 'firebase';
 
 @Component({
 	selector: 'app-donation',
@@ -12,44 +12,32 @@ import { Donation } from '../donation';
 	styleUrls: ['./donation-editor.component.css']
 })
 export class DonationEditorComponent implements OnInit {
+	private donationsRef: firebase.database.Reference = firebase.database().ref("donations");
+
 	donor: Donor = new Donor();
 	donation: Donation = new Donation();
 	
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private donorsService: DonorsService,
 		private location: Location
 	) {}
 
 	ngOnInit(): void {
-		this.getDonor();
-		this.getDonation();
-	}
+		this.donor.id = this.route.snapshot.paramMap.get("donor");
+		this.donation.id = this.route.snapshot.paramMap.get("donation");
 
-	
-	private getDonor(): void {
-		if (this.route.snapshot.paramMap.get('donor')) {
-			this.donorsService.getDonor(this.route.snapshot.paramMap.get('donor'), donor => {
-				this.donor = donor;
-			});
-		}
-		else {
+		if (!this.donor.id) {
 			this.location.back(); //temporary fix;
 		}
-	}
 
-	private getDonation(): void {
-		if (this.route.snapshot.paramMap.get('donation')) {
-			this.donorsService.getDonation(this.route.snapshot.paramMap.get('donation'), donation => {
-				this.donation.id = donation.id;
-				this.donation.donor = donation.donor;
-				this.donation.amount = donation.amount;
-				this.donation.date = donation.date;
+		if (this.donation.id) {
+			this.donationsRef.child(this.donation.id).once("value", donation => {
+				this.donation.copy(donation.toJSON() as Donation);
 			});
 		}
 	}
-	
+
 	save(): void {		
 		if (!this.donation.date || !this.donation.amount) {
 			return;
@@ -58,17 +46,23 @@ export class DonationEditorComponent implements OnInit {
 			this.donation.donor = this.donor.id;
 
 			if (this.donation.id) {
-				this.donorsService.updateDonation(this.donation, () => this.router.navigate(['/donor/' + this.donor.id]));
+				this.donationsRef.child(this.donation.id).update(this.donation.toJSON(), () => {
+					this.router.navigate(['/donor/' + this.donor.id]);
+				});
 			}
 			else {
-				this.donorsService.addDonation(this.donation, () => this.router.navigate(['/donor/' + this.donor.id]));
+				var ref = this.donationsRef.push(this.donation.toJSON(), donation => {
+					this.router.navigate(['/donor/' + this.donor.id]);
+				});
 			}
 		}
 	}
 
 	delete() {
 		if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
-			this.donorsService.deleteDonation(this.donation, () => this.router.navigate(['/donor/' + this.donor.id]));
+			this.donationsRef.child(this.donation.id).remove(() => {
+				this.router.navigate(['/donor/' + this.donor.id]);
+			});
 		}
 	}
 }
