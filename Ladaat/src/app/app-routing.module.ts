@@ -10,6 +10,9 @@ import { DonationEditorComponent } from './donors/donation-editor/donation-edito
 import { AuthGuard } from './login/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
+import { EducationComponent } from './education/education.component';
+import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
+import { LectureComponent } from "./education/lecture/lecture.component";
 
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: HomeComponent },
@@ -22,7 +25,10 @@ const routes: Routes = [
 	{ path: 'donor-editor/:id', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'donor-editor', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
-	{ path: 'login', component: LoginComponent }
+	{ path: 'login', component: LoginComponent },
+	{ path: 'education', canActivate: [AuthGuard], component: EducationComponent },
+	{ path: 'new-lecture', canActivate: [AuthGuard], component: NewLectureComponent },
+	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent }
 ];
 
 @NgModule({
