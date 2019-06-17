@@ -3,15 +3,8 @@
   "rules": {
     ".read": "auth != null",
     ".write": "auth != null",
-    "donors": {
-      "$donor": {
-        ".validate": "newData.hasChildren(['orgName', 'firstName', 'lastName', 'telephone', 'email', 'address']) && newData.child('orgName').isString() && newData.child('address').isString() && newData.child('email').isString() && newData.child('firstName').isString() && newData.child('lastName').isString() && newData.child('telephone').isString()"
-      }
-    },
     "donations": {
-      "$donation": {
-        ".validate": "newData.hasChildren(['donor', 'date', 'amount']) && newData.child('donor').isString() && newData.child('date').isString() && newData.child('amount').isNumber()"
-      }
+      ".indexOn": "donor"
     }
   }
 }

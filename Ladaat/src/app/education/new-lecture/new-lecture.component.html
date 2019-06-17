@@ -1,0 +1,145 @@
+<form class="container" (ngSubmit)="onSubmit(lectureForm)" #lectureForm="ngForm">
+	<h4>שדות אדומים עם * הם חובה</h4>
+	<div class="row">
+		<div class="col-25">
+			<label for="institute" style="color: darkred">* שם מוסד</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="institute" type="text" name="institute" 
+			id="institute" 
+			class="form-control" required>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-25">
+			<label for="year" style="color: darkred">* שנה</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="year" type="text" name="year" id="year" 
+			class="form-control" required/>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-25">
+			<label for="class" style="color: darkred">* שכבה</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="class" type="text" name="class" id="class" 
+			class="form-control" required/>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-25">
+			<label for="date" style="color: darkred">* תאריך סדנה</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="date" type="text" name="date" id="date"
+			class="form-control" required/>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-25">
+			<label for="content">תכנים</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="content" type="text" name="content" id="content"
+			class="form-control" />
+		</div>
+	</div>
+
+  <div class="row">
+		<div class="col-25">
+			<label for="lecturerName">שם מנחה</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="lecturerName" type="text" name="lecturerName" 
+			id="lecturerName" 
+			class="form-control" />
+		</div>
+  </div>
+
+  <div class="row">
+		<div class="col-25">
+			<label for="price">מחיר</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="price" type="text" name="price" id="price" 
+			class="form-control" />
+		</div>
+  </div>
+
+  <div class="row">
+		<div class="col-25">
+			<label for="contactName1"> איש קשר 1 </label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="contactName1" type="text" name="contactName1" 
+			id="contactName1" placeholder="שם פרטי + שם משפחה"
+			class="form-control"/>
+		</div>
+  </div>
+
+  <div class="row">
+		<div class="col-25">
+			<label for="email1"></label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="email1" type="email" name="email1" 
+			id="email1" placeholder="אימייל"
+			class="form-control"/>
+		</div>
+  </div>
+
+  <div class="row">
+		<div class="col-25">
+			<label for="phone1"></label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="phone1" type="text" name="phone1" 
+			id="phone1" placeholder="טלפון"
+			class="form-control"/>
+		</div>
+  </div>
+  <div class="row">
+		<div class="col-25">
+			<label for="contactName2"> איש קשר 2 </label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="contactName2" type="text" name="contactName2" 
+			id="contactName2" placeholder="שם פרטי + שם משפחה"
+			class="form-control"/>
+		</div>
+  </div>
+
+  <div class="row">
+		<div class="col-25">
+			<label for="email2"></label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="email2" type="email" name="email2" 
+			id="email2" placeholder="אימייל"
+			class="form-control"/>
+		</div>
+  </div>
+
+  <div class="row">
+		<div class="col-25">
+			<label for="phone2"></label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="phone2" type="text" name="phone2" 
+			id="phone2" placeholder="טלפון"
+			class="form-control"/>
+		</div>
+  </div>
+
+	<div class="row submit">
+		<button class="button" name="submit" type="submit" [disabled]="!lectureForm.form.valid">שמור</button>
+		<div class="button" routerLink="/education">בטל</div>
+		<div class="button" (click)="delete()" *ngIf="update">מחק</div>
+	</div>
+</form>

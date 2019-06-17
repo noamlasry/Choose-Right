@@ -10,11 +10,13 @@ Also keep:
 */
 
 import { Donation } from './donation';
+import { DonorConversation } from './conversation';
+import { DonorRecord } from './record';
 
 export class Donor {
-	static create(other: Object, id?: string): Donor {
+	static create(other: Donor, id?: string): Donor {
 		var donor: Donor = new Donor();
-		donor.copy(other as Donor);
+		donor.copy(other);
 
 		if (id) {
 			donor.id = id;
@@ -25,20 +27,42 @@ export class Donor {
 
 	/* Copies all fields from other donor to this donor, except the ID */
 	copy(other: Donor) {
-		this.firstName = (other as Donor).firstName;
-		this.lastName = (other as Donor).lastName;
-		this.telephone = (other as Donor).telephone;
+		this.firstName = other.firstName;
+		this.lastName = other.lastName;
+		this.telephone = other.telephone;
 		
-		this.orgName = (other as Donor).orgName;
-		this.address = (other as Donor).address;
-		this.email = (other as Donor).email;
+		this.orgName = other.orgName;
+		this.address = other.address;
+		this.email = other.email;
 	}
 
 	/* Copies all fields from other donor to this donor, including the ID */
 	copyAll(other: Donor) {
-		this.id = (other as Donor).id;
+		this.id = other.id;
 		this.copy(other);
 	}
+
+	toJSON() {
+		return {
+			'firstName': this.firstName,
+			'lastName': this.lastName,
+			'telephone': this.telephone,
+			'orgName': this.orgName,
+			'address': this.address,
+			'email': this.email,
+		  }
+	}
+	
+	getTotal(): number {
+		var total = 0;
+
+		this.donations.forEach(donation => {
+			total += donation.amount;
+		});
+
+		return total;
+	}
+
 
 	id: string;
 	
@@ -49,6 +73,7 @@ export class Donor {
 	address: string = "";
 	email: string = "";
 
-	donations: Donation[];
-	total: number;
+	donations: Donation[] = [];
+	conversations: DonorConversation[] = [];
+	records: DonorRecord[] = [];
 }

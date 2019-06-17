@@ -1,0 +1,41 @@
+<form class="container" (ngSubmit)="save()" #donationForm="ngForm">
+  <h1 *ngIf="record.id">עריכת מסמך</h1>
+  <h1 *ngIf="!record.id">הוספת מסמך</h1>
+	<div class="row">
+    <div class="col-25">
+      <label for="date">תאריך</label>
+		</div>
+		<div class="col-75">
+      <input type="date" [(ngModel)]="record.date" name="date" id="date" required/>
+		</div>
+  </div>
+  <div class="row">
+      <div class="col-25">
+        <label for="name">שם המסמך</label>
+      </div>
+      <div class="col-75">
+        <input type="text" [(ngModel)]="record.name" name="name" id="name" required/>
+      </div>
+    </div>
+	<div class="row">
+    <div class="col-25">
+      <label for="url">כתובת המסמך</label>
+    </div>
+    <div class="col-75">
+      <input type="url" [(ngModel)]="record.url" name="url" id="url" required/>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-25">
+      </div>
+      <div class="col-75">
+        <input type="checkbox" [(ngModel)]="record.incoming" name="incoming" id="incoming"/>
+        <label for="incoming">נשלח אלי</label>
+      </div>
+    </div>
+	<div class="row submit">
+    <button class="button" type="submit" [disabled]="!donationForm.form.valid">שמור</button>
+		<div class="button" routerLink="/donor/{{donor.id}}">בטל</div>
+		<div class="button" (click)="delete()" *ngIf="record.id">מחק</div>
+	</div>
+</form>
