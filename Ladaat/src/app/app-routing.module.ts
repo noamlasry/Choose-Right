@@ -9,17 +9,14 @@ import { DonorEditorComponent } from './donors/donor-editor/donor-editor.compone
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
 import { AuthGuard } from './login/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
-<<<<<<< HEAD
 import { TaskComponent } from './home/task/task.component';
 import { TasksComponent } from './home/tasks/tasks.component';
 
-=======
 import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
 import { EducationComponent } from './education/education.component';
 import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
 import { LectureComponent } from "./education/lecture/lecture.component";
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
->>>>>>> 4e52d40a14771d6b0520188c71d4555df652ef8e
 
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: TasksComponent },
@@ -35,15 +32,12 @@ const routes: Routes = [
 	{ path: 'donor-editor', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
 	{ path: 'login', component: LoginComponent },
-<<<<<<< HEAD
 	{ path: 'task', component: TaskComponent },
-	{ path: 'tasks', component: TasksComponent }
+	{ path: 'tasks', component: TasksComponent },
 	
-=======
 	{ path: 'education', canActivate: [AuthGuard], component: EducationComponent },
 	{ path: 'new-lecture', canActivate: [AuthGuard], component: NewLectureComponent },
 	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent }
->>>>>>> 4e52d40a14771d6b0520188c71d4555df652ef8e
 ];
 
 @NgModule({

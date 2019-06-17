@@ -12,21 +12,13 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^7.2.15",
-<<<<<<< HEAD
-    "@angular/cdk": "^5.2.4",
-=======
     "@angular/cdk": "^8.0.0",
->>>>>>> 4e52d40a14771d6b0520188c71d4555df652ef8e
     "@angular/common": "~7.2.0",
     "@angular/compiler": "~7.2.0",
     "@angular/core": "^7.2.0",
     "@angular/fire": "^5.2.1",
     "@angular/forms": "~7.2.0",
-<<<<<<< HEAD
-    "@angular/material": "^5.2.4",
-=======
     "@angular/material": "^8.0.0",
->>>>>>> 4e52d40a14771d6b0520188c71d4555df652ef8e
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",

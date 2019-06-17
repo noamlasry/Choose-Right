@@ -16,12 +16,10 @@ import { DonorEditorComponent } from './donors/donor-editor/donor-editor.compone
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-<<<<<<< HEAD
 import { TasksComponent } from './home/tasks/tasks.component';
 import { TaskComponent } from './home/task/task.component';
 import {MatButtonModule,MatCheckboxModule,MatTableModule,MatDialogModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-=======
 import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
 import { EducationComponent } from './education/education.component';
 import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
@@ -30,7 +28,6 @@ import { LectureEditorComponent } from './education/lecture-editor/lecture-edito
 import { ListingEditorComponent } from './education/listing-editor/listing-editor.component';
 import { AddListingComponent } from './education/add-listing/add-listing.component';
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
->>>>>>> 4e52d40a14771d6b0520188c71d4555df652ef8e
 
 @NgModule({
   declarations: [
@@ -43,12 +40,10 @@ import { ConversationEditorComponent } from './donors/conversation-editor/conver
     DonationEditorComponent,
     HomeComponent,
     ProfileComponent,
-<<<<<<< HEAD
     TasksComponent,
     TaskComponent,
     
  
-=======
     DocumentEditorComponent,
     EducationComponent,
     NewLectureComponent,
@@ -57,7 +52,6 @@ import { ConversationEditorComponent } from './donors/conversation-editor/conver
     ListingEditorComponent,
     AddListingComponent,
     ConversationEditorComponent,
->>>>>>> 4e52d40a14771d6b0520188c71d4555df652ef8e
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
