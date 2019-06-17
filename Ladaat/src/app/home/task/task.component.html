@@ -1,0 +1,12 @@
+<div id="task-editor">
+  <h2>הוסף משימה</h2>
+  
+   <div id="task-form">
+       <label for="task-description">תאור:</label>
+       <br>
+       <input id="task-description" [(ngModel)]="taskDescription" type="text" placeholder="Lucy needs some catfood, run by the store to get some!">
+       
+       <button class="button" (click)="addTask()">הוסף משימה</button> 
+   </div>
+</div>
+<button class="button" routerLink="/tasks">חזור </button>

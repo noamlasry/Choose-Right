@@ -9,9 +9,12 @@ import { DonorEditorComponent } from './donors/donor-editor/donor-editor.compone
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
 import { AuthGuard } from './login/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
+import { TaskComponent } from './home/task/task.component';
+import { TasksComponent } from './home/tasks/tasks.component';
+
 
 const routes: Routes = [
-	{ path: '', canActivate: [AuthGuard], component: HomeComponent },
+	{ path: '', canActivate: [AuthGuard], component: TasksComponent },
 	{ path: 'donors', canActivate: [AuthGuard], component: DonorsComponent },
 	{ path: 'donor/:id', canActivate: [AuthGuard], component: DonorComponent },
 	{ path: 'donation-editor/:donor', canActivate: [AuthGuard], component: DonationEditorComponent },
@@ -19,7 +22,10 @@ const routes: Routes = [
 	{ path: 'donor-editor/:id', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'donor-editor', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
-	{ path: 'login', component: LoginComponent }
+	{ path: 'login', component: LoginComponent },
+	{ path: 'task', component: TaskComponent },
+	{ path: 'tasks', component: TasksComponent }
+	
 ];
 
 @NgModule({

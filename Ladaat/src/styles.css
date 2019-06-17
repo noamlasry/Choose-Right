@@ -140,7 +140,7 @@ th {
 }
 
 tr:nth-child(odd) td {
-	background-color: rgb(253, 251, 243);
+	background-color: rgb(243, 253, 246);
 	
 }
 
