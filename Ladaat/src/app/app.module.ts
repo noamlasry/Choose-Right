@@ -9,15 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
-import { TaskService } from './home/task.service';
+import { TaskService } from './tasks/task.service';
 import { DonorsComponent } from './donors/donors.component';
 import { DonorComponent } from './donors/donor/donor.component';
 import { DonorEditorComponent } from './donors/donor-editor/donor-editor.component';
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
-import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { TasksComponent } from './home/tasks/tasks.component';
-import { TaskComponent } from './home/task/task.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskComponent } from './tasks/task/task.component';
 import {MatButtonModule,MatCheckboxModule,MatTableModule,MatDialogModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
@@ -38,7 +37,6 @@ import { ConversationEditorComponent } from './donors/conversation-editor/conver
     DonorComponent,
     DonorEditorComponent,
     DonationEditorComponent,
-    HomeComponent,
     ProfileComponent,
     TasksComponent,
     TaskComponent,

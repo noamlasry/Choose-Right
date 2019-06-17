@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DonorsComponent } from './donors/donors.component';
 import { DonorComponent } from './donors/donor/donor.component';
@@ -9,9 +7,8 @@ import { DonorEditorComponent } from './donors/donor-editor/donor-editor.compone
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
 import { AuthGuard } from './login/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
-import { TaskComponent } from './home/task/task.component';
-import { TasksComponent } from './home/tasks/tasks.component';
-
+import { TaskComponent } from './tasks/task/task.component';
+import { TasksComponent } from '../app/tasks/tasks.component';
 import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
 import { EducationComponent } from './education/education.component';
 import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
@@ -31,13 +28,12 @@ const routes: Routes = [
 	{ path: 'donor-editor/:id', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'donor-editor', canActivate: [AuthGuard], component: DonorEditorComponent },
 	{ path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
-	{ path: 'login', component: LoginComponent },
-	{ path: 'task', component: TaskComponent },
-	{ path: 'tasks', component: TasksComponent },
-	
+	{ path: 'task', canActivate: [AuthGuard], component: TaskComponent },
+	{ path: 'tasks', canActivate: [AuthGuard], component: TasksComponent },
 	{ path: 'education', canActivate: [AuthGuard], component: EducationComponent },
 	{ path: 'new-lecture', canActivate: [AuthGuard], component: NewLectureComponent },
-	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent }
+	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent },
+	{ path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

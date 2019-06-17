@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Tasks } from '../model/Tasks';
-import { Task } from '../model/Task';
-import { Priority } from '../model/Priority';
-import { TaskService } from '../task.service';
+import { Tasks } from '../tasks/model/Tasks';
+import { Task } from '../tasks/model/Task';
+import { Priority } from '../tasks/model/Priority';
+import { TaskService } from '../tasks/task.service';
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
