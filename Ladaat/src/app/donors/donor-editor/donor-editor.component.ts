@@ -13,6 +13,8 @@ import * as firebase from 'firebase';
 export class DonorEditorComponent implements OnInit {
 	private donorsRef: firebase.database.Reference = firebase.database().ref("donors");
 	private donationsRef: firebase.database.Reference = firebase.database().ref("donations");
+	private conversationsRef = firebase.database().ref("donor-conversations");
+    private recordssRef = firebase.database().ref("donor-records");
 
 	donor: Donor = new Donor();
 
@@ -54,6 +56,24 @@ export class DonorEditorComponent implements OnInit {
 				this.donationsRef.orderByChild("donor").equalTo(this.donor.id).once("value", donations => {
 					donations.forEach(donation => {
 						this.donationsRef.child(donation.key).remove();
+					});
+					
+					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?
+					this.router.navigate(['donors'])
+				});
+
+				this.conversationsRef.orderByChild("donor").equalTo(this.donor.id).once("value", conversations => {
+					conversations.forEach(conversation => {
+						this.conversationsRef.child(conversation.key).remove();
+					});
+					
+					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?
+					this.router.navigate(['donors'])
+				});
+
+				this.recordssRef.orderByChild("donor").equalTo(this.donor.id).once("value", records => {
+					records.forEach(record => {
+						this.recordssRef.child(record.key).remove();
 					});
 					
 					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?

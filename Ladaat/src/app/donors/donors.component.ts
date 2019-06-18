@@ -46,7 +46,6 @@ export class DonorsComponent implements OnInit {
 				this.donorData.push(donor);
 				this.addDonationUpdaters(donor);
 				this.donorData.sort(this.currentSort);
-				console.log("All quiet on the western front");
 			}
 		});
 
