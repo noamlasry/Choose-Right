@@ -1,33 +1,22 @@
-<div id="tasks-overview">
-  <h2>משימות</h2>
+<div class="container viewer">
+    <h1>משימות</h1>
 
-  <div id="tasks-overview-top" >
-      <button class="button" routerLink="/task">הוסף משימה</button>
-  <div id="tasks-red" class="task-table">
-     
-      
-      <table class="mission">
-          <thead>
-              <tr>
-                  <th>תאור</th>
-                  <th>תאריך</th>
-                  <th>מחק</th>
-                
-              </tr>
-          </thead>
-          <tbody >
-              <tr *ngFor="let task of tasks.getTasksByPriority(Priority.Red)">
-                  <td>{{task.description}}</td>
-                  <td>{{task.date.toDateString()}}</td>
-                  <td class="remove-task" (click)="removeTask(task)"><i class="fa fa-times" aria-hidden="true"></i></td>
-              </tr>
-              <tr *ngIf="tasks.getTasksByPriority(Priority.Red).length == 0">
-                  <td colspan="3">אין משימות</td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
-    
-</div>
-
+    <div class="toolbar" >
+        <button class="button" routerLink="/task">הוסף משימה</button>
+    </div>
+    <table>
+        <tr>
+            <th>תאור</th>
+            <th>תאריך</th>
+            <th>מחק</th>
+        </tr>
+        <tr *ngFor="let task of tasks.getTasksByPriority(Priority.Red)">
+            <td>{{task.description}}</td>
+            <td>{{task.date.toDateString()}}</td>
+            <td class="remove-task" (click)="removeTask(task)"><i class="fa fa-times" aria-hidden="true"></i></td>
+        </tr>
+        <tr *ngIf="tasks.getTasksByPriority(Priority.Red).length == 0">
+            <td colspan="3">אין משימות</td>
+        </tr>
+    </table>
 </div>
