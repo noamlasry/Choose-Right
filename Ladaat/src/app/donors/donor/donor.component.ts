@@ -29,6 +29,7 @@ import { DonorRecord } from '../record';
 export class DonorComponent implements OnInit {
   donor: Donor = new Donor();
   sortField: string = "date";
+  currentTab: string ='contact';
   
   currentSort: (a: Donation, b: Donation) => number;
   
@@ -37,7 +38,6 @@ export class DonorComponent implements OnInit {
     ) {}
     
   ngOnInit(): void {
-    
     const donorRef = firebase.database().ref("donors").child(this.route.snapshot.paramMap.get("id"));
     const donationsRef = firebase.database().ref("donations");
     const conversationsRef = firebase.database().ref("donor-conversations");
@@ -166,5 +166,21 @@ export class DonorComponent implements OnInit {
   
   compareAmounts(a: Donation, b: Donation): number {
   	return a.amount - b.amount;
+  }
+
+  switchTab(destination: string) {
+    switch (destination) {
+      case "donations":
+        document
+        break;
+      case "conversations":
+      
+        break;
+      case "documents":
+      
+        break;
+      default:
+        break;
+    }
   }
 }

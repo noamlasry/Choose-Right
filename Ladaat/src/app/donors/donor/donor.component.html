@@ -6,15 +6,19 @@
 <h1 *ngIf="donor.orgName">הפרטים של {{donor.orgName}}</h1>
 <h1 *ngIf="!donor.orgName">הפרטים של {{donor.firstName + " " + donor.lastName}}</h1>
 
-<div class="toolbar">
-	<button class="button" routerLink="/donor-editor/{{ donor.id }}">עריכת תורם</button>
-	<button class="button" routerLink="/donation-editor/{{ donor.id }}">הוספת תרומה</button>
-	<button class="button" routerLink="/conversation-editor/{{ donor.id }}">הוספת שיחה</button>
-	<button class="button" routerLink="/document-editor/{{ donor.id }}">הוספת מסמך</button>
-</div>
-
-<h2>איש קשר</h2>
-<table class="contact">
+<div class="tabs">
+	<div class="tabbar">
+		<button class="button" (click)="currentTab='contact'">איש קשר</button>
+		<button class="button" (click)="currentTab='donations'">תרומות</button>
+		<button class="button" (click)="currentTab='conversations'">שיחות</button>
+		<button class="button" (click)="currentTab='documents'">מסמכים</button>
+	</div>
+	<div class="tab" *ngIf="currentTab=='contact'">
+		<h2>איש קשר</h2>
+		<p>
+			<button class="button" routerLink="/donor-editor/{{ donor.id }}">עריכה</button>
+		</p>
+		<table class="contact">
 	<tr>
 		<td>שם משפחה</td>
 		<td>{{ donor.lastName }}</td> 
@@ -36,48 +40,62 @@
 		<td>{{ donor.email }}</td>
 	</tr>
 </table>
-
-<h2>תרומות</h2>
-<p>
-	<b>סך כל התרומות: </b><span class="number">₪{{ donor.getTotal() }}</span>
-</p>
-<table>
-<tr>
-	<th (click)="sortDonations(compareDates); sortField = 'date'">תאריך</th>
-	<th (click)="sortDonations(compareAmounts); sortField = 'amount'">סכום</th> 
-</tr>
-<tr *ngFor="let donation of donor.donations" routerLink="/donation-editor/{{donor.id}}/{{donation.id}}">
-	<td><span class="number">{{ donation.date }}</span></td>
-	<td><span class="number">₪{{ donation.amount }}</span></td> 
-</tr>
-</table>
-
-<h2>שיחות</h2>
-<table>
-<tr>
-	<th>תאריך</th>
-	<th>סיכום</th> 
-</tr>
-<tr *ngFor="let conversation of donor.conversations" routerLink="/conversation-editor/{{donor.id}}/{{conversation.id}}">
-	<td><span class="number">{{ conversation.date }}</span></td>
-	<td>{{ conversation.summary }}</td> 
-</tr>
-</table>
-
-<h2>מסמכים</h2>
-<table>
-<tr>
-	<th>תאריך</th>
-	<th>שם המסמך</th>
-	<th>קישור</th>
-	<th>כיוון</th>
-</tr>
-<tr *ngFor="let record of donor.records" routerLink="/document-editor/{{donor.id}}/{{record.id}}">
-	<td><span class="number">{{ record.date }}</span></td>
-	<td>{{ record.name }}</td>
-	<td><a href="{{ record.url }}">לחצי לפתיחה</a></td>
-	<td>{{ record.incoming ? "התקבל" : "נשלח" }}</td>
-</tr>
-</table>
-
+</div>
+<div class="tab" *ngIf="currentTab=='donations'">
+	<h2>תרומות</h2>
+	<p>
+		<button class="button" routerLink="/donation-editor/{{ donor.id }}">הוספת תרומה</button>
+	</p>
+	<p>
+		<b>סך כל התרומות: </b><span class="number">₪{{ donor.getTotal() }}</span>
+	</p>
+	<table>
+	<tr>
+		<th (click)="sortDonations(compareDates); sortField = 'date'">תאריך</th>
+		<th (click)="sortDonations(compareAmounts); sortField = 'amount'">סכום</th> 
+	</tr>
+	<tr *ngFor="let donation of donor.donations" routerLink="/donation-editor/{{donor.id}}/{{donation.id}}">
+		<td><span class="number">{{ donation.date }}</span></td>
+		<td><span class="number">₪{{ donation.amount }}</span></td> 
+	</tr>
+	</table>
+</div>
+<div class="tab" *ngIf="currentTab=='conversations'">
+	<h2>שיחות</h2>
+	<p>
+		<button class="button" routerLink="/conversation-editor/{{ donor.id }}">הוספת שיחה</button>
+	</p>
+	<table>
+	<tr>
+		<th>תאריך</th>
+		<th>סיכום</th> 
+	</tr>
+	<tr *ngFor="let conversation of donor.conversations" routerLink="/conversation-editor/{{donor.id}}/{{conversation.id}}">
+		<td><span class="number">{{ conversation.date }}</span></td>
+		<td>{{ conversation.summary }}</td> 
+	</tr>
+	</table>
+</div>
+<div class="tab" *ngIf="currentTab=='documents'">
+	<h2>מסמכים</h2>
+	<p>
+		<button class="button" routerLink="/document-editor/{{ donor.id }}">הוספת מסמך</button>
+	</p>
+	<table>
+	<tr>
+		<th>תאריך</th>
+		<th>שם המסמך</th>
+		<th>קישור</th>
+		<th>כיוון</th>
+	</tr>
+	<tr *ngFor="let record of donor.records" routerLink="/document-editor/{{donor.id}}/{{record.id}}">
+		<td><span class="number">{{ record.date }}</span></td>
+		<td>{{ record.name }}</td>
+		<td><a href="{{ record.url }}">לחצי לפתיחה</a></td>
+		<td>{{ record.incoming ? "התקבל" : "נשלח" }}</td>
+	</tr>
+	</table>
+	
+	</div>
+</div>
 </div>

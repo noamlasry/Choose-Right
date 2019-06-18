@@ -97,10 +97,7 @@ img.avatar {
 
 .row.submit .button {
 	float: left;
-}
-
-.button {
-	margin-left: 21px;
+	
 	padding: 12px 20px;
 	border-width: 1px;
 	border-style: solid;
@@ -114,27 +111,34 @@ img.avatar {
 	border-color: white;
 }
 
-.button:first-child, .toolbar .button:last-child {
-	margin-left: 0px;
-}
-
-.button:hover {
+.row.submit .button:hover {
 	background-color: white;
 	color: rgb(111, 183, 182);
 }
 
-.toolbar .button {
+.button {
 	margin-left: 21px;
-	background-color:rgb(172, 49, 150);
+	padding: 12px 20px;
+
 	border: none;
+	border-radius: 5px;
+
 	font-size: 16px;
 	font-weight: normal;
-	transition: 0.3s;
+	
+	background-color:rgb(172, 49, 150);
 	color: white;
+	
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
-.toolbar .button:hover {
+.button:hover {
 	background-color: rgb(198, 64, 156);
+}
+
+.button:first-child, .toolbar .button:last-child {
+	margin-left: 0px;
 }
 
 .container {
@@ -234,7 +238,7 @@ h3 {
 		width: 100%;
 	}
 
-	.row.submit .button, .toolbar .button {
+	.row.submit .button, .button {
 		float: none;
 		display: block;
 		width: 100%;
