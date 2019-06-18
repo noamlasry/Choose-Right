@@ -14,6 +14,16 @@ body {
 	*/
 }	
 
+.container.editor {
+	background-color: rgb(111, 183, 182);
+	width: 50%;
+}
+
+.container.viewer {
+	background-color: rgb(253, 251, 243);
+	width: 100%;
+}
+
 input, input[type=text], input[type=password], input[type=number] {
 	width: 100%;
 	padding: 12px;
@@ -115,14 +125,16 @@ img.avatar {
 
 .toolbar .button {
 	margin-left: 21px;
-	background-color: rgba(0, 0, 0, 0);
-	color: black;
-	border-color: rgb(0, 0, 0);
-	border-bottom-width: 5px;
+	background-color:rgb(172, 49, 150);
+	border: none;
+	font-size: 16px;
+	font-weight: normal;
+	transition: 0.3s;
+	color: white;
 }
 
 .toolbar .button:hover {
-	background-color: rgb(111, 183, 182);
+	background-color: rgb(198, 64, 156);
 }
 
 .container {

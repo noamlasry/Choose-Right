@@ -1,8 +1,8 @@
-<div class="container" *ngIf="!donor.id">
+<div class="container viewer" *ngIf="!donor.id">
 	<h1>התורם המבוקש לא קיים</h1>
 </div>
 
-<div class="container" *ngIf="donor.id">
+<div class="container viewer" *ngIf="donor.id">
 <h1 *ngIf="donor.orgName">הפרטים של {{donor.orgName}}</h1>
 <h1 *ngIf="!donor.orgName">הפרטים של {{donor.firstName + " " + donor.lastName}}</h1>
 
