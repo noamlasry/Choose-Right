@@ -3,10 +3,13 @@ import { Priority } from './Priority';
 /** Class representing a Task */
 export class Task
 {
+    
     private _id : number;
     private _description : string;
     private _priority : Priority;
     private _date : Date;
+    static id: string;
+   
     
     constructor(id : number = -1, description : string = "A new task." , priority : Priority = Priority.Green, date : Date = new Date())
     {
@@ -15,7 +18,21 @@ export class Task
         this.priority = priority;
         this.date = date;
     }
-    
+    static create(other: Object, id?: string): Task {
+		var task: Task = new Task();
+		task.copy(other as Task);
+
+		if (id) {
+			Task.id = id;
+		}
+
+		return task;
+    }
+    copy(other: Task) {
+		this.description = (other as Task).description;
+		this.date = (other as Task).date;
+	
+	}
     /**
     * Get the id of the Task.
     * @return {number} The Tasks id.

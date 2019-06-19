@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Task } from './model/Task';
 import { Tasks } from './model/Tasks';
 import * as firebase from 'firebase';
 @Injectable({
@@ -15,31 +16,48 @@ export class TaskService
   constructor() 
   {
 		this.db = firebase.database();
-	//	this.taskRef = this.db.ref("task");
     this.tasksRef = this.db.ref("tasks");
   }
   
-  getTasks(id: string, callback: (complexTasks: Tasks) => void): void {
+  getTask(id: string, callback: (complexTask: Task) => void): void {
     this.tasksRef.child(id).once('value')
 		.then(snapshot => {
-      var dono: Tasks = Tasks.create(snapshot.toJSON(), snapshot.key);
+      var dono: Task = Task.create(snapshot.toJSON(), snapshot.key);
       callback(dono);
 		})
 		.catch(error => {
 			console.log(error);
 		});
   }
+  getTasks(callback: (tasks: Task[]) => void): void {
+    this.tasksRef.once('value')
+    .then(taskSnapshot => {
+      var tasks: Task[] = [];
+      taskSnapshot.forEach(element => {
+        this.getTask(element.key, complexLecture => {
+          tasks.push(complexLecture)
+          if (tasks.length == taskSnapshot.numChildren()) {
+            callback(tasks);
+          }
+        })
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    
+  }
   
 
-  
-  addTasks(tasks: Tasks, callback: (donor: Tasks) => void): void {
+  addTasks(task: Task, callback: (donor: Task) => void): void {
 		var ref = this.tasksRef.push({
-      
+      'date': task.date,
+      'description': task.description,
      
 
 		  });
 		ref.then(d => {
-			callback(Tasks.create(d.toJSON(), ref.key));
+			callback(Task.create(d.toJSON(), ref.key));
 		})
 		.catch(error => {
 			console.log(error);

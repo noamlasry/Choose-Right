@@ -11,27 +11,23 @@ import { TaskService } from '../tasks/task.service';
 })
 export class TasksComponent implements OnInit 
 {
-  
+  Priority = Priority;
+  taskData: Task [];
+  currentSort: (a: Task, b: Task) => number; 
+  constructor(private taskService : TaskService ) { }
+  ngOnInit() {
+		this.taskService.getTasks(tasks => {
+			this.taskData = tasks;
+			console.log(this.taskData);
+		});
+  }
   get tasks() : Tasks
   {
       return this.taskService.tasks;
   }
-    
-  // This is a hack that enables us to use imported enums.
-  Priority = Priority;
-    
-  constructor(private taskService : TaskService ) { }
-
-
-  ngOnInit() 
-  {
-  }
-    
   removeTask(task : Task) : void
   {
       this.tasks.removeTaskById(task.id);
-      
-      
   }
 
 }
