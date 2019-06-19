@@ -6,6 +6,11 @@
 <h1 *ngIf="donor.orgName">הפרטים של {{donor.orgName}}</h1>
 <h1 *ngIf="!donor.orgName">הפרטים של {{donor.firstName + " " + donor.lastName}}</h1>
 
+<p *ngIf="hasUpdates()"><small>
+	המידע עודכן במערכת.
+	<a (click)="update()">לרענן?</a>
+</small></p>
+
 <div class="tabs">
 	<div class="tabbar">
 		<button class="button" (click)="currentTab='contact'">איש קשר</button>

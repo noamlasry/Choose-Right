@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Donor } from '../donor';
 import { Donation } from '../donation';
 import * as firebase from 'firebase';
+import { UpdaterService } from '../../updater.service';
 
 @Component({
 	selector: 'app-donation',
@@ -20,21 +21,26 @@ export class DonationEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
+		private donorService: UpdaterService,
 		private location: Location
 	) {}
 
 	ngOnInit(): void {
 		this.donor.id = this.route.snapshot.paramMap.get("donor");
 		this.donation.id = this.route.snapshot.paramMap.get("donation");
-
+		
+		
 		if (!this.donor.id) {
 			this.location.back(); //temporary fix;
 		}
-
+		
 		if (this.donation.id) {
-			this.donationsRef.child(this.donation.id).once("value", donation => {
-				this.donation.copy(donation.toJSON() as Donation);
-			});
+			this.donorService.initializeSingle(this.donationsRef, this.donation.id, this.donation, new Donation())
+			.then(snapshot => this.donorService.addSingleListener(this.donationsRef, this.donation.id, this.donation, new Donation()));
+
+			// this.donationsRef.child(this.donation.id).once("value", donation => {
+			// 	this.donation.copy(donation.toJSON() as Donation);
+			// });
 		}
 	}
 
@@ -64,5 +70,13 @@ export class DonationEditorComponent implements OnInit {
 				this.router.navigate(['/donor/' + this.donor.id]);
 			});
 		}
+	}
+
+	hasUpdates(): boolean {
+	return this.donorService.updates.length > 0;
+	}
+
+	update(): void {
+	this.donorService.updateAll();
 	}
 }

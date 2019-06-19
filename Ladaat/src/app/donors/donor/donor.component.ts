@@ -20,6 +20,7 @@ import { Donation } from '../donation';
 import * as firebase from 'firebase';
 import { DonorConversation } from '../conversation';
 import { DonorRecord } from '../record';
+import { UpdaterService } from '../../updater.service';
 
 @Component({
   selector: 'app-donor',
@@ -32,123 +33,40 @@ export class DonorComponent implements OnInit {
   currentTab: string ='contact';
   
   currentSort: (a: Donation, b: Donation) => number;
-  
+
+  // updates = [];
+
   constructor(
+    private donorService: UpdaterService,
     private route: ActivatedRoute
     ) {}
     
   ngOnInit(): void {
-    const donorRef = firebase.database().ref("donors").child(this.route.snapshot.paramMap.get("id"));
+    const id = this.route.snapshot.paramMap.get("id");
+    const donorsRef = firebase.database().ref("donors");
     const donationsRef = firebase.database().ref("donations");
     const conversationsRef = firebase.database().ref("donor-conversations");
-    const recordssRef = firebase.database().ref("donor-records");
+    const recordsRef = firebase.database().ref("donor-records");
     
-    donorRef.on("value", donor => {
-      if (donor.exists()) {
-        this.donor.id = this.route.snapshot.paramMap.get("id");
-        this.donor.copy(donor.toJSON() as Donor);
-      }
-      else {
-        this.donor.id = null;
-      }
+    this.donorService.initializeSingle(donorsRef, id, this.donor, new Donor()).then(snapshot => {
+      this.donorService.addSingleListener(donorsRef, id, this.donor, new Donor());
     });
 
-
-    // Donations updaters:
-    donationsRef.orderByChild("donor").equalTo(this.route.snapshot.paramMap.get("id")).on("child_added", dona => {
-      var donation = Donation.create(dona.toJSON() as Donation, dona.key);
-      this.donor.donations.push(donation);
-      this.donor.donations.sort(this.currentSort);
-    });
-    
-    donationsRef.orderByChild("donor").equalTo(this.route.snapshot.paramMap.get("id")).on("child_changed", dona => {
-      var donation = Donation.create(dona.toJSON() as Donation, dona.key);
-      
-      this.donor.donations.forEach(d => {
-        if (d.id == donation.id) {
-          d.copy(donation);
-          this.donor.donations.sort(this.currentSort);
-          return;
-        }
-      });
-    });
-    
-    donationsRef.orderByChild("donor").equalTo(this.route.snapshot.paramMap.get("id")).on("child_removed", dona => {
-      var donation = Donation.create(dona.toJSON() as Donation, dona.key);
-      
-      this.donor.donations.forEach(d => {
-        if (d.id == donation.id) {
-          this.donor.donations.splice(this.donor.donations.indexOf(d), 1);
-          this.donor.donations.sort(this.currentSort);
-          return;
-        }
-      });
+    this.donorService.initializeList(donationsRef, "donor", id, this.donor.donations, new Donation()).then(snapshot => {
+      this.donorService.addListListeners(donationsRef, "donor", id, this.donor.donations, new Donation());
     });
 
-    // Conversation updaters:
-    conversationsRef.orderByChild("donor").equalTo(this.route.snapshot.paramMap.get("id")).on("child_added", convo => {
-      var conversation = DonorConversation.create(convo.toJSON() as DonorConversation, convo.key);
-      this.donor.conversations.push(conversation);
-      // this.donor.conversations.sort(this.currentSort);
-    });
-    
-    conversationsRef.orderByChild("donor").equalTo(this.route.snapshot.paramMap.get("id")).on("child_changed", convo => {
-      var conversation = DonorConversation.create(convo.toJSON() as DonorConversation, convo.key);
-      
-      this.donor.conversations.forEach(c => {
-        if (c.id == conversation.id) {
-          c.copy(conversation);
-          // this.donor.conversations.sort(this.currentSort);
-          return;
-        }
-      });
-    });
-    
-    conversationsRef.orderByChild("donor").equalTo(this.route.snapshot.paramMap.get("id")).on("child_removed", convo => {
-      var conversation = DonorConversation.create(convo.toJSON() as DonorConversation, convo.key);
-      
-      this.donor.conversations.forEach(c => {
-        if (c.id == conversation.id) {
-          this.donor.conversations.splice(this.donor.conversations.indexOf(c), 1);
-          // this.donor.conversations.sort(this.currentSort);
-          return;
-        }
-      });
+    this.donorService.initializeList(conversationsRef, "donor", id, this.donor.conversations, new DonorConversation()).then(snapshot => {
+      this.donorService.addListListeners(conversationsRef, "donor", id, this.donor.conversations, new DonorConversation());
     });
 
+    this.donorService.initializeList(recordsRef, "donor", id, this.donor.records, new DonorRecord()).then(snapshot => {
+      this.donorService.addListListeners(recordsRef, "donor",id, this.donor.records, new DonorRecord());
+    });
 
-    // Document updaters:
-    recordssRef.orderByChild("donor").equalTo(this.route.snapshot.paramMap.get("id")).on("child_added", rec => {
-      var record = DonorRecord.create(rec.toJSON() as DonorRecord, rec.key);
-      this.donor.records.push(record);
-      // this.donor.conversations.sort(this.currentSort);
-    });
-    
-    recordssRef.orderByChild("donor").equalTo(this.route.snapshot.paramMap.get("id")).on("child_changed", rec => {
-      var record = DonorRecord.create(rec.toJSON() as DonorRecord, rec.key);
-      
-      this.donor.records.forEach(r => {
-        if (r.id == record.id) {
-          r.copy(record);
-          // this.donor.records.sort(this.currentSort);
-          return;
-        }
-      });
-    });
-    
-    recordssRef.orderByChild("donor").equalTo(this.route.snapshot.paramMap.get("id")).on("child_removed", rec => {
-      var record = DonorRecord.create(rec.toJSON() as DonorRecord, rec.key);
-      
-      this.donor.records.forEach(r => {
-        if (r.id == record.id) {
-          this.donor.records.splice(this.donor.records.indexOf(r), 1);
-          // this.donor.records.sort(this.currentSort);
-          return;
-        }
-      });
-    });
+    this.donorService.updateAll();
   }
-  
+
   sortDonations(compareFunction: (a: Donation, b: Donation) => number): void {
   	if (!this.currentSort || compareFunction != this.currentSort) {
       this.donor.donations.sort(compareFunction);
@@ -182,5 +100,13 @@ export class DonorComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  hasUpdates(): boolean {
+    return this.donorService.updates.length > 0;
+  }
+
+  update(): void {
+    this.donorService.updateAll();
   }
 }

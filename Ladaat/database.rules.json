@@ -5,6 +5,12 @@
     ".write": "auth != null",
     "donations": {
       ".indexOn": "donor"
+    },
+    "donor-conversations": {
+      ".indexOn": "donor"
+    },
+    "donor-records": {
+      ".indexOn": "donor"
     }
   }
 }

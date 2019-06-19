@@ -4,6 +4,7 @@ import { Tasks } from '../model/Tasks';
 import { TaskService } from '../task.service';
 import { Priority } from '../model/Priority';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-task',
@@ -12,29 +13,31 @@ import { Router } from '@angular/router';
 })
 export class TaskComponent implements OnInit
 {
+  task: Task;
   taskDescription = "";
   taskPriority = "Green";
     
   // Hack to show enum
   Priority = Priority;
 
-  constructor(private taskService : TaskService, private router : Router) { }
-
-  ngOnInit() {
-  }
-    
+  constructor(private taskService : TaskService, private router : Router,private route: ActivatedRoute) { }
   addTask() : void
   {
    
       let priority;
       priority = Priority.Red;
      
-      
+    
       this.taskService.tasks.addTask(this.taskDescription, priority, new Date());
       this.taskDescription = "";
       this.taskPriority = "Green";
-      
+    
       this.router.navigate(['tasks']);
   }
+  ngOnInit() {
+  
+  } 
+
+
 
 }

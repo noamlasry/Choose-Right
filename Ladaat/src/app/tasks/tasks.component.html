@@ -12,8 +12,8 @@
         </tr>
         <tr *ngFor="let task of tasks.getTasksByPriority(Priority.Red)">
             <td>{{task.description}}</td>
-            <td>{{task.date.toDateString()}}</td>
-            <td class="remove-task" (click)="removeTask(task)"><i class="fa fa-times" aria-hidden="true"></i></td>
+            <td>{{task.date| date:'short'}}</td>
+            <td class="remove-task" (click)="removeTask(task)"><i class="fa fa-trash" aria-hidden="true"></i></td>
         </tr>
         <tr *ngIf="tasks.getTasksByPriority(Priority.Red).length == 0">
             <td colspan="3">אין משימות</td>
