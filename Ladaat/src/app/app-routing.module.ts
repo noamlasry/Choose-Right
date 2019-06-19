@@ -30,9 +30,11 @@ const routes: Routes = [
 	{ path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
 	{ path: 'task', canActivate: [AuthGuard], component: TaskComponent },
 	{ path: 'tasks', canActivate: [AuthGuard], component: TasksComponent },
+	
 	{ path: 'education', canActivate: [AuthGuard], component: EducationComponent },
 	{ path: 'new-lecture', canActivate: [AuthGuard], component: NewLectureComponent },
 	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent },
+	
 	{ path: 'login', component: LoginComponent },
 ];
 
