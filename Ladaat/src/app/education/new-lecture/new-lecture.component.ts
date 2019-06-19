@@ -25,7 +25,6 @@ export class NewLectureComponent implements OnInit {
     contactName2: string = '';
     email2: string = '';
     phone2: string = '';
-    listing: Listing[];
 
   constructor(private _es: EducationService, private location: Location) { }
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { Listing } from "../classes/listing";
 import {Lecture} from '../classes/lecture';
 import * as firebase from 'firebase';
 
@@ -46,7 +46,7 @@ export class EducationService {
     
   }
 
-  addLecture(lecture: Lecture, callback: (donor: Lecture) => void): void {
+  addLecture(lecture: Lecture, callback: (lecture: Lecture) => void): void {
 		var ref = this.lectureRef.push({
       'institute': lecture.institute,
       'year': lecture.year,
@@ -61,7 +61,6 @@ export class EducationService {
       'contactName2': lecture.contactName2,
       'email2': lecture.email2,
       'phone2': lecture.phone2
-      /*'listing': Listing[];*/
 		  });
 		ref.then(d => {
 			callback(Lecture.create(d.toJSON(), ref.key));
