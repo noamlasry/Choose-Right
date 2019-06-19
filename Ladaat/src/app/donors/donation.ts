@@ -1,4 +1,6 @@
-export class Donation {
+import { Identifiable } from '../identifiable';
+
+export class Donation implements Identifiable<Donation> {
 	static create(other: Donation, id?: string): Donation {
 		var donation: Donation = new Donation();
 		donation.copy(other);
@@ -24,6 +26,14 @@ export class Donation {
 		this.id = other.id;
 	}
 
+	equals(other: Donation) {
+		return this.id == other.id && this.donor == other.donor && this.date == other.date && this.amount == other.amount;
+	}
+
+	make(): Donation {
+		return new Donation();
+	}
+	
 	toJSON() {
 		return {
 			'donor': this.donor,

@@ -82,6 +82,11 @@ img.avatar {
 .toolbar {
 	display: block;
 	margin-bottom: 21px;
+	margin-top: 21px;
+}
+
+.toolbar button.button {
+	margin-left: 21px;
 }
 
 /* Clear floats after the columns */

@@ -20,7 +20,6 @@ export class DonorsComponent implements OnInit {
 	constructor() {}
 	
 	ngOnInit() {
-
 		this.donorRef.orderByChild(this.sortField).once("value", donors => {
 			this.donorData = [];
 

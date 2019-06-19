@@ -17,8 +17,6 @@ import { DonationEditorComponent } from './donors/donation-editor/donation-edito
 import { ProfileComponent } from './profile/profile.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskComponent } from './tasks/task/task.component';
-import {MatButtonModule,MatCheckboxModule,MatTableModule,MatDialogModule} from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
 import { EducationComponent } from './education/education.component';
 import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
