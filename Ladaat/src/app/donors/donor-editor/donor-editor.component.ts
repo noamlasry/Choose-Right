@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Donor } from '../donor';
 import * as firebase from 'firebase';
+import { UpdaterService } from '../../updater.service';
 
 @Component({
 	selector: 'app-donor-editor',
@@ -21,16 +22,21 @@ export class DonorEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
+		private donorService: UpdaterService,
 		private location: Location
 	) {}
 
 	ngOnInit(): void {
+		
 		this.donor.id = this.route.snapshot.paramMap.get("id");
-
+		
 		if (this.donor.id) {
-			this.donorsRef.child(this.donor.id).once("value", donor => {
-				this.donor.copy(donor.toJSON() as Donor);
-			});
+			this.donorService.initializeSingle(this.donorsRef, this.donor.id, this.donor, new Donor())
+			.then(snapshot => this.donorService.addSingleListener(this.donorsRef, this.donor.id, this.donor, new Donor()));
+
+			// this.donorsRef.child(this.donor.id).once("value", donor => {
+			// 	this.donor.copy(donor.toJSON() as Donor);
+			// });
 		}
 	}
 	
@@ -82,4 +88,12 @@ export class DonorEditorComponent implements OnInit {
 			});
 		}
 	}
+
+	hasUpdates(): boolean {
+		return this.donorService.updates.length > 0;
+		}
+	
+		update(): void {
+		this.donorService.updateAll();
+		}
 }

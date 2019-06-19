@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Donor } from '../donor';
 import { DonorConversation } from '../conversation';
 import * as firebase from 'firebase';
+import { UpdaterService } from '../../updater.service';
 
 @Component({
   selector: 'app-conversation-editor',
@@ -20,21 +21,22 @@ export class ConversationEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
+		private donorService: UpdaterService,
 		private location: Location
 	) {}
 
 	ngOnInit(): void {
 		this.donor.id = this.route.snapshot.paramMap.get("donor");
-		this.conversation.id = this.route.snapshot.paramMap.get("conversation");
-
+		this.conversation.id = this.route.snapshot.paramMap.get("donation");
+		
+		
 		if (!this.donor.id) {
 			this.location.back(); //temporary fix;
 		}
-
+		
 		if (this.conversation.id) {
-			this.conversationsRef.child(this.conversation.id).once("value", record => {
-				this.conversation.copy(record.toJSON() as DonorConversation);
-			});
+			this.donorService.initializeSingle(this.conversationsRef, this.conversation.id, this.conversation, new DonorConversation())
+			.then(snapshot => this.donorService.addSingleListener(this.conversationsRef, this.conversation.id, this.conversation, new DonorConversation()));
 		}
 	}
 
@@ -65,5 +67,12 @@ export class ConversationEditorComponent implements OnInit {
 			});
 		}
 	}
-}
 
+	hasUpdates(): boolean {
+	return this.donorService.updates.length > 0;
+	}
+
+	update(): void {
+	this.donorService.updateAll();
+	}
+}

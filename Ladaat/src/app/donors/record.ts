@@ -1,4 +1,6 @@
-export class DonorRecord {
+import { Identifiable } from '../identifiable';
+
+export class DonorRecord implements Identifiable<DonorRecord> {
 	static create(other: DonorRecord, id?: string): DonorRecord {
 		var record: DonorRecord = new DonorRecord();
 		record.copy(other);
@@ -26,6 +28,14 @@ export class DonorRecord {
 		this.id = other.id;
 	}
 
+	equals(other: DonorRecord) {
+		return this.id == other.id && this.donor == other.donor && this.date == other.date && this.name == other.name && this.url == other.url && this.incoming == other.incoming;
+	}
+
+	make(): DonorRecord {
+		return new DonorRecord();
+	}
+	
 	toJSON() {
 		return {
 			'donor': this.donor,

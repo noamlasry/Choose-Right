@@ -1,6 +1,12 @@
 <form class="container editor" (ngSubmit)="save()" #donationForm="ngForm">
   <h1 *ngIf="record.id">עריכת מסמך</h1>
   <h1 *ngIf="!record.id">הוספת מסמך</h1>
+
+  <p *ngIf="hasUpdates()"><small>
+		המידע עודכן במערכת.
+		<a (click)="update()">לרענן?</a>
+  </small></p>
+  
 	<div class="row">
     <div class="col-25">
       <label for="date">תאריך</label>

@@ -12,8 +12,9 @@ Also keep:
 import { Donation } from './donation';
 import { DonorConversation } from './conversation';
 import { DonorRecord } from './record';
+import { Identifiable } from '../identifiable';
 
-export class Donor {
+export class Donor implements Identifiable<Donor> {
 	static create(other: Donor, id?: string): Donor {
 		var donor: Donor = new Donor();
 		donor.copy(other);
@@ -42,6 +43,10 @@ export class Donor {
 		this.copy(other);
 	}
 
+	equals(other: Donor) {
+		return this.id == other.id && this.firstName == other.firstName && this.lastName == other.lastName && this.telephone == other.telephone &&
+			this.orgName == other.orgName && this.address == other.address && this.email == other.email;
+	}
 	toJSON() {
 		return {
 			'firstName': this.firstName,
@@ -51,6 +56,10 @@ export class Donor {
 			'address': this.address,
 			'email': this.email,
 		  }
+	}
+	
+	make(): Donor {
+		return new Donor();
 	}
 	
 	getTotal(): number {
