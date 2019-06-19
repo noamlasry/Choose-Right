@@ -25,6 +25,7 @@ import { LectureEditorComponent } from './education/lecture-editor/lecture-edito
 import { ListingEditorComponent } from './education/listing-editor/listing-editor.component';
 import { AddListingComponent } from './education/add-listing/add-listing.component';
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { ConversationEditorComponent } from './donors/conversation-editor/conver
   entryComponents: [
    TaskComponent,
   ],
-  providers: [TaskService],
+  providers: [TaskService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

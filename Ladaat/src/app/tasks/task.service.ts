@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from './model/Task';
-import { Tasks } from './model/Tasks';
 import * as firebase from 'firebase';
+import {DatePipe} from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,9 +11,8 @@ export class TaskService
   db: firebase.database.Database;
   tasksRef: firebase.database.Reference;
 
-  tasks = new Tasks();
     
-  constructor() 
+  constructor(public datepipe: DatePipe) 
   {
 		this.db = firebase.database();
     this.tasksRef = this.db.ref("tasks");
@@ -49,13 +48,15 @@ export class TaskService
   }
   
 
-  addTasks(task: Task, callback: (donor: Task) => void): void {
-		var ref = this.tasksRef.push({
-      'date': task.date,
-      'description': task.description,
-     
+  addTask(task: Task, callback: (donor: Task) => void): void {
+    task.date=new Date();
+    let latest_date =this.datepipe.transform(task.date, 'M/d/yy, h:mm a');
+    console.log(latest_date)
+    var ref = this.tasksRef.push({
+      'date':latest_date,
+      'description': task.description
 
-		  });
+      });
 		ref.then(d => {
 			callback(Task.create(d.toJSON(), ref.key));
 		})
