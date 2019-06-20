@@ -33,8 +33,8 @@ export class TaskService
     .then(taskSnapshot => {
       var tasks: Task[] = [];
       taskSnapshot.forEach(element => {
-        this.getTask(element.key, complexLecture => {
-          tasks.push(complexLecture)
+        this.getTask(element.key, complexTask => {
+          tasks.push(complexTask)
           if (tasks.length == taskSnapshot.numChildren()) {
             callback(tasks);
           }

@@ -5,7 +5,7 @@ import { TaskService } from '../tasks/task.service';
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
-  encapsulation: ViewEncapsulation.None
+ // encapsulation: ViewEncapsulation.None
 })
 export class TasksComponent implements OnInit 
 {
