@@ -17,6 +17,7 @@ export class Task
     }
     copy(other: Task) {
 		this.description = (other as Task).description;
-		this.date = new Date();
+		this.date = (other as Task).date;
+		//this.date = new Date();
 	}
 }
