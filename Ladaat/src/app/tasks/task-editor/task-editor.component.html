@@ -1,0 +1,27 @@
+<form class="container editor" (ngSubmit)="save()" #donorForm="ngForm">
+
+    <div class="row">
+      <div class="col-25">
+        <label for="orgName">המשימה בוצעה על ידי:</label>
+      </div>
+      <div class="col-75">
+        <input type="text" [(ngModel)]="donor.orgName" name="orgName" id="orgName" placeholder="לתורם פרטי, השאר ריק"/>
+      </div>
+    </div>
+
+  	<div class="row">
+        <div class="col-25">
+          <label for="date">תאריך ביצוע המשימה:</label>
+        </div>
+        <div class="col-75">
+          <input type="date" [(ngModel)]="donation.date" name="date" id="date" required/>
+        </div>
+      </div>
+    
+    <div class="row submit">
+      <button class="button" type="submit" [disabled]="!donorForm.form.valid">שמור</button>
+      <div class="button" (click)="this.location.back()">בטל</div>
+      <div class="button" (click)="delete()">מחק</div>
+    </div>
+  </form>
+  

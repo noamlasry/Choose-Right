@@ -5,19 +5,17 @@ import {DatePipe} from '@angular/common';
 @Injectable({
   providedIn: 'root'
 })
-
 export class TaskService
 {
   db: firebase.database.Database;
   tasksRef: firebase.database.Reference;
 
-    
   constructor(public datepipe: DatePipe) 
   {
 		this.db = firebase.database();
     this.tasksRef = this.db.ref("tasks");
   }
-  
+
   getTask(id: string, callback: (complexTask: Task) => void): void {
     this.tasksRef.child(id).once('value')
 		.then(snapshot => {
@@ -54,8 +52,9 @@ export class TaskService
     console.log(latest_date)
     var ref = this.tasksRef.push({
       'date':latest_date,
-      'description': task.description
-
+      'description': task.description,
+   //   'doneBy': task.doneBy,
+   //   'executionDate': task.executionDate
       });
 		ref.then(d => {
 			callback(Task.create(d.toJSON(), ref.key));

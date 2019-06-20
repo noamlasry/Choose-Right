@@ -27,6 +27,7 @@ import { AddListingComponent } from './education/add-listing/add-listing.compone
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
 import { DatePipe } from '@angular/common';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
+import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
     AddListingComponent,
     ConversationEditorComponent,
     TaskDetailComponent,
+    TaskEditorComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
