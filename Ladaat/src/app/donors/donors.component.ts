@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Donor } from './donor';
 import * as firebase from 'firebase';
 import { Donation } from './donation';
+import { UpdaterService } from '../updater.service';
 
 @Component({
 	selector: 'app-donors',
@@ -17,60 +18,16 @@ export class DonorsComponent implements OnInit {
 	currentSort: (a: Donor, b: Donor) => number;
 	sortField: string = "lastName";
 	
-	constructor() {}
+	constructor(
+		private updateService: UpdaterService
+	) {}
 	
 	ngOnInit() {
-		this.donorRef.orderByChild(this.sortField).once("value", donors => {
-			this.donorData = [];
-
-			donors.forEach(dono => {
-				var donor = Donor.create(dono.toJSON() as Donor, dono.key);
-				this.addDonationUpdaters(donor);
-				this.donorData.push(donor);
+		this.updateService.initializeAndListenAll<Donor>(this.donorRef, this.donorData, new Donor())
+		.then(snapshot => {
+			this.donorData.forEach(donor => {
+				this.updateService.initializeAndListenList<Donation>(this.donationsRef, "donor", donor.id, donor.donations, new Donation());
 			});
-		});
-
-		this.donorRef.orderByChild(this.sortField).on("child_added", dono => {
-			var exists = false;
-			var donor = Donor.create(dono.toJSON() as Donor, dono.key)
-
-			this.donorData.forEach(d => {
-				if (d.id == donor.id) {
-					exists = true;
-					return;
-				}
-			})
-			
-			if (!exists) {
-				this.donorData.push(donor);
-				this.addDonationUpdaters(donor);
-				this.donorData.sort(this.currentSort);
-			}
-		});
-
-		this.donorRef.orderByChild(this.sortField).on("child_changed", dono => {
-			var donor = Donor.create(dono.toJSON() as Donor, dono.key);
-
-			this.donorData.forEach(d => {
-				if (d.id == donor.id) {
-					d.copy(donor);
-					this.donorData.sort(this.currentSort);
-					return;
-				}
-			})
-		});
-
-		this.donorRef.orderByChild(this.sortField).on("child_removed", dono => {
-			var donor = Donor.create(dono.toJSON() as Donor, dono.key);
-
-			this.donorData.forEach(d => {
-				if (d.id == donor.id) {
-					this.donorData.splice(this.donorData.indexOf(d), 1);
-					// this.donationsRef.orderByChild("donor").equalTo(donor.id).off(); //Is this needed?
-					this.donorData.sort(this.currentSort);
-					return;
-				}
-			})
 		});
 	}
 	
@@ -101,35 +58,11 @@ export class DonorsComponent implements OnInit {
 		return a.getTotal() - b.getTotal();
 	}
 
-	private addDonationUpdaters(donor: Donor) {
-		this.donationsRef.orderByChild("donor").equalTo(donor.id).on("child_added", dona => {
-			var donation = Donation.create(dona.toJSON() as Donation, dona.key);
-			donor.donations.push(donation);
-			this.donorData.sort(this.currentSort);
-		});
-		
-		this.donationsRef.orderByChild("donor").equalTo(donor.id).on("child_changed", dona => {
-			var donation = Donation.create(dona.toJSON() as Donation, dona.key);
-			
-			donor.donations.forEach(d => {
-			  if (d.id == donation.id) {
-				d.copy(donation);
-				this.donorData.sort(this.currentSort);
-				return;
-			  }
-			});
-		});
-		  
-		this.donationsRef.orderByChild("donor").equalTo(donor.id).on("child_removed", dona => {
-			var donation = Donation.create(dona.toJSON() as Donation, dona.key);
-			
-			donor.donations.forEach(d => {
-			  if (d.id == donation.id) {
-				donor.donations.splice(donor.donations.indexOf(d), 1);
-				this.donorData.sort(this.currentSort);
-				return;
-			  }
-			});
-		});
+	hasUpdates(): boolean {
+		return this.updateService.updates.length > 0;
+	}
+
+	update(): void {
+		this.updateService.updateAll();
 	}
 }

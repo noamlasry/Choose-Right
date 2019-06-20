@@ -1,6 +1,11 @@
 <div class="container viewer">
 	<h1>תורמים</h1>
 	
+	<p *ngIf="hasUpdates()"><small>
+		המידע עודכן במערכת.
+		<a (click)="update()">לרענן?</a>
+	</small></p>
+
 	<div class="toolbar">
 		<button class="button" routerLink="/donor-editor">הוסף תורם</button>
 	</div>
