@@ -1,14 +1,10 @@
 .navbar {
-	overflow: hidden;
 	background-color: rgb(172, 49, 150);
 	color: white;
-	display: block;
 	padding: 0;
-	height: 70px;
-}
-
-.row {
-	display: inline;
+	overflow: visible;
+	display: block;
+	position: relative;
 }
 
 .navbar a, .dropbtn {
@@ -19,7 +15,6 @@
 	text-decoration: none;
 	color: white;
 	border: none;
-	border-bottom: 5px solid rgba(255, 255, 255, 0);
 	
 	text-align: center;
 	vertical-align: middle;
@@ -45,9 +40,12 @@
 	padding: 0;
 	display: table-cell;
 	vertical-align: middle;
-	overflow: hidden;
-	float: left;
 	border-radius: 5px 0 0 0;
+
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	height: 100%;
 }
 
 .navbtn:hover {
@@ -58,6 +56,8 @@
 .dropdown-content {
 	display: none;
 	position: absolute;
+	top: 70px;
+	right: 0px;
 	background-color: rgb(172, 49, 150);
 	min-width: 160px;
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -70,7 +70,6 @@
 	display: block;
 	text-align: right;
 	width: 100%;
-	border-bottom: 5px solid rgba(255, 255, 255, 0);
 }
 
 .dropdown:hover .dropdown-content {
@@ -94,17 +93,16 @@
 		height: fit-content;
 	}
 
-	.row a.navbtn, .dropdown, .dropdown .dropbtn, .dropdown-content, .dropdown-content a.navbtn {
+	.navbar a.navbtn, .dropdown, .dropdown .dropbtn, .dropdown-content, .dropdown-content a.navbtn {
 		display: none;
 	}
 	
-	.row:hover a.navbtn, .row a.logo, .row:hover .dropdown, .dropdown .dropbtn, .dropdown:hover .dropdown-content, .dropdown:hover .dropdown-content a.navbtn {
+	.navbar:hover a.navbtn, .navbar a.logo, .navbar:hover .dropdown, .dropdown .dropbtn, .dropdown:hover .dropdown-content, .dropdown:hover .dropdown-content a.navbtn {
 		text-align: center;
 		display: block;
-		float: none;
 	}
 
-	.dropdown-content {
+	.dropdown-content, .dropdown, .dropdown .dropbtn {
 		position: static;
 	}
 }
