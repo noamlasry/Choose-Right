@@ -25,15 +25,15 @@ export class TasksComponent implements OnInit
       console.log(this.taskService.tasksRef);
 		});
   }
- /*   אם ישאר זמן אעשה מחיקת מחיקה חיצונ ית
-  removeTask()
+  //  אם ישאר זמן אעשה מחיקת מחיקה חיצונית
+  removeTask(task: Task)
   {
-    alert("dd");
+    // alert("dd");
     if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
-			this.tasksRef.child(this.task.id).remove(() => {
-				this.router.navigate(['/tasks/' ]);
+			this.tasksRef.child(task.id).remove(() => {
+				this.router.navigate(['/tasks/']);
 			});
 		}
   }
-*/
+
 }
