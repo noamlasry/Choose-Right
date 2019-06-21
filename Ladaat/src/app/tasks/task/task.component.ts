@@ -13,9 +13,7 @@ export class TaskComponent implements OnInit
 {
   id?: string;
   description: string = '';
-  doneBy: string = '';
   date: Date;
-  executionDate: Date;
   constructor(private _es: TaskService, private location: Location) { }
 
   ngOnInit() {
