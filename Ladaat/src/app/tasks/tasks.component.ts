@@ -13,18 +13,12 @@ import * as firebase from 'firebase';
 })
 export class TasksComponent implements OnInit 
 {
-  
-    private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
     taskData: Task [];
-    task: Task = new Task();
-
   currentSort: (a: Task, b: Task) => number; 
   constructor(private taskService : TaskService ,private router: Router,	private route: ActivatedRoute) { }
 
 
   ngOnInit() {
-    this.task.id = this.route.snapshot.paramMap.get("id");
-
 		this.taskService.getTasks(tasks => {
 			this.taskData = tasks;
       console.log(this.taskData);
