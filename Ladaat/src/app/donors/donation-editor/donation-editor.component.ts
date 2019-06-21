@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Donor } from '../donor';
-import { Donation } from '../donation';
+import { Donor } from '../model/donor';
+import { Donation } from '../model/donation';
 import * as firebase from 'firebase';
 import { UpdaterService } from '../../updater.service';
 
@@ -73,7 +73,7 @@ export class DonationEditorComponent implements OnInit {
 	}
 
 	hasUpdates(): boolean {
-	return this.donorService.updates.length > 0;
+	return this.donorService.hasUpdates();
 	}
 
 	update(): void {

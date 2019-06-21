@@ -11,7 +11,7 @@ export class UpdaterService {
   conversationsRef = firebase.database().ref("donor-conversations");
   recordsRef = firebase.database().ref("donor-records");
 
-  updates = [];
+  private updates = [];
 
   constructor() { }
 
@@ -290,4 +290,8 @@ export class UpdaterService {
       update.function(update.next, update.previous);
     }
   }
+
+  hasUpdates(): boolean {
+		return this.updates.length > 0;
+	}
 }

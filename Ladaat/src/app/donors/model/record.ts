@@ -1,4 +1,5 @@
-import { Identifiable } from '../identifiable';
+import { Identifiable } from 'src/app/identifiable';
+
 
 export class DonorRecord implements Identifiable<DonorRecord> {
 	static create(other: DonorRecord, id?: string): DonorRecord {
@@ -45,6 +46,23 @@ export class DonorRecord implements Identifiable<DonorRecord> {
 			'incoming':  this.incoming
 		  }
 	}
+
+	static compareDates(a: DonorRecord, b: DonorRecord): number {
+		return a.date > b.date ? 1 : -1;
+	}
+
+	static compareNames(a: DonorRecord, b: DonorRecord): number {
+		return a.name > b.name ? 1 : -1;
+	}
+
+	static compareUrls(a: DonorRecord, b: DonorRecord): number {
+		return a.url > b.url ? 1 : -1;
+	}
+
+	static compareIncoming(a: DonorRecord, b: DonorRecord): number {
+		return a.incoming > b.incoming ? 1 : -1;
+	}
+
 	id: string;
 	donor: string;
 	date: string;

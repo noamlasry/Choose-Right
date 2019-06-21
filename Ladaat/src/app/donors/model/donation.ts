@@ -1,4 +1,5 @@
-import { Identifiable } from '../identifiable';
+import { Identifiable } from 'src/app/identifiable';
+
 
 export class Donation implements Identifiable<Donation> {
 	static create(other: Donation, id?: string): Donation {
@@ -41,6 +42,15 @@ export class Donation implements Identifiable<Donation> {
 			'amount': this.amount
 		  }
 	}
+
+	static compareDates(a: Donation, b: Donation): number {
+		return a.date > b.date ? 1 : -1;
+	}
+	
+	static compareAmounts(a: Donation, b: Donation): number {
+		return a.amount - b.amount;
+	}
+
 	id: string;
 	donor: string;
 	date: string;

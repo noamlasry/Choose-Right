@@ -1,4 +1,4 @@
-import { Identifiable } from '../identifiable';
+import { Identifiable } from '../../identifiable';
 
 export class DonorConversation implements Identifiable<DonorConversation> {
 	static create(other: DonorConversation, id?: string): DonorConversation {
@@ -33,6 +33,7 @@ export class DonorConversation implements Identifiable<DonorConversation> {
 	make(): DonorConversation {
 		return new DonorConversation();
 	}
+
 	toJSON() {
 		return {
 			'donor': this.donor,
@@ -40,6 +41,15 @@ export class DonorConversation implements Identifiable<DonorConversation> {
 			'summary': this.summary
 		  }
 	}
+
+	static compareDates(a: DonorConversation, b: DonorConversation): number {
+		return a.date > b.date ? 1 : -1;
+	}
+
+	static compareSummaries(a: DonorConversation, b: DonorConversation): number {
+		return a.summary > b.summary ? 1 : -1;
+	}
+
 	id: string;
 	donor: string;
 	date: string;
