@@ -11,23 +11,14 @@ import { Location } from '@angular/common';
 })
 export class TaskComponent implements OnInit
 {
-  id?: string;
-  description: string = '';
-  doneBy: string = '';
-  date: Date;
-  executionDate: Date;
+
   constructor(private _es: TaskService, private location: Location) { }
+  ngOnInit() {} 
 
-  ngOnInit() {
-  
-  } 
-
-  onSubmit({value, valid}: { value: Task, valid: boolean }) {
-
-    if (valid) {
-      this._es.addTask(value, () => this.location.back());
-      }
-     
+  onSubmit({value, valid}: { value: Task, valid: boolean }) 
+  {
+    if (valid) 
+      this._es.addTask(value, () => this.location.back()); 
   }
 
 }

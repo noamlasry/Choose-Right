@@ -7,17 +7,22 @@ import { TaskService } from '../task.service';
   templateUrl: './task-detail.component.html',
   styleUrls: ['./task-detail.component.css']
 })
-export class TaskDetailComponent implements OnInit {
+export class TaskDetailComponent implements OnInit 
+{
+  id?: string;
+	doneBy: string='';
+	executionDate: string;
   task: Task;
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService
   ) { }
-
-  ngOnInit() {
+  
+  ngOnInit() 
+  {
     this.taskService.getTask(this.route.snapshot.paramMap.get('id'), 
-        task => { this.task = task;});
-        console.log(this.task);
+    task => { this.task = task;});
+    console.log(this.task);
   }
 
 }

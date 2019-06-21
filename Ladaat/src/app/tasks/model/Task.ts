@@ -3,9 +3,10 @@ export class Task
 {
     id?: string;
 	description: string;
-	doneBy: string;
 	date: Date;
+	doneBy: string;
 	executionDate: Date;
+
 	
 	static create(other: Object, id?: string): Task 
 	{
@@ -18,7 +19,7 @@ export class Task
 	{
 		this.description = (other as Task).description;
 		this.date = (other as Task).date;
-		this.doneBy = (other as Task).doneBy;
 		this.executionDate = (other as Task).executionDate;
+		this.doneBy = (other as Task).doneBy;
 	}
 }

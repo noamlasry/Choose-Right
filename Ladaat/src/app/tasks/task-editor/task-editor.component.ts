@@ -17,22 +17,28 @@ export class TaskEditorComponent implements OnInit {
 	executionDate: string;
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
+  private taskEditRef: firebase.database.Reference = firebase.database().ref("taskEdit");
   task: Task = new Task();
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private taskService: TaskService,
 		private location: Location
-	) {}
+		) {}
+		
 	ngOnInit(): void
 	 {	
-		this.task.id = this.route.snapshot.paramMap.get("id");	
+		//this.task.id = this.route.snapshot.paramMap.get("id");	
 	 }
-	 onSubmit({value, valid}: { value: Task, valid: boolean }) 
-	 {
+	 
+	onSubmit({value, valid}: { value: Task, valid: boolean }) 
+	{
 		console.log(value);
 		if (valid) 
-		  this.taskService.addTask(value, () => this.location.back()); 
+		{
+			this.taskService.editTask(value, () => this.location.back());
+		}
+		  
 	}
   
    delete() 
