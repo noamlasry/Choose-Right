@@ -53,8 +53,8 @@ export class TaskService
     var ref = this.tasksRef.push({
       'date':latest_date,
       'description': task.description,
-      'doneBy': task.doneBy,
-      'executionDate': task.executionDate
+     // 'doneBy': task.doneBy,
+    //  'executionDate': task.executionDate
       });
 		ref.then(d => {
 			callback(Task.create(d.toJSON(), ref.key));

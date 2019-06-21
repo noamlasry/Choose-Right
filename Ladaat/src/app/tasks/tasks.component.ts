@@ -13,7 +13,8 @@ import * as firebase from 'firebase';
 })
 export class TasksComponent implements OnInit 
 {
-    taskData: Task [];
+  private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
+   taskData: Task [];
   currentSort: (a: Task, b: Task) => number; 
   constructor(private taskService : TaskService ,private router: Router,	private route: ActivatedRoute) { }
 
@@ -25,10 +26,9 @@ export class TasksComponent implements OnInit
       console.log(this.taskService.tasksRef);
 		});
   }
-  //  אם ישאר זמן אעשה מחיקת מחיקה חיצונית
+  
   removeTask(task: Task)
   {
-    // alert("dd");
     if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
 			this.tasksRef.child(task.id).remove(() => {
 				this.router.navigate(['/tasks/']);
