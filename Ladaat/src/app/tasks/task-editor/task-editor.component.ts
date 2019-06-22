@@ -5,7 +5,7 @@ import * as firebase from 'firebase';
 import { UpdaterService } from '../../updater.service';
 import { Task } from '../model/Task';
 import { TaskEdit } from '../model/TaskEdit';
-import { EditTaskService } from '../editTask.service';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-task-editor',
@@ -14,7 +14,7 @@ import { EditTaskService } from '../editTask.service';
 })
 export class TaskEditorComponent implements OnInit {
 	id?: string;
-	doneBy: string='';
+	doneBy: string;
 	executionDate: string='';
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
@@ -23,7 +23,7 @@ export class TaskEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private editTaskService: EditTaskService,
+		private taskService: TaskService,
 		private location: Location
 		) {}
 		
@@ -34,7 +34,7 @@ export class TaskEditorComponent implements OnInit {
 		console.log(value);
 		if (valid) 
 		{
-			this.editTaskService.editTask(value, () => this.location.back());
+			this.taskService.editTask(value, () => this.location.back());
 		}
 	}
  

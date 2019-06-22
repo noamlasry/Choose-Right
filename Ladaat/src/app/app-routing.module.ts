@@ -7,7 +7,7 @@ import { DonorEditorComponent } from './donors/donor-editor/donor-editor.compone
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
 import { AuthGuard } from './login/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
-import { TaskComponent } from './tasks/task/task.component';
+import { TaskComponent } from '../app/tasks/task/task.component';
 import { TasksComponent } from '../app/tasks/tasks.component';
 import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
 import { EducationComponent } from './education/education.component';
@@ -17,8 +17,12 @@ import { ConversationEditorComponent } from './donors/conversation-editor/conver
 import { ListingEditorComponent } from "./education/listing-editor/listing-editor.component";
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
+<<<<<<< HEAD
 import { StaffComponent } from "./staff/staff.component";
 import { StaffEditorComponent } from "./staff/staff-editor/staff-editor.component";
+=======
+
+>>>>>>> de2a5c68a97c3ffa7a7e91a10fd829379f0a0312
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: TasksComponent },
 	{ path: 'donors', canActivate: [AuthGuard], component: DonorsComponent },

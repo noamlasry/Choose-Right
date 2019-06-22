@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { TaskService } from './tasks/task.service';
-import { EditTaskService } from './tasks/editTask.service';
 import { DonorsComponent } from './donors/donors/donors.component';
 import { DonorComponent } from './donors/donor/donor.component';
 import { DonorEditorComponent } from './donors/donor-editor/donor-editor.component';
@@ -68,7 +67,7 @@ import { StaffEditorComponent } from './staff/staff-editor/staff-editor.componen
   entryComponents: [
    TaskComponent,
   ],
-  providers: [TaskService,DatePipe,EditTaskService],
+  providers: [TaskService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
