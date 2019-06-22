@@ -16,10 +16,14 @@ export class TasksComponent implements OnInit
 		this.taskService.getTasks(tasks => {
 			this.taskData = tasks;
       console.log(this.taskData);
-      console.log(this.taskService.tasksRef);
-		});
+     
+    });
+    
+ 
   }
-  
+  removeTask(task: Task): void{
+       
+  }
   
 
 }

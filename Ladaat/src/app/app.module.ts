@@ -23,7 +23,6 @@ import { NewLectureComponent } from './education/new-lecture/new-lecture.compone
 import { LectureComponent } from './education/lecture/lecture.component';
 import { LectureEditorComponent } from './education/lecture-editor/lecture-editor.component';
 import { ListingEditorComponent } from './education/listing-editor/listing-editor.component';
-import { AddListingComponent } from './education/add-listing/add-listing.component';
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
 import { DatePipe } from '@angular/common';
 
@@ -47,7 +46,6 @@ import { DatePipe } from '@angular/common';
     LectureComponent,
     LectureEditorComponent,
     ListingEditorComponent,
-    AddListingComponent,
     ConversationEditorComponent,
   ],
   imports: [

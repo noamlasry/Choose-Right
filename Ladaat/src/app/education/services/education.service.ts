@@ -45,6 +45,28 @@ export class EducationService {
     });
     
   }
+  addListing(listing: Listing, callback: (listing: Listing) => void): void {
+
+		var ref = this.listungsRef.push({ 
+      'subject': listing.subject,
+      'status': listing.status,
+      'date': listing.date,
+      'link': listing.link,
+      'lectureId': listing.lectureId
+      });
+      console.log('33333333')
+
+      console.log(listing.lectureId)
+      console.log('22222222')
+
+		ref.then(d => {
+			callback(Listing.create(d.toJSON(), ref.key));
+		})
+		.catch(error => {
+			console.log(error);
+    });
+  }	
+  
 
   addLecture(lecture: Lecture, callback: (lecture: Lecture) => void): void {
 		var ref = this.lectureRef.push({

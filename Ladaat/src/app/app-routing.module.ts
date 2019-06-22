@@ -14,7 +14,7 @@ import { EducationComponent } from './education/education.component';
 import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
 import { LectureComponent } from "./education/lecture/lecture.component";
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
-
+import { ListingEditorComponent } from "./education/listing-editor/listing-editor.component";
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: TasksComponent },
 	{ path: 'donors', canActivate: [AuthGuard], component: DonorsComponent },
@@ -34,7 +34,8 @@ const routes: Routes = [
 	{ path: 'education', canActivate: [AuthGuard], component: EducationComponent },
 	{ path: 'new-lecture', canActivate: [AuthGuard], component: NewLectureComponent },
 	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent },
-	
+	{ path: 'listing-editor/:id', canActivate: [AuthGuard], component: ListingEditorComponent },
+
 	{ path: 'login', component: LoginComponent },
 ];
 
