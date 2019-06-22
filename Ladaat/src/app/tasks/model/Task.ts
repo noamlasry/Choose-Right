@@ -3,8 +3,8 @@ export class Task
 {
     id?: string;
 	description: string;
-	doneBy: string;
 	date: Date;
+	doneBy: string;
 	executionDate: Date;
 	
 	static create(other: Object, id?: string): Task 

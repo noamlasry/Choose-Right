@@ -23,11 +23,12 @@ import { NewLectureComponent } from './education/new-lecture/new-lecture.compone
 import { LectureComponent } from './education/lecture/lecture.component';
 import { LectureEditorComponent } from './education/lecture-editor/lecture-editor.component';
 import { ListingEditorComponent } from './education/listing-editor/listing-editor.component';
-import { AddListingComponent } from './education/add-listing/add-listing.component';
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
 import { DatePipe } from '@angular/common';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
+import { StaffComponent } from './staff/staff.component';
+import { StaffEditorComponent } from './staff/staff-editor/staff-editor.component';
 
 @NgModule({
   declarations: [
@@ -49,10 +50,11 @@ import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
     LectureComponent,
     LectureEditorComponent,
     ListingEditorComponent,
-    AddListingComponent,
     ConversationEditorComponent,
     TaskDetailComponent,
     TaskEditorComponent,
+    StaffComponent,
+    StaffEditorComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

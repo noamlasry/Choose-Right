@@ -4,6 +4,7 @@ import { TaskService } from '../tasks/task.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as firebase from 'firebase';
+import { TaskEdit } from './model/TaskEdit';
 
 @Component({
   selector: 'app-tasks',
@@ -14,9 +15,12 @@ import * as firebase from 'firebase';
 export class TasksComponent implements OnInit 
 {
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
+  private taskDetailRef: firebase.database.Reference = firebase.database().ref("taskEdit");
    taskData: Task [];
-  currentSort: (a: Task, b: Task) => number; 
-  constructor(private taskService : TaskService ,private router: Router,	private route: ActivatedRoute) { }
+   detailTaskData: TaskEdit[];
+  currentSort: (a: Task, b: Task, c: TaskEdit, d: TaskEdit) => number; 
+  constructor(
+    private taskService : TaskService ,private router: Router,	private route: ActivatedRoute) { }
 
 
   ngOnInit() {
@@ -24,6 +28,12 @@ export class TasksComponent implements OnInit
 			this.taskData = tasks;
       console.log(this.taskData);
       console.log(this.taskService.tasksRef);
+    });
+    
+    this.taskService.getDetailTasks(tasks => {
+			this.detailTaskData = tasks;
+      console.log(this.detailTaskData);
+    //  console.log(this.taskService.taskDetailRef);
 		});
   }
   

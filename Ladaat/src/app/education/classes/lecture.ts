@@ -1,6 +1,3 @@
-import { Listing } from './listing';
-import { EmailValidator } from '@angular/forms';
-
 export class Lecture {
     id?: string;
     institute: string;
@@ -16,7 +13,6 @@ export class Lecture {
     contactName2: string;
     email2: string;
     phone2: string;
-    listing: Listing[];
     
     
     static create(other: Object, id?: string): Lecture {
@@ -43,7 +39,6 @@ export class Lecture {
     this.contactName2= (other as Lecture).contactName2;
     this.email2= (other as Lecture).email2;
     this.phone2= (other as Lecture).phone2;
-    this.listing = (other as Lecture).listing;
         
 	}
 }

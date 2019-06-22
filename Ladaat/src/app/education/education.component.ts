@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Lecture } from './classes/lecture';
 import { EducationService } from './services/education.service';
+
 @Component({
   selector: 'app-education',
   templateUrl: './education.component.html',
@@ -47,4 +47,6 @@ export class EducationComponent implements OnInit {
 	compareDates(a: Lecture, b: Lecture): number {
 		return a.date > b.date ? 1 : -1;
 	}
+	
+
 }

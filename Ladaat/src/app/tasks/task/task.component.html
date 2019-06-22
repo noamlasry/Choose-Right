@@ -9,15 +9,7 @@
 			class="form-control" required>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-25">
-			<label for="date">תאריך</label>
-		</div>
-		<div class="col-75">
-			<input [(ngModel)]="date" type="date" name="date" id="date" 
-			class="form-control" required>
-		</div>
-	</div>
+
 	<div class="row submit">
 	<button class="button" type="submit" name="submit"
 	[disabled]="!taskForm.form.valid">שמור</button>

@@ -1,0 +1,28 @@
+<div class="container viewer">
+  <h1>צוות העמותה</h1>
+  <div class="toolbar">
+    <button class="button" routerLink="/staff-editor">הוספת איש צוות</button>
+	</div>
+	<div class="toolbar">הצג
+    <button class="button1">מתנדבים</button>
+    <button class="button1">מרצים</button>
+  </div>
+  <h3>כל אנשי הצוות</h3>
+
+	<table>
+	<tr>
+    <th (click)="sortLectures(compareInstituteNames)">שייכות</th>
+		<th (click)="sortLectures(compareInstituteNames)">שם פרטי</th>
+		<th (click)="sortLectures(compareInstituteNames)">שם משפחה</th>
+    <th (click)="sortLectures(compareInstituteNames)">טלפון</th>
+    <th (click)="sortLectures(compareInstituteNames)">מייל</th>
+
+	</tr>
+	<tr *ngFor="let d of orgstaffData"  routerLink="/staff/{{d.id}}">
+		<td>{{ d.institute }}</td> 
+		<td>{{ d.year }}</td> 
+		<td>{{ d.class }}</td>
+		<td>{{ d.date }}</td>
+	</tr>
+	</table>
+</div>

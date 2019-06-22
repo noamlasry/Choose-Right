@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import * as firebase from 'firebase';
 import { UpdaterService } from '../../updater.service';
 import { Task } from '../model/Task';
+import { TaskEdit } from '../model/TaskEdit';
 import { TaskService } from '../task.service';
 
 @Component({
@@ -14,10 +15,12 @@ import { TaskService } from '../task.service';
 export class TaskEditorComponent implements OnInit {
 	id: string;
 	doneBy: string;
-	executionDate: string;
+	executionDate: string='';
+	task: Task;
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
-  task: Task = new Task();
+  
+  taskEdit: TaskEdit = new TaskEdit();
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -47,7 +50,7 @@ export class TaskEditorComponent implements OnInit {
 	delete() 
 	{
 		if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
-			this.tasksRef.child(this.task.id).remove(() => {
+			this.tasksRef.child(this.taskEdit.id).remove(() => {
 				this.router.navigate(['/tasks/']);
 			});
 		}

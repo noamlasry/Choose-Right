@@ -1,3 +1,49 @@
-<p>
-  listing-editor works!
-</p>
+<form class="container editor" (ngSubmit)="onSubmit(listingForm)" #listingForm="ngForm">
+  <h4>כל השדות הם חובה</h4>
+  <div class="row">
+		<div class="col-25">
+			<label for="subject">נושא</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="subject" type="text" name="subject" 
+			id="subject" 
+			class="form-control" required>
+		</div>
+	</div>
+  
+	<div class="row">
+		<div class="col-25">
+			<label for="status">סטטוס</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="status" type="text" name="status" id="status" 
+			class="form-control" required/>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-25">
+			<label for="date" >תאריך</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="date" type="text" name="date" id="date" 
+			class="form-control" required/>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-25">
+			<label for="link">קישור</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="link" type="text" name="link" id="link"
+			class="form-control" required/>
+    </div>
+	</div>
+  
+	<div class="row submit">
+		<button class="button" name="submit" type="submit" [disabled]="!listingForm.form.valid">שמור</button>
+		<div class="button" routerLink="/education">בטל</div>
+		<div class="button" (click)="delete()" *ngIf="update">מחק</div>
+	</div>
+</form>
