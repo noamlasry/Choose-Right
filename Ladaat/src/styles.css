@@ -14,6 +14,14 @@ body {
 	*/
 }	
 
+.container {
+	border-radius: 5px;
+	padding: 20px;
+	margin: auto;
+	margin-bottom: 66px;
+	display: block;
+}
+
 .container.editor {
 	background-color: rgb(111, 183, 182);
 	width: 50%;
@@ -24,7 +32,9 @@ body {
 	width: 100%;
 }
 
-input, input[type=text], input[type=password], input[type=number] {
+/* Forms */
+
+input {
 	width: 100%;
 	padding: 12px;
 	border: 1px solid #ccc;
@@ -79,16 +89,6 @@ img.avatar {
 	margin-top: 12px;
 }
 
-.toolbar {
-	display: block;
-	margin-bottom: 21px;
-	margin-top: 21px;
-}
-
-.toolbar button.button {
-	margin-left: 21px;
-}
-
 /* Clear floats after the columns */
 .row:after, .row.submit:after {
 	content: "";
@@ -98,6 +98,18 @@ img.avatar {
 
 .row.submit {
 	margin-top: 12px;
+}
+
+/* Buttons */
+
+.toolbar {
+	display: block;
+	margin-bottom: 21px;
+	margin-top: 21px;
+}
+
+.toolbar button.button {
+	margin-left: 21px;
 }
 
 .row.submit .button {
@@ -146,16 +158,7 @@ img.avatar {
 	margin-left: 0px;
 }
 
-.container {
-	border-radius: 5px;
-	padding: 20px;
-	margin: auto;
-	margin-bottom: 66px;
-	display: block;
-}
-
 /* Tables: */
-
 
 table {
 	width: 100%;
@@ -223,7 +226,6 @@ h3 {
 	* {
 		font-size: 100%; 
 	}
-
 
 	.container {
 		margin-bottom: 33px;

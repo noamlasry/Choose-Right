@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { TaskService } from './tasks/task.service';
-import { DonorsComponent } from './donors/donors.component';
+import { EditTaskService } from './tasks/editTask.service';
+import { DonorsComponent } from './donors/donors/donors.component';
 import { DonorComponent } from './donors/donor/donor.component';
 import { DonorEditorComponent } from './donors/donor-editor/donor-editor.component';
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
@@ -25,6 +26,8 @@ import { LectureEditorComponent } from './education/lecture-editor/lecture-edito
 import { ListingEditorComponent } from './education/listing-editor/listing-editor.component';
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
 import { DatePipe } from '@angular/common';
+import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
+import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,8 @@ import { DatePipe } from '@angular/common';
     LectureEditorComponent,
     ListingEditorComponent,
     ConversationEditorComponent,
+    TaskDetailComponent,
+    TaskEditorComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
@@ -59,7 +64,7 @@ import { DatePipe } from '@angular/common';
   entryComponents: [
    TaskComponent,
   ],
-  providers: [TaskService,DatePipe],
+  providers: [TaskService,DatePipe,EditTaskService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

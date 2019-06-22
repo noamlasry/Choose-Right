@@ -1,0 +1,28 @@
+<form class="container editor" (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+  
+	<div class="row">
+    	<div class="col-25">
+    	  <label for="doneBy">בוצע ב..</label>
+		</div>
+		<div class="col-75">
+			<input [(ngModel)]="doneBy" type="text" name="doneBy" id="doneBy" 
+			class="form-control" required>
+		</div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="executionDate">בוצע בתאריך</label>
+  </div>
+  <div class="col-75">
+    <input [(ngModel)]="executionDate" type="text" name="executionDate" id="executionDate" 
+    class="form-control" required>
+  </div>
+</div>
+
+<div class="row submit">
+	<button class="button" type="submit" name="submit" [disabled]="!taskForm.form.valid">שמור</button>
+	<div class="button" (click)="this.location.back()">בטל</div>
+	<div class="button" (click)="delete()">מחק</div>
+  </div>
+</form>
