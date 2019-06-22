@@ -30,10 +30,6 @@ export class TasksComponent implements OnInit
       console.log(this.taskService.tasksRef);
     });
     
-<<<<<<< HEAD
- 
-  }
-=======
     this.taskService.getDetailTasks(tasks => {
 			this.detailTaskData = tasks;
       console.log(this.detailTaskData);
@@ -41,7 +37,6 @@ export class TasksComponent implements OnInit
 		});
   }
   
->>>>>>> de2a5c68a97c3ffa7a7e91a10fd829379f0a0312
   removeTask(task: Task)
   {
     if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
