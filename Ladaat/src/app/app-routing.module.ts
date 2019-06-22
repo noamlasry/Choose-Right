@@ -17,12 +17,9 @@ import { ConversationEditorComponent } from './donors/conversation-editor/conver
 import { ListingEditorComponent } from "./education/listing-editor/listing-editor.component";
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
-<<<<<<< HEAD
 import { StaffComponent } from "./staff/staff.component";
 import { StaffEditorComponent } from "./staff/staff-editor/staff-editor.component";
-=======
 
->>>>>>> de2a5c68a97c3ffa7a7e91a10fd829379f0a0312
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: TasksComponent },
 	{ path: 'donors', canActivate: [AuthGuard], component: DonorsComponent },
@@ -49,7 +46,6 @@ const routes: Routes = [
 	
 	{ path: 'staff', canActivate: [AuthGuard], component: StaffComponent },
 	{ path: 'staff-editor', canActivate: [AuthGuard], component: StaffEditorComponent },
-	{ path: 'staff/:id', canActivate: [AuthGuard], component: StaffComponent },
 
 	{ path: 'login', component: LoginComponent },
 ];
