@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Task } from './model/Task';
-//import { TaskEdit } from './model/TaskEdit';
+import { TaskEdit } from './model/TaskEdit';
 import * as firebase from 'firebase';
 import {DatePipe} from '@angular/common';
 @Injectable({
@@ -10,16 +10,16 @@ export class TaskService
 {
   db: firebase.database.Database;
   tasksRef: firebase.database.Reference;
-  taskEditRef: firebase.database.Reference;
 
   constructor(public datepipe: DatePipe) 
   {
 		this.db = firebase.database();
     this.tasksRef = this.db.ref("tasks");
-    this.taskEditRef = this.db.ref("taskEdit");
+
   }
 
-  getTask(id: string, callback: (complexTask: Task) => void): void {
+  getTask(id: string, callback: (complexTask: Task) => void): void 
+  {
     this.tasksRef.child(id).once('value')
 		.then(snapshot => {
       var dono: Task = Task.create(snapshot.toJSON(), snapshot.key);
@@ -29,7 +29,9 @@ export class TaskService
 			console.log(error);
 		});
   }
-  getTasks(callback: (tasks: Task[]) => void): void {
+
+  getTasks(callback: (tasks: Task[]) => void): void 
+  {
     this.tasksRef.once('value')
     .then(taskSnapshot => {
       var tasks: Task[] = [];
@@ -47,8 +49,6 @@ export class TaskService
     });
     
   }
-  
-
   addTask(task: Task, callback: (donor: Task) => void): void {
     task.date=new Date();
     let latest_date =this.datepipe.transform(task.date, 'M/d/yy, h:mm a');
@@ -64,25 +64,4 @@ export class TaskService
 			console.log(error);
     });
   }	
-   editTask(task: Task, callback: (donor: Task) => void): void
-   {
-    var ref = this.taskEditRef.push({
-      
-      'doneBy': task.doneBy,
-      'executionDate': task.executionDate
-      });
-    
-		ref.then(d => {
-			callback(Task.create(d.toJSON(), ref.key));
-		})
-		.catch(error => {
-			console.log(error);
-    });
-	 }	
- 
- 
-
-
-
-
 }
