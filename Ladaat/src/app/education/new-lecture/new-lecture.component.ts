@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { EducationService } from "../services/education.service";
-import { Listing } from '../classes/listing';
 import {Lecture}from'../classes/lecture';
 import { Location } from '@angular/common';
 
@@ -31,7 +30,6 @@ export class NewLectureComponent implements OnInit {
   ngOnInit() {
   }
   onSubmit({value, valid}: { value: Lecture, valid: boolean }) {
-    console.log(value);
     if (valid) {
       this._es.addLecture(value, () => this.location.back());
       }

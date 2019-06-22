@@ -7,13 +7,14 @@ import { DonorEditorComponent } from './donors/donor-editor/donor-editor.compone
 import { DonationEditorComponent } from './donors/donation-editor/donation-editor.component';
 import { AuthGuard } from './login/auth.guard';
 import { ProfileComponent } from './profile/profile.component';
-import { TaskComponent } from './tasks/task/task.component';
+import { TaskComponent } from '../app/tasks/task/task.component';
 import { TasksComponent } from '../app/tasks/tasks.component';
 import { DocumentEditorComponent } from './donors/document-editor/document-editor.component';
 import { EducationComponent } from './education/education.component';
 import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
 import { LectureComponent } from "./education/lecture/lecture.component";
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
+import { ListingEditorComponent } from "./education/listing-editor/listing-editor.component";
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
 
@@ -39,6 +40,8 @@ const routes: Routes = [
 	{ path: 'education', canActivate: [AuthGuard], component: EducationComponent },
 	{ path: 'new-lecture', canActivate: [AuthGuard], component: NewLectureComponent },
 	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent },
+	{ path: 'listing-editor/:id', canActivate: [AuthGuard], component: ListingEditorComponent },
+
 	{ path: 'login', component: LoginComponent },
 ];
 

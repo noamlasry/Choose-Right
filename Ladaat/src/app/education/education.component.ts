@@ -47,4 +47,6 @@ export class EducationComponent implements OnInit {
 	compareDates(a: Lecture, b: Lecture): number {
 		return a.date > b.date ? 1 : -1;
 	}
+	
+
 }
