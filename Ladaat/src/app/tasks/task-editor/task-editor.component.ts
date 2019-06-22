@@ -13,8 +13,8 @@ import { TaskService } from '../task.service';
 })
 export class TaskEditorComponent implements OnInit {
 	id?: string;
-	doneBy: string;
-	executionDate: string;
+	doneBy: string='';
+	executionDate: string='';
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
   private taskEditRef: firebase.database.Reference = firebase.database().ref("taskEdit");

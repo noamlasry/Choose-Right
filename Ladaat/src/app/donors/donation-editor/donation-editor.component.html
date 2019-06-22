@@ -2,10 +2,9 @@
 	<h1 *ngIf="donation.id">עריכת תרומה</h1>
 	<h1 *ngIf="!donation.id">הוספת תרומה</h1>
 	
-	<p *ngIf="hasUpdates()"><small>
-		המידע עודכן במערכת.
-		<a (click)="update()">לרענן?</a>
-	</small></p>
+	<p *ngIf="hasUpdates()">
+		<a class="button" (click)="update()"><i class="fa fa-refresh" aria-hidden="true"></i> לרענן</a>
+	</p>
 
 	<div class="row">
 		<div class="col-25">

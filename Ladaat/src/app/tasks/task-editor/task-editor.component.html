@@ -1,5 +1,5 @@
 <form class="container editor" (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
-  <h1>הוספת משימה</h1>
+  
 	<div class="row">
     	<div class="col-25">
     	  <label for="doneBy">בוצע ב..</label>
@@ -20,9 +20,9 @@
   </div>
 </div>
 
-	<div class="row submit">
-	<button class="button" type="submit" name="submit"
-	[disabled]="!taskForm.form.valid">שמור</button>
-		<div class="button" routerLink="/">בטל</div>
-	</div>
+<div class="row submit">
+	<button class="button" type="submit" name="submit" [disabled]="!taskForm.form.valid">שמור</button>
+	<div class="button" (click)="this.location.back()">בטל</div>
+	<div class="button" (click)="delete()">מחק</div>
+  </div>
 </form>

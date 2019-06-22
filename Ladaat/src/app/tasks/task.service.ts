@@ -64,9 +64,8 @@ export class TaskService
 			console.log(error);
     });
   }	
-  editTask(task: Task, callback: (donor: Task) => void): void {
-
-  alert(task.doneBy);
+   editTask(task: Task, callback: (donor: Task) => void): void
+   {
     var ref = this.taskEditRef.push({
       
       'doneBy': task.doneBy,
@@ -79,7 +78,7 @@ export class TaskService
 		.catch(error => {
 			console.log(error);
     });
-	}	
+	 }	
  
  
 

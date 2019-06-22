@@ -1,0 +1,42 @@
+<div class="container viewer">
+	<h1>תורמים</h1>
+	
+	<p *ngIf="hasUpdates()">
+		<a class="button" (click)="update()"><i class="fa fa-refresh" aria-hidden="true"></i> לרענן</a>
+	</p>
+
+	<div class="toolbar">
+		<button class="button" routerLink="/donor-editor">הוסף תורם</button>
+	</div>
+	
+	<table>
+	<tr>
+		<th (click)="sortDonorsByOrgName()">
+			ארגון 
+			<i *ngIf="donorSorting.current == 'orgName' && donorSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
+			<i *ngIf="donorSorting.current == 'orgName' && !donorSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
+		</th>
+		<th (click)="sortDonorsByLastName()">
+			שם משפחה 
+			<i *ngIf="donorSorting.current == 'lastName' && donorSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
+			<i *ngIf="donorSorting.current == 'lastName' && !donorSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
+		</th> 
+		<th (click)="sortDonorsByFirstName()">
+			שם פרטי 
+			<i *ngIf="donorSorting.current == 'firstName' && donorSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
+			<i *ngIf="donorSorting.current == 'firstName' && !donorSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
+		</th>
+		<th (click)="sortDonorsByAmount()">
+			סך התרומות 
+			<i *ngIf="donorSorting.current == 'amount' && donorSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
+			<i *ngIf="donorSorting.current == 'amount' && !donorSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
+		</th>
+	</tr>
+	<tr *ngFor="let d of donorData"  routerLink="/donor/{{d.id}}">
+		<td>{{ d.orgName ? d.orgName : "תורם פרטי" }}</td> 
+		<td>{{ d.lastName }}</td> 
+		<td>{{ d.firstName }}</td>
+		<td><span class="number">₪{{ d.getTotal() }}</span></td>
+	</tr>
+	</table>
+</div>

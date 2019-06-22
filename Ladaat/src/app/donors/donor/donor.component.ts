@@ -15,11 +15,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Donor } from '../donor';
-import { Donation } from '../donation';
+import { Donor } from '../model/donor';
+import { Donation } from '../model/donation';
 import * as firebase from 'firebase';
-import { DonorConversation } from '../conversation';
-import { DonorRecord } from '../record';
+import { DonorConversation } from '../model/conversation';
+import { DonorRecord } from '../model/record';
 import { UpdaterService } from '../../updater.service';
 
 @Component({
@@ -29,12 +29,7 @@ import { UpdaterService } from '../../updater.service';
 })
 export class DonorComponent implements OnInit {
   donor: Donor = new Donor();
-  sortField: string = "date";
-  currentTab: string ='contact';
-  
-  currentSort: (a: Donation, b: Donation) => number;
-
-  // updates = [];
+  currentTab: string = "contact";
 
   constructor(
     private donorService: UpdaterService,
@@ -48,62 +43,27 @@ export class DonorComponent implements OnInit {
     const conversationsRef = firebase.database().ref("donor-conversations");
     const recordsRef = firebase.database().ref("donor-records");
     
-    this.donorService.initializeSingle(donorsRef, id, this.donor, new Donor()).then(snapshot => {
-      this.donorService.addSingleListener(donorsRef, id, this.donor, new Donor());
+    this.donorService.initializeAndListenSingle(donorsRef, id, this.donor, new Donor()).then(snapshot => this.donorService.updateAll());
+    
+    this.donorService.initializeAndListenList(donationsRef, "donor", id, this.donor.donations, new Donation()).then(snapshot => {
+      this.donorService.updateAll();
+      this.donor.donations.sort(this.donor.donationSorting.comparator);
     });
 
-    this.donorService.initializeList(donationsRef, "donor", id, this.donor.donations, new Donation()).then(snapshot => {
-      this.donorService.addListListeners(donationsRef, "donor", id, this.donor.donations, new Donation());
+    this.donorService.initializeAndListenList(conversationsRef, "donor", id, this.donor.conversations, new DonorConversation()).then(snapshot => {
+      this.donorService.updateAll();
+      this.donor.conversations.sort(this.donor.conversationSorting.comparator);
     });
 
-    this.donorService.initializeList(conversationsRef, "donor", id, this.donor.conversations, new DonorConversation()).then(snapshot => {
-      this.donorService.addListListeners(conversationsRef, "donor", id, this.donor.conversations, new DonorConversation());
+    this.donorService.initializeAndListenList(recordsRef, "donor", id, this.donor.records, new DonorRecord()).then(snapshot => {
+      this.donorService.updateAll();
+      this.donor.records.sort(this.donor.recordSorting.comparator);
     });
 
-    this.donorService.initializeList(recordsRef, "donor", id, this.donor.records, new DonorRecord()).then(snapshot => {
-      this.donorService.addListListeners(recordsRef, "donor",id, this.donor.records, new DonorRecord());
-    });
-
-    this.donorService.updateAll();
-  }
-
-  sortDonations(compareFunction: (a: Donation, b: Donation) => number): void {
-  	if (!this.currentSort || compareFunction != this.currentSort) {
-      this.donor.donations.sort(compareFunction);
-  	}
-  	else {
-  		this.donor.donations.reverse();
-  	}
-  	
-  	this.currentSort = compareFunction;
-  }
-  
-  compareDates(a: Donation, b: Donation): number {
-  	return a.date > b.date ? 1 : -1;
-  }
-  
-  compareAmounts(a: Donation, b: Donation): number {
-  	return a.amount - b.amount;
-  }
-
-  switchTab(destination: string) {
-    switch (destination) {
-      case "donations":
-        document
-        break;
-      case "conversations":
-      
-        break;
-      case "documents":
-      
-        break;
-      default:
-        break;
-    }
   }
 
   hasUpdates(): boolean {
-    return this.donorService.updates.length > 0;
+    return this.donorService.hasUpdates();
   }
 
   update(): void {
