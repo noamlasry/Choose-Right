@@ -30,7 +30,7 @@ export class TasksComponent implements OnInit
       console.log(this.taskService.tasksRef);
     });
     
-    this.taskService.getDetailTasks(tasks => {
+    this.taskService.getTasks(tasks => {
 			this.detailTaskData = tasks;
       console.log(this.detailTaskData);
     //  console.log(this.taskService.taskDetailRef);

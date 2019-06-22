@@ -25,7 +25,7 @@ export class TaskDetailComponent implements OnInit
     this.taskService.getTask(this.route.snapshot.paramMap.get('id'), 
     task => { this.task = task;}); 
    
-    this.taskService.getDetailTask(this.route.snapshot.paramMap.get('id'), 
+    this.taskService.getTask(this.route.snapshot.paramMap.get('id'), 
     taskEdit => { this.taskEdit = taskEdit;});
    // console.log(this.taskEdit);
     

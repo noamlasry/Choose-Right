@@ -16,11 +16,10 @@ export class TaskEditorComponent implements OnInit {
 	id: string;
 	doneBy: string;
 	executionDate: string='';
-	task: Task;
+	task: Task = new Task();
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
   
-  taskEdit: TaskEdit = new TaskEdit();
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -33,16 +32,15 @@ export class TaskEditorComponent implements OnInit {
 		this.task.id = this.route.snapshot.paramMap.get("id");
 		this.taskService.getTask(this.task.id, task => {
 			this.task.copy(task);
-			console.log(task);
 		});
 	}
 
 	onSubmit({value, valid}: { value: Task, valid: boolean }) 
 	{
-		if (valid) {
-			this.task.doneBy = this.doneBy;
-			this.task.executionDate = new Date(this.executionDate);
+		this.task.doneBy = this.doneBy;
+		this.task.executionDate = new Date(this.executionDate);
 
+		if (valid) {
 			this.taskService.updateTask(this.task, () => this.location.back()); 
 		}
 	}
@@ -50,7 +48,7 @@ export class TaskEditorComponent implements OnInit {
 	delete() 
 	{
 		if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
-			this.tasksRef.child(this.taskEdit.id).remove(() => {
+			this.tasksRef.child(this.task.id).remove(() => {
 				this.router.navigate(['/tasks/']);
 			});
 		}
