@@ -1,7 +1,7 @@
 
 <div class="container viewer" *ngIf="task">
   <h1>פרטי משימה:</h1>
-  <button class="button" routerLink="/task-editor/{{ task.id }}">עריכה</button>
+  <button class="button" *ngIf="task" routerLink="/task-editor/{{ task.id }}">עריכה</button>
   <table class="contact">
       <tr>
         <td>תאור:</td>
