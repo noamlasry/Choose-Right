@@ -14,13 +14,11 @@ import { EducationComponent } from './education/education.component';
 import { NewLectureComponent } from './education/new-lecture/new-lecture.component';
 import { LectureComponent } from "./education/lecture/lecture.component";
 import { ConversationEditorComponent } from './donors/conversation-editor/conversation-editor.component';
-<<<<<<< HEAD
 import { ListingEditorComponent } from "./education/listing-editor/listing-editor.component";
-=======
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
-
->>>>>>> 1769324c0a3daa6c1ce4cbf9881cf479739559fa
+import { StaffComponent } from "./staff/staff.component";
+import { StaffEditorComponent } from "./staff/staff-editor/staff-editor.component";
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: TasksComponent },
 	{ path: 'donors', canActivate: [AuthGuard], component: DonorsComponent },
@@ -43,11 +41,12 @@ const routes: Routes = [
 	{ path: 'education', canActivate: [AuthGuard], component: EducationComponent },
 	{ path: 'new-lecture', canActivate: [AuthGuard], component: NewLectureComponent },
 	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent },
-<<<<<<< HEAD
 	{ path: 'listing-editor/:id', canActivate: [AuthGuard], component: ListingEditorComponent },
+	
+	{ path: 'staff', canActivate: [AuthGuard], component: StaffComponent },
+	{ path: 'staff-editor', canActivate: [AuthGuard], component: StaffEditorComponent },
+	{ path: 'staff/:id', canActivate: [AuthGuard], component: StaffComponent },
 
-=======
->>>>>>> 1769324c0a3daa6c1ce4cbf9881cf479739559fa
 	{ path: 'login', component: LoginComponent },
 ];
 

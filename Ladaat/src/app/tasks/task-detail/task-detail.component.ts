@@ -25,11 +25,17 @@ export class TaskDetailComponent implements OnInit
   ngOnInit() 
   {
     this.taskService.getTask(this.route.snapshot.paramMap.get('id'), 
-    task => { this.task = task;}); 
+    task => { this.task = task;});
+    console.log('1111111');
+    console.log(this.task);
 
     this.editTaskService.getDetailTask(this.route.snapshot.paramMap.get('id'), 
     taskEdit => { this.taskEdit = taskEdit;});
+    console.log(this.id);
+
     console.log(this.taskEdit);
+    console.log('1111111');
+
   }
 
 }

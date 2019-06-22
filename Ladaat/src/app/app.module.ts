@@ -28,6 +28,8 @@ import { ConversationEditorComponent } from './donors/conversation-editor/conver
 import { DatePipe } from '@angular/common';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
+import { StaffComponent } from './staff/staff.component';
+import { StaffEditorComponent } from './staff/staff-editor/staff-editor.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
     ConversationEditorComponent,
     TaskDetailComponent,
     TaskEditorComponent,
+    StaffComponent,
+    StaffEditorComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

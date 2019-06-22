@@ -28,12 +28,6 @@ export class TasksComponent implements OnInit
     
  
   }
-  removeTask(task: Task): void{
-       
-  }
-  
-<<<<<<< HEAD
-=======
   removeTask(task: Task)
   {
     if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
@@ -42,6 +36,5 @@ export class TasksComponent implements OnInit
 			});
 		}
   }
->>>>>>> 1769324c0a3daa6c1ce4cbf9881cf479739559fa
 
 }
