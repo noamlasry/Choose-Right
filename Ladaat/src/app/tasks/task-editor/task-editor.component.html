@@ -1,27 +1,25 @@
-<form class="container editor" (ngSubmit)="save()" #donorForm="ngForm">
-
+<form class="container editor" (ngSubmit)="onSubmit(taskEditForm)" #taskEditForm="ngForm">
     <div class="row">
       <div class="col-25">
-        <label for="orgName">המשימה בוצעה על ידי:</label>
+        <label for="doneBy">המשימה בוצעה על ידי:</label>
       </div>
       <div class="col-75">
-        <input type="text" [(ngModel)]="donor.orgName" name="orgName" id="orgName" placeholder="לתורם פרטי, השאר ריק"/>
+        <input type="text" [(ngModel)]="doneBy" name="doneBy" id="doneBy"/>
       </div>
     </div>
 
   	<div class="row">
-        <div class="col-25">
-          <label for="date">תאריך ביצוע המשימה:</label>
-        </div>
-        <div class="col-75">
-          <input type="date" [(ngModel)]="donation.date" name="date" id="date" required/>
-        </div>
+      <div class="col-25">
+        <label for="executionDate">תאריך ביצוע המשימה:</label>
       </div>
+      <div class="col-75">
+        <input type="date" [(ngModel)]="executionDate" name="executionDate" id="executionDate" required/>
+      </div>
+    </div>
     
     <div class="row submit">
-      <button class="button" type="submit" [disabled]="!donorForm.form.valid">שמור</button>
+      <button class="button" type="submit" [disabled]="!taskEditForm.form.valid">שמור</button>
       <div class="button" (click)="this.location.back()">בטל</div>
       <div class="button" (click)="delete()">מחק</div>
     </div>
   </form>
-  

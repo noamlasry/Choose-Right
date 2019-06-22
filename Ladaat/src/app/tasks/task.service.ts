@@ -26,6 +26,7 @@ export class TaskService
 			console.log(error);
 		});
   }
+  
   getTasks(callback: (tasks: Task[]) => void): void {
     this.tasksRef.once('value')
     .then(taskSnapshot => {
@@ -46,12 +47,9 @@ export class TaskService
   }
   
 
-  addTask(task: Task, callback: (donor: Task) => void): void {
-    task.date=new Date();
-    let latest_date =this.datepipe.transform(task.date, 'M/d/yy, h:mm a');
-    console.log(latest_date)
+  addTask(task: Task, callback: (task: Task) => void): void {
     var ref = this.tasksRef.push({
-      'date':latest_date,
+      'date':task.date,
       'description': task.description
       });
 		ref.then(d => {
@@ -60,10 +58,20 @@ export class TaskService
 		.catch(error => {
 			console.log(error);
     });
-	}	
- 
+  }
 
-
-
-
+  updateTask(task: Task, callback: (task: Task) => void): void {
+    var ref = this.tasksRef.child(task.id).set({
+      'date':task.date,
+      'description': task.description,
+      'executionDate': task.executionDate.toString(),
+      'doneBy': task.doneBy
+      });
+		ref.then(d => {
+			callback(task);
+		})
+		.catch(error => {
+			console.log(error);
+    });
+  }
 }

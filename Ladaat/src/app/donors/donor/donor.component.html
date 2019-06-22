@@ -55,6 +55,7 @@
 	</p>
 	<table>
 	<tr>
+		<th></th>
 		<th (click)="donor.sortDonationsByDate()">
 			תאריך 
 			<i *ngIf="donor.donationSorting.current == 'date' && donor.donationSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
@@ -66,7 +67,8 @@
 			<i *ngIf="donor.donationSorting.current == 'amount' && !donor.donationSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
 		</th>
 	</tr>
-	<tr *ngFor="let donation of donor.donations" routerLink="/donation-editor/{{donor.id}}/{{donation.id}}">
+	<tr *ngFor="let donation of donor.donations">
+		<td><i routerLink="/donation-editor/{{donor.id}}/{{donation.id}}" class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
 		<td><span class="number">{{ donation.date }}</span></td>
 		<td><span class="number">₪{{ donation.amount }}</span></td> 
 	</tr>
@@ -79,6 +81,7 @@
 	</p>
 	<table>
 	<tr>
+		<th></th>
 		<th (click)="donor.sortConversationsByDate()">
 			תאריך 
 			<i *ngIf="donor.conversationSorting.current == 'date' && donor.conversationSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
@@ -90,7 +93,8 @@
 			<i *ngIf="donor.conversationSorting.current == 'summary' && !donor.conversationSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
 		</th>
 	</tr>
-	<tr *ngFor="let conversation of donor.conversations" routerLink="/conversation-editor/{{donor.id}}/{{conversation.id}}">
+	<tr *ngFor="let conversation of donor.conversations">
+		<td><i routerLink="/conversation-editor/{{donor.id}}/{{conversation.id}}" class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
 		<td><span class="number">{{ conversation.date }}</span></td>
 		<td>{{ conversation.summary }}</td> 
 	</tr>
@@ -103,6 +107,7 @@
 	</p>
 	<table>
 	<tr>
+		<th></th>
 		<th (click)="donor.sortRecordsByDate()">
 			תאריך 
 			<i *ngIf="donor.recordSorting.current == 'date' && donor.recordSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
@@ -124,10 +129,11 @@
 			<i *ngIf="donor.recordSorting.current == 'incoming' && !donor.recordSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
 		</th>
 	</tr>
-	<tr *ngFor="let record of donor.records" routerLink="/document-editor/{{donor.id}}/{{record.id}}">
+	<tr *ngFor="let record of donor.records">
+		<td><i routerLink="/document-editor/{{donor.id}}/{{record.id}}" class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
 		<td><span class="number">{{ record.date }}</span></td>
 		<td>{{ record.name }}</td>
-		<td><a href="{{ record.url }}">לחצי לפתיחה</a></td>
+		<td><a href="{{ record.url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
 		<td>{{ record.incoming ? "התקבל" : "נשלח" }}</td>
 	</tr>
 	</table>

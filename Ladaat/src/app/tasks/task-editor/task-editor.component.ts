@@ -12,7 +12,7 @@ import { TaskService } from '../task.service';
   styleUrls: ['./task-editor.component.css']
 })
 export class TaskEditorComponent implements OnInit {
-	id?: string;
+	id: string;
 	doneBy: string;
 	executionDate: string;
 
@@ -24,23 +24,32 @@ export class TaskEditorComponent implements OnInit {
 		private taskService: TaskService,
 		private location: Location
 	) {}
+	
 	ngOnInit(): void
-	 {	
-		this.task.id = this.route.snapshot.paramMap.get("id");	
-	 }
-	 onSubmit({value, valid}: { value: Task, valid: boolean }) 
-	 {
-		console.log(value);
-		if (valid) 
-		  this.taskService.addTask(value, () => this.location.back()); 
+	{	
+		this.task.id = this.route.snapshot.paramMap.get("id");
+		this.taskService.getTask(this.task.id, task => {
+			this.task.copy(task);
+			console.log(task);
+		});
+	}
+
+	onSubmit({value, valid}: { value: Task, valid: boolean }) 
+	{
+		if (valid) {
+			this.task.doneBy = this.doneBy;
+			this.task.executionDate = new Date(this.executionDate);
+
+			this.taskService.updateTask(this.task, () => this.location.back()); 
+		}
 	}
   
-   delete() 
-   {
+	delete() 
+	{
 		if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
 			this.tasksRef.child(this.task.id).remove(() => {
 				this.router.navigate(['/tasks/']);
 			});
 		}
-   }
+	}
 }
