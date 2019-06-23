@@ -1,4 +1,14 @@
 <form class="container editor" (ngSubmit)="onSubmit(taskEditForm)" #taskEditForm="ngForm">
+  	<div class="row" >
+        <div class="col-25">
+          <label for="description">ערוך משימה:</label>
+      </div>
+      <div class="col-75">
+        <input [(ngModel)]="description" type="text" name="description" id="description" 
+        class="form-control" required>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-25">
         <label for="doneBy">המשימה בוצעה על ידי:</label>
@@ -13,7 +23,8 @@
         <label for="executionDate">תאריך ביצוע המשימה:</label>
       </div>
       <div class="col-75">
-        <input type="date" [(ngModel)]="executionDate" name="executionDate" id="executionDate" required/>
+        <input type="datetime-local" [(ngModel)]="executionDate" name="meeting-time" value="2018-06-12T19:30"
+       id="executionDate" required/>
       </div>
     </div>
     

@@ -10,6 +10,15 @@
 		</div>
 	</div>
 
+	<div class="row">
+			<div class="col-25">
+			  <label for="expireDate">לביצוע עד</label>
+			</div>
+			<div class="col-75">
+				<input [(ngModel)]="expireDate" type="datetime-local" name="expireDate" id="expireDate" 
+				class="form-control" value="2018-06-12T19:30" required>
+			</div>
+		</div>
 
 	<div class="row submit">
 	<button class="button" type="submit" name="submit"

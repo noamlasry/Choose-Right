@@ -4,7 +4,6 @@ import { Location } from '@angular/common';
 import * as firebase from 'firebase';
 import { UpdaterService } from '../../updater.service';
 import { Task } from '../model/Task';
-import { TaskEdit } from '../model/TaskEdit';
 import { TaskService } from '../task.service';
 
 @Component({
@@ -15,7 +14,9 @@ import { TaskService } from '../task.service';
 export class TaskEditorComponent implements OnInit {
 	id: string;
 	doneBy: string;
+	description: string='';
 	executionDate: string='';
+	expireDate: string ='';
 	task: Task = new Task();
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
@@ -39,6 +40,8 @@ export class TaskEditorComponent implements OnInit {
 	{
 		this.task.doneBy = this.doneBy;
 		this.task.executionDate = new Date(this.executionDate);
+		this.task.description = this.description;
+		this.task.expireDate = this.expireDate;
 
 		if (valid) {
 			this.taskService.updateTask(this.task, () => this.location.back()); 
