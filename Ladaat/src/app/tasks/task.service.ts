@@ -46,8 +46,10 @@ export class TaskService
   }
 
   addTask(task: Task, callback: (task: Task) => void): void {
+    task.date=new Date();
+    let latest_date =this.datepipe.transform(task.date, 'M/d/yy, h:mm a');
     var ref = this.tasksRef.push({
-      'date':task.date,
+      'date':latest_date,
       'description': task.description
       });
 		ref.then(d => {
