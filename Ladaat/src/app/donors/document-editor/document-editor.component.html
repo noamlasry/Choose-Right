@@ -28,6 +28,14 @@
     </div>
     <div class="col-75">
       <input type="url" [(ngModel)]="record.url" name="url" id="url" required/>
+      
+      <button type="button" class="button" id="auth" onclick="
+        gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
+          googleAuth.signIn({ scope: scope }).then(function(result) {
+            handleAuthResult(result.getAuthResponse());
+          })
+        })
+      ">בחרי</button>
     </div>
   </div>
   <div class="row">

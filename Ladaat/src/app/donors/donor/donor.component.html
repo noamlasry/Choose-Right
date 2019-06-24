@@ -133,7 +133,8 @@
 		<td><i routerLink="/document-editor/{{donor.id}}/{{record.id}}" class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
 		<td><span class="number">{{ record.date }}</span></td>
 		<td>{{ record.name }}</td>
-		<td><a href="{{ record.url }}"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>
+		<td><i onclick="window.open('https://docs.google.com/presentation/d/1ALzQYoi0N19DMwgeXV8M91jqI71NUnmKGXFypqGIiA4/edit#slide=id.p1')"
+			class="fa fa-external-link" aria-hidden="true"></i></td>
 		<td>{{ record.incoming ? "התקבל" : "נשלח" }}</td>
 	</tr>
 	</table>
