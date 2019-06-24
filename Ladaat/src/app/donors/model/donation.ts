@@ -20,6 +20,7 @@ export class Donation implements Identifiable<Donation> {
 		this.donor = other.donor;
 		this.date = other.date;
 		this.amount = other.amount;
+		this.modifiedBy = other.modifiedBy;
 	}
 
 	copyAll(other: Donation) {
@@ -39,7 +40,8 @@ export class Donation implements Identifiable<Donation> {
 		return {
 			'donor': this.donor,
 			'date': this.date,
-			'amount': this.amount
+			'amount': this.amount,
+			'modifiedBy': this.modifiedBy
 		  }
 	}
 
@@ -55,4 +57,5 @@ export class Donation implements Identifiable<Donation> {
 	donor: string;
 	date: string;
 	amount: number;
+	modifiedBy: string;
 }

@@ -29,6 +29,8 @@ export class Donor implements Identifiable<Donor> {
 	conversations: DonorConversation[] = [];
 	records: DonorRecord[] = [];
 
+	modifiedBy: string;
+
 	static create(other: Donor, id?: string): Donor {
 		var donor: Donor = new Donor();
 		donor.copy(other);
@@ -49,6 +51,8 @@ export class Donor implements Identifiable<Donor> {
 		this.orgName = other.orgName;
 		this.address = other.address;
 		this.email = other.email;
+
+		this.modifiedBy = other.modifiedBy;
 	}
 
 	/* Copies all fields from other donor to this donor, including the ID */
@@ -69,6 +73,7 @@ export class Donor implements Identifiable<Donor> {
 			'orgName': this.orgName,
 			'address': this.address,
 			'email': this.email,
+			'modifiedBy': this.modifiedBy
 		  }
 	}
 	

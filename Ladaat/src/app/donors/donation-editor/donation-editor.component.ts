@@ -6,6 +6,7 @@ import { Donor } from '../model/donor';
 import { Donation } from '../model/donation';
 import * as firebase from 'firebase';
 import { UpdaterService } from '../../updater.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
 	selector: 'app-donation',
@@ -22,6 +23,7 @@ export class DonationEditorComponent implements OnInit {
 		private router: Router,
 		private route: ActivatedRoute,
 		private donorService: UpdaterService,
+		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
 
@@ -50,6 +52,8 @@ export class DonationEditorComponent implements OnInit {
 		}
 		else {
 			this.donation.donor = this.donor.id;
+
+			this.donation.modifiedBy = this.userAuth.auth.currentUser.uid;
 
 			if (this.donation.id) {
 				this.donationsRef.child(this.donation.id).update(this.donation.toJSON(), () => {
