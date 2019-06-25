@@ -6,6 +6,10 @@
 		<a class="button" (click)="update()"><i class="fa fa-refresh" aria-hidden="true"></i> לרענן</a>
 	</p>
 
+	<p *ngIf="donation.modifiedBy"><small>
+		עודכן לאחרונה ע"י {{ donation.modifiedBy }}
+	</small></p>
+
 	<div class="row">
 		<div class="col-25">
 			<label for="date">תאריך</label>

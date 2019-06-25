@@ -22,6 +22,7 @@ export class DonorRecord implements Identifiable<DonorRecord> {
 		this.name = other.name;
 		this.url = other.url;
 		this.incoming = other.incoming;
+		this.modifiedBy = other.modifiedBy;
 	}
 
 	copyAll(other: DonorRecord) {
@@ -43,7 +44,8 @@ export class DonorRecord implements Identifiable<DonorRecord> {
 			'date': this.date,
 			'name': this.name,
 			'url': this.url,
-			'incoming':  this.incoming
+			'incoming':  this.incoming,
+			'modifiedBy': this.modifiedBy
 		  }
 	}
 
@@ -69,4 +71,5 @@ export class DonorRecord implements Identifiable<DonorRecord> {
 	name: string;
 	url: string;
 	incoming: boolean = false;
+	modifiedBy: string;
 }

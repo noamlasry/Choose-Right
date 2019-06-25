@@ -4,7 +4,6 @@ import { Location } from '@angular/common';
 import * as firebase from 'firebase';
 import { UpdaterService } from '../../updater.service';
 import { Task } from '../model/Task';
-import { TaskEdit } from '../model/TaskEdit';
 import { TaskService } from '../task.service';
 
 @Component({
@@ -13,37 +12,48 @@ import { TaskService } from '../task.service';
   styleUrls: ['./task-editor.component.css']
 })
 export class TaskEditorComponent implements OnInit {
-	id?: string;
+	id: string;
 	doneBy: string;
+	description: string='';
 	executionDate: string='';
+	expireDate: string ='';
+	task: Task = new Task();
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
-  private taskEditRef: firebase.database.Reference = firebase.database().ref("taskEdit");
-  taskEdit: TaskEdit = new TaskEdit();
+  
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
 		private taskService: TaskService,
 		private location: Location
-		) {}
-		
-	ngOnInit(){	}
-	 
-	onSubmit({value, valid}: { value: TaskEdit, valid: boolean }) 
+	) {}
+	
+	ngOnInit(): void
+	{	
+		this.task.id = this.route.snapshot.paramMap.get("id");
+		this.taskService.getTask(this.task.id, task => {
+			this.task.copy(task);
+		});
+	}
+
+	onSubmit({value, valid}: { value: Task, valid: boolean }) 
 	{
-		console.log(value);
-		if (valid) 
-		{
-			this.taskService.editTask(value, () => this.location.back());
+		this.task.doneBy = this.doneBy;
+		this.task.executionDate = new Date(this.executionDate);
+		this.task.description = this.description;
+		this.task.expireDate = this.expireDate;
+
+		if (valid) {
+			this.taskService.updateTask(this.task, () => this.location.back()); 
 		}
 	}
- 
-   delete() 
-   {
+  
+	delete() 
+	{
 		if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
-			this.tasksRef.child(this.taskEdit.id).remove(() => {
+			this.tasksRef.child(this.task.id).remove(() => {
 				this.router.navigate(['/tasks/']);
 			});
 		}
-   }
+	}
 }

@@ -14,6 +14,11 @@ body {
 	*/
 }	
 
+.fa:hover {
+	cursor: pointer;
+	color: rgb(172, 49, 150);
+}
+
 .container {
 	border-radius: 5px;
 	padding: 20px;
@@ -77,16 +82,24 @@ img.avatar {
 	text-align: center;
 }
 
+.row {
+	display: block;
+	width: 100%;
+}
 .col-25 {
-	float: right;
 	width: 25%;
 	margin-top: 12px;
+
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .col-75 {
-	float: right;
 	width: 75%;
 	margin-top: 12px;
+	
+	display: inline-block;
+	vertical-align: middle;
 }
 
 /* Clear floats after the columns */

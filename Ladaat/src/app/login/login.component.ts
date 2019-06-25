@@ -17,15 +17,14 @@ export class LoginComponent implements OnInit {
 	) {}
 	
 	ngOnInit() {
-		this.userAuth.auth.onAuthStateChanged(user => {
-			if (user) {
-				this.router.navigate([""]);
-			}
-		});
+		if (this.userAuth.auth && this.userAuth.auth.currentUser && this.userAuth.auth.currentUser.uid) {
+			this.router.navigate(["tasks"]);
+		}
 	}
 	
 	enter() {
 		this.userAuth.auth.signInWithEmailAndPassword(this.email, this.password)
+			.then(() => this.router.navigate(["tasks"]))
 			.catch(() => {alert("Invalid email or password")});
 	}
 }

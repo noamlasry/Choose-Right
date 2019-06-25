@@ -19,6 +19,7 @@ export class DonorConversation implements Identifiable<DonorConversation> {
 		this.donor = other.donor;
 		this.date = other.date;
 		this.summary = other.summary;
+		this.modifiedBy = other.modifiedBy;
 	}
 
 	copyAll(other: DonorConversation) {
@@ -38,7 +39,8 @@ export class DonorConversation implements Identifiable<DonorConversation> {
 		return {
 			'donor': this.donor,
 			'date': this.date,
-			'summary': this.summary
+			'summary': this.summary,
+			'modifiedBy': this.modifiedBy
 		  }
 	}
 
@@ -54,4 +56,5 @@ export class DonorConversation implements Identifiable<DonorConversation> {
 	donor: string;
 	date: string;
 	summary: string;
+	modifiedBy: string;
 }

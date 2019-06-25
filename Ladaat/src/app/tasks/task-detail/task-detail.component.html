@@ -3,7 +3,7 @@
   <h1>פרטי משימה:</h1>
   <button class="button" *ngIf="task" routerLink="/task-editor/{{ task.id }}">עריכה</button>
   <table class="contact">
-      <tr>
+      <tr >
         <td>תאור:</td>
         <td>{{ task.description }}</td> 
       </tr>
@@ -17,7 +17,11 @@
       </tr>
       <tr>
           <td>בוצע בתאריך:</td>
-          <td>{{ task.executionDate }}</td>
+          <td>{{ task.executionDate}}</td>
+      </tr>
+      <tr>
+          <td>לביצוע עד:</td>
+          <td>{{ task.expireDate| date:'short'}}</td>
       </tr>
     </table>
   

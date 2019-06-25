@@ -6,6 +6,7 @@ import { Donor } from '../model/donor';
 import { DonorRecord } from '../model/record';
 import * as firebase from 'firebase';
 import { UpdaterService } from '../../updater.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-document-editor',
@@ -22,6 +23,7 @@ export class DocumentEditorComponent implements OnInit {
 		private router: Router,
 		private route: ActivatedRoute,
 		private donorService: UpdaterService,
+		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
 
@@ -46,6 +48,8 @@ export class DocumentEditorComponent implements OnInit {
 		}
 		else {
 			this.record.donor = this.donor.id;
+
+			this.record.modifiedBy = this.userAuth.auth.currentUser.uid;
 
 			if (this.record.id) {
 				this.recordsRef.child(this.record.id).update(this.record.toJSON(), () => {
