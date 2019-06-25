@@ -26,13 +26,11 @@ export class TasksComponent implements OnInit
   ngOnInit() {
 		this.taskService.getTasks(tasks => {
 			this.taskData = tasks;
-      console.log(this.taskData);
-      console.log(this.taskService.tasksRef);
+      
     });
     
     this.taskService.getDetailTasks(tasks => {
 			this.detailTaskData = tasks;
-      console.log(this.detailTaskData);
     //  console.log(this.taskService.taskDetailRef);
 		});
   }

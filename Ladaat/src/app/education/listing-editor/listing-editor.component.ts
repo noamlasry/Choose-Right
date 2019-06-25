@@ -22,18 +22,19 @@ export class ListingEditorComponent implements OnInit {
     lecture: Lecture = new Lecture();
 
   constructor(
-    private _es: EducationService,
+    private educationService: EducationService,
      private location: Location,
      private route: ActivatedRoute,
      ) { }
 
   ngOnInit() {
+    this.educationService.getLecture(this.route.snapshot.paramMap.get('id'), 
+        lecture => { this.lecture = lecture;});
   }
   onSubmit({value, valid}: { value: Listing, valid: boolean }) {
-    console.log('11111');
-    console.log(value);
+    value.lectureId = this.lecture.id;
     if (valid) {
-      this._es.addListing(value, () => this.location.back());
+      this.educationService.addListing(value, () => this.location.back());
       }
      
   }

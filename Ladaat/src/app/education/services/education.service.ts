@@ -10,12 +10,12 @@ export class EducationService {
 
   db: firebase.database.Database;
 	lectureRef: firebase.database.Reference;
-	listungsRef: firebase.database.Reference;
+	listingsRef: firebase.database.Reference;
 
   constructor() {
 		this.db = firebase.database();
 		this.lectureRef = this.db.ref("lectures");
-    this.listungsRef = this.db.ref("listings");
+    this.listingsRef = this.db.ref("listings");
   }
   getLecture(id: string, callback: (complexLecture: Lecture) => void): void {
     this.lectureRef.child(id).once('value')
@@ -43,22 +43,48 @@ export class EducationService {
     .catch(error => {
       console.log(error);
     });
-    
+  }
+  getListing(id: string, callback: (complexListing: Listing) => void): void {
+    this.listingsRef.child(id).once('value')
+		.then(snapshot => {
+      var dono: Listing = Listing.create(snapshot.toJSON(), snapshot.key);
+      callback(dono);
+    })
+		.catch(error => {
+			console.log(error);
+    });
+	}
+  getListings(callback: (listing: Listing[]) => void): void 
+  {
+    this.listingsRef.once('value')
+    .then(listingSnapshot => 
+      {
+      var listings: Listing[] = [];
+      listingSnapshot.forEach(element=> 
+        {
+        this.getListing(element.key, complexListing => 
+          {
+            listings.push(complexListing)
+          if (listings.length == listingSnapshot.numChildren()) 
+          {
+            callback(listings);
+          }
+        })
+      });
+      
+    })
+    .catch(error => {
+      console.log(error);
+    });
   }
   addListing(listing: Listing, callback: (listing: Listing) => void): void {
-
-		var ref = this.listungsRef.push({ 
+		var ref = this.listingsRef.push({ 
       'subject': listing.subject,
       'status': listing.status,
       'date': listing.date,
       'link': listing.link,
       'lectureId': listing.lectureId
       });
-      console.log('33333333')
-
-      console.log(listing.lectureId)
-      console.log('22222222')
-
 		ref.then(d => {
 			callback(Listing.create(d.toJSON(), ref.key));
 		})
@@ -67,7 +93,6 @@ export class EducationService {
     });
   }	
   
-
   addLecture(lecture: Lecture, callback: (lecture: Lecture) => void): void {
 		var ref = this.lectureRef.push({
       'institute': lecture.institute,

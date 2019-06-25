@@ -17,7 +17,6 @@ export class EducationComponent implements OnInit {
 		this.lecturesService.getLectures(lectures => {
 			this.lectureData = lectures;
 			this.sortLectures(this.compareInstituteNames);
-			console.log(this.lectureData);
 		});
 	}
 	
