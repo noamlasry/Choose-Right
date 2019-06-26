@@ -43,7 +43,8 @@ const routes: Routes = [
 	{ path: 'new-lecture', canActivate: [AuthGuard], component: NewLectureComponent },
 	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent },
 	{ path: 'listing-editor/:id', canActivate: [AuthGuard], component: ListingEditorComponent },
-	
+	{ path: 'lecture-editor/:id', canActivate: [AuthGuard], component: NewLectureComponent },
+
 	{ path: 'staff', canActivate: [AuthGuard], component: StaffComponent },
 	{ path: 'staff-editor', canActivate: [AuthGuard], component: StaffEditorComponent },
 

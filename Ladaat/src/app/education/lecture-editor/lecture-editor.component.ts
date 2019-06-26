@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Lecture } from "../classes/lecture";
+import { EducationService } from "../services/education.service";
+import { Listing } from '../classes/listing';
+import { Location } from '@angular/common';
+import { MethodCall } from '@angular/compiler';
 
 @Component({
   selector: 'app-lecture-editor',
@@ -7,9 +13,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LectureEditorComponent implements OnInit {
 
-  constructor() { }
+  lecture: Lecture;
 
-  ngOnInit() {
+  constructor(
+    private location: Location,
+    private route: ActivatedRoute,
+    private educationService: EducationService
+  ) { }
+
+  ngOnInit() {        
+
+    this.educationService.getLecture(this.route.snapshot.paramMap.get('id'), 
+        lecture => { this.lecture = lecture;});
   }
+ 
 
 }
