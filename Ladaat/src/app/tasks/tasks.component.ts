@@ -72,5 +72,12 @@ export class TasksComponent implements OnInit
     this.router.navigate(['/tasks/']);
   }
 
-
+  getClass(task: Task) {
+    if (task.doneBy) {
+      return 'completed';
+    }
+    else if (this.taskAlert(task)) {
+      return 'overdue';
+    }
+  }
 }

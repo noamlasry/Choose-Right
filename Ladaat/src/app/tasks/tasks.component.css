@@ -3,4 +3,9 @@ table tr.highlight {
     color: #ffffff;
 }
 
-
+.overdue {
+    color: red;
+}
+.completed {
+    color: green;
+}
