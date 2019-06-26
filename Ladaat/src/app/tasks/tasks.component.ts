@@ -16,6 +16,7 @@ export class TasksComponent implements OnInit
 {
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
   private taskDetailRef: firebase.database.Reference = firebase.database().ref("taskEdit");
+  temp = true;
    taskData: Task [];
   
   currentSort: (a: Task, b: Task,) => number; 
