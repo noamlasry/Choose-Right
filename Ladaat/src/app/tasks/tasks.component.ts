@@ -39,5 +39,10 @@ export class TasksComponent implements OnInit
     else
     this.router.navigate(['/tasks/']);
   }
+  public selectedName:any;
+  
+  public highlightRow(task) {
+    this.selectedName = task.name;
+  }
 
 }

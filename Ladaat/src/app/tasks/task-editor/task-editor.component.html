@@ -4,8 +4,8 @@
           <label for="description">ערוך משימה:</label>
       </div>
       <div class="col-75">
-        <input [(ngModel)]="description" type="text" name="description" id="description" 
-        class="form-control" required>
+        <input [(ngModel)]="task.description" type="text" name="description" id="description"  required/>
+       
       </div>
     </div>
 
@@ -14,19 +14,28 @@
         <label for="doneBy">המשימה בוצעה על ידי:</label>
       </div>
       <div class="col-75">
-        <input type="text" [(ngModel)]="doneBy" name="doneBy" id="doneBy"/>
+        <input [(ngModel)]="task.doneBy" type="text" name="doneBy" id="doneBy" required/>
       </div>
     </div>
 
-  	<div class="row">
-      <div class="col-25">
-        <label for="executionDate">תאריך ביצוע המשימה:</label>
+    <div class="row">
+        <div class="col-25">
+          <label for="expireDate">לביצוע עד</label>
+        </div>
+        <div class="col-75">
+          <input [(ngModel)]="task.expireDate" type="datetime-local" name="expireDate" id="expireDate" required/>
+        </div>
       </div>
-      <div class="col-75">
-        <input type="datetime-local" [(ngModel)]="executionDate" name="meeting-time" value="2018-06-12T19:30"
-       id="executionDate" required/>
+      
+      <div class="row">
+        <div class="col-25">
+          <label for="executionDate">תאריך ביצוע המשימה:</label>
+        </div>
+        <div class="col-75">
+          <input [(ngModel)]="task.executionDate" type="datetime-local" name="executionDate" id="executionDate" required/>
+        </div>
       </div>
-    </div>
+
     
     <div class="row submit">
       <button class="button" type="submit" [disabled]="!taskEditForm.form.valid">שמור</button>

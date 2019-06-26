@@ -51,7 +51,8 @@ export class TaskService
     var ref = this.tasksRef.push({
       'date':latest_date,
       'description': task.description,
-      'expireDate': task.expireDate
+      'expireDate': task.expireDate,
+    
       });
 		ref.then(d => {
 			callback(Task.create(d.toJSON(), ref.key));
@@ -63,11 +64,13 @@ export class TaskService
 
   updateTask(task: Task, callback: (task: Task) => void): void 
   {
-    let latest_date =this.datepipe.transform(task.executionDate, 'M/d/yy, h:mm a');
+    //let latest_date =this.datepipe.transform(task.executionDate, 'M/d/yy, h:mm a');
+   // task.executionDate = latest_date;
     var ref = this.tasksRef.child(task.id).set({
       'date':task.date,
       'description': task.description,
-      'executionDate': latest_date,
+      'executionDate': task.executionDate,
+      
       'doneBy': task.doneBy,
       'expireDate': task.expireDate
       });

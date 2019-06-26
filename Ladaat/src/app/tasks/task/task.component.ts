@@ -15,6 +15,7 @@ export class TaskComponent implements OnInit
   description: string = '';
   date: Date;
   expireDate: string;
+  executionDate: string;
   constructor(private _es: TaskService, private location: Location) { }
 
   ngOnInit() {} 
