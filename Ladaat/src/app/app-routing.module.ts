@@ -19,7 +19,8 @@ import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
 import { StaffComponent } from "./staff/staff.component";
 import { StaffEditorComponent } from "./staff/staff-editor/staff-editor.component";
-
+import { LectureEditorComponent } from "./education/lecture-editor/lecture-editor.component";
+import { ListingComponent } from "./education/listing/listing.component";
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: TasksComponent },
 	{ path: 'donors', canActivate: [AuthGuard], component: DonorsComponent },
@@ -42,8 +43,10 @@ const routes: Routes = [
 	{ path: 'education', canActivate: [AuthGuard], component: EducationComponent },
 	{ path: 'new-lecture', canActivate: [AuthGuard], component: NewLectureComponent },
 	{ path: 'lecture/:id', canActivate: [AuthGuard], component: LectureComponent },
+	{ path: 'listing/:id', canActivate: [AuthGuard], component: ListingComponent },
 	{ path: 'listing-editor/:id', canActivate: [AuthGuard], component: ListingEditorComponent },
-	{ path: 'lecture-editor/:id', canActivate: [AuthGuard], component: NewLectureComponent },
+
+	{ path: 'lecture-editor/:id', canActivate: [AuthGuard], component: LectureEditorComponent },
 
 	{ path: 'staff', canActivate: [AuthGuard], component: StaffComponent },
 	{ path: 'staff-editor', canActivate: [AuthGuard], component: StaffEditorComponent },

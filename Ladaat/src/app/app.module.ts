@@ -29,7 +29,8 @@ import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
 import { StaffComponent } from './staff/staff.component';
 import { StaffEditorComponent } from './staff/staff-editor/staff-editor.component';
-import { CommonModule } from '@angular/common'
+import { CommonModule } from '@angular/common';
+import { ListingComponent } from './education/listing/listing.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { CommonModule } from '@angular/common'
     TaskEditorComponent,
     StaffComponent,
     StaffEditorComponent,
+    ListingComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

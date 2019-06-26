@@ -17,6 +17,46 @@ export class EducationService {
 		this.lectureRef = this.db.ref("lectures");
     this.listingsRef = this.db.ref("listings");
   }
+  updateListing(listing: Listing, callback: (task: Listing) => void): void 
+  {
+    var ref = this.listingsRef.child(listing.id).set({
+      'subject': listing.subject,
+      'status': listing.status,
+      'date': listing.date,
+      'link': listing.link,
+      'lectureId': listing.lectureId
+      });
+		ref.then(d => {
+			callback(listing);
+		})
+		.catch(error => {
+			console.log(error);
+    });
+  }
+  updateLecture(lecture: Lecture, callback: (task: Lecture) => void): void 
+  {
+    var ref = this.lectureRef.child(lecture.id).set({
+      'institute': lecture.institute,
+      'year': lecture.year,
+      'class': lecture.class,
+      'content': lecture.content,
+      'date': lecture.date,
+      'lecturerName': lecture.lecturerName,
+      'price': lecture.price,
+      'contactName1': lecture.contactName1,
+      'email1': lecture.email1,
+      'phone1': lecture.phone1,
+      'contactName2': lecture.contactName2,
+      'email2': lecture.email2,
+      'phone2': lecture.phone2
+      });
+		ref.then(d => {
+			callback(lecture);
+		})
+		.catch(error => {
+			console.log(error);
+    });
+  }
   getLecture(id: string, callback: (complexLecture: Lecture) => void): void {
     this.lectureRef.child(id).once('value')
 		.then(snapshot => {

@@ -11,15 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./listing-editor.component.css']
 })
 export class ListingEditorComponent implements OnInit {
-
-    id?: string;
-    lectureId: string = '';
-    subject: string = '';
-    status: string = '';
-    date: string = '';
-    link: string = '';
     
-    lecture: Lecture = new Lecture();
+  listing: Listing;
 
   constructor(
     private educationService: EducationService,
@@ -28,13 +21,16 @@ export class ListingEditorComponent implements OnInit {
      ) { }
 
   ngOnInit() {
-    this.educationService.getLecture(this.route.snapshot.paramMap.get('id'), 
-        lecture => { this.lecture = lecture;});
+    this.educationService.getListing(this.route.snapshot.paramMap.get('id'), 
+        listing => { this.listing = listing;});
   }
+
+
+
   onSubmit({value, valid}: { value: Listing, valid: boolean }) {
-    value.lectureId = this.lecture.id;
+    alert
     if (valid) {
-      this.educationService.addListing(value, () => this.location.back());
+      this.educationService.updateListing(value, () => this.location.back());
       }
      
   }
