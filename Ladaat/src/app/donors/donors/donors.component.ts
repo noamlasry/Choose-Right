@@ -14,21 +14,21 @@ export class DonorsComponent implements OnInit {
 	donorRef: firebase.database.Reference = firebase.database().ref("donors");
 	donationsRef: firebase.database.Reference = firebase.database().ref("donations");
 
-	donorData: Donor[] = [];
+	donors: Donor[] = [];
 	
 	constructor(
 		private updateService: UpdaterService
 	) {}
 	
 	ngOnInit() {
-		this.updateService.initializeAndListenAll<Donor>(this.donorRef, this.donorData, new Donor())
+		this.updateService.initializeAndListenAll<Donor>(this.donorRef, this.donors, new Donor())
 		.then(snapshot => {
-			this.donorData.forEach(donor => {
+			this.donors.forEach(donor => {
 				this.updateService.initializeAndListenList<Donation>(this.donationsRef, "donor", donor.id, donor.donations, new Donation());
 			});
 		}).then(snapshot => {
 			this.updateService.updateAll();
-			this.donorData.sort(this.donorSorting.comparator);
+			this.donors.sort(this.donorSorting.comparator);
 		});
 	}
 	
@@ -46,7 +46,7 @@ export class DonorsComponent implements OnInit {
 	}
 
 	donorSorting = {
-		'data': this.donorData,
+		'data': this.donors,
 		'comparator': Donor.compareOrgNames,
 		'ascending': true,
 		'current': 'orgName'

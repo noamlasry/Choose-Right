@@ -15,6 +15,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class DonationEditorComponent implements OnInit {
 	private donationsRef: firebase.database.Reference = firebase.database().ref("donations");
+	private usersRef: firebase.database.Reference = firebase.database().ref("users");
 
 	donor: Donor = new Donor();
 	donation: Donation = new Donation();
@@ -22,7 +23,7 @@ export class DonationEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private donorService: UpdaterService,
+		private updaterService: UpdaterService,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
@@ -37,12 +38,13 @@ export class DonationEditorComponent implements OnInit {
 		}
 		
 		if (this.donation.id) {
-			this.donorService.initializeSingle(this.donationsRef, this.donation.id, this.donation, new Donation())
-			.then(snapshot => this.donorService.addSingleListener(this.donationsRef, this.donation.id, this.donation, new Donation()));
-
-			// this.donationsRef.child(this.donation.id).once("value", donation => {
-			// 	this.donation.copy(donation.toJSON() as Donation);
-			// });
+			this.updaterService.initializeAndListenSingle(this.donationsRef, this.donation.id, this.donation, new Donation())
+			.then(snapshot => {
+				if (this.donation.modifiedBy) {
+					this.donation.modifiedByUser.id = this.donation.modifiedBy;
+					this.updaterService.initializeSingle(this.usersRef, this.donation.modifiedBy, this.donation.modifiedByUser, this.donation.modifiedByUser);
+				}
+			});
 		}
 	}
 
@@ -77,10 +79,15 @@ export class DonationEditorComponent implements OnInit {
 	}
 
 	hasUpdates(): boolean {
-	return this.donorService.hasUpdates();
+		return this.updaterService.hasUpdates();
 	}
 
 	update(): void {
-	this.donorService.updateAll();
+		this.updaterService.updateAll();
+
+		if (this.donation.modifiedBy) {
+			this.donation.modifiedByUser.id = this.donation.modifiedBy;
+			this.updaterService.initializeSingle(this.usersRef, this.donation.modifiedBy, this.donation.modifiedByUser, this.donation.modifiedByUser);
+		}
 	}
 }

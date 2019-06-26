@@ -22,6 +22,9 @@
 		<p>
 			<button class="button" routerLink="/donor-editor/{{ donor.id }}">עריכה</button>
 		</p>
+		<p *ngIf="donor.modifiedBy"><small>
+			עודכן לאחרונה ע"י {{ donor.modifiedByUser.getFullestName() }}
+		</small></p>
 	<table class="contact">
 	<tr>
 		<td>שם משפחה</td>

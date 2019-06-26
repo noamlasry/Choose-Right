@@ -1,6 +1,15 @@
 import { Identifiable } from '../../identifiable';
+import { User } from 'src/app/login/model/user';
 
 export class DonorConversation implements Identifiable<DonorConversation> {
+	id: string;
+	donor: string;
+	date: string;
+	summary: string;
+	modifiedBy: string;
+
+	modifiedByUser: User = new User();
+
 	static create(other: DonorConversation, id?: string): DonorConversation {
 		var conversation: DonorConversation = new DonorConversation();
 		conversation.copy(other);
@@ -51,10 +60,4 @@ export class DonorConversation implements Identifiable<DonorConversation> {
 	static compareSummaries(a: DonorConversation, b: DonorConversation): number {
 		return a.summary > b.summary ? 1 : -1;
 	}
-
-	id: string;
-	donor: string;
-	date: string;
-	summary: string;
-	modifiedBy: string;
 }

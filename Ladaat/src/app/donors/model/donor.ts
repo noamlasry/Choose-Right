@@ -13,6 +13,7 @@ import { Donation } from './donation';
 import { DonorConversation } from './conversation';
 import { DonorRecord } from './record';
 import { Identifiable } from 'src/app/identifiable';
+import { User } from 'src/app/login/model/user';
 
 
 export class Donor implements Identifiable<Donor> {
@@ -24,12 +25,13 @@ export class Donor implements Identifiable<Donor> {
 	orgName: string = "";
 	address: string = "";
 	email: string = "";
+	modifiedBy: string;
 
 	donations: Donation[] = [];
 	conversations: DonorConversation[] = [];
 	records: DonorRecord[] = [];
 
-	modifiedBy: string;
+	modifiedByUser: User = new User();
 
 	static create(other: Donor, id?: string): Donor {
 		var donor: Donor = new Donor();

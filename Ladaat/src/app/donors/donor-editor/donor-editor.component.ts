@@ -16,7 +16,8 @@ export class DonorEditorComponent implements OnInit {
 	private donorsRef: firebase.database.Reference = firebase.database().ref("donors");
 	private donationsRef: firebase.database.Reference = firebase.database().ref("donations");
 	private conversationsRef = firebase.database().ref("donor-conversations");
-    private recordssRef = firebase.database().ref("donor-records");
+	private recordssRef = firebase.database().ref("donor-records");
+	private usersRef: firebase.database.Reference = firebase.database().ref("users");
 
 	donor: Donor = new Donor();
 
@@ -29,16 +30,16 @@ export class DonorEditorComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		
 		this.donor.id = this.route.snapshot.paramMap.get("id");
 		
 		if (this.donor.id) {
-			this.updaterService.initializeSingle(this.donorsRef, this.donor.id, this.donor, new Donor())
-			.then(snapshot => this.updaterService.addSingleListener(this.donorsRef, this.donor.id, this.donor, new Donor()));
-
-			// this.donorsRef.child(this.donor.id).once("value", donor => {
-			// 	this.donor.copy(donor.toJSON() as Donor);
-			// });
+			this.updaterService.initializeAndListenSingle(this.donorsRef, this.donor.id, this.donor, new Donor())
+			.then(snapshot => {
+				if (this.donor.modifiedBy) {
+					this.donor.modifiedByUser.id = this.donor.modifiedBy;
+					this.updaterService.initializeSingle(this.usersRef, this.donor.modifiedBy, this.donor.modifiedByUser, this.donor.modifiedByUser);
+				}
+			});
 		}
 	}
 	
@@ -95,9 +96,14 @@ export class DonorEditorComponent implements OnInit {
 
 	hasUpdates(): boolean {
 		return this.updaterService.hasUpdates();
-		}
-	
-		update(): void {
+	}
+
+	update(): void {
 		this.updaterService.updateAll();
+
+		if (this.donor.modifiedBy) {
+			this.donor.modifiedByUser.id = this.donor.modifiedBy;
+			this.updaterService.initializeSingle(this.usersRef, this.donor.modifiedBy, this.donor.modifiedByUser, this.donor.modifiedByUser);
 		}
+	}
 }

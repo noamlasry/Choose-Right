@@ -7,7 +7,7 @@
   </p>
   
   <p *ngIf="record.modifiedBy"><small>
-		עודכן לאחרונה ע"י {{ record.modifiedBy }}
+      עודכן לאחרונה ע"י {{ record.modifiedByUser.getFullestName() }}
   </small></p>
   
 	<div class="row">

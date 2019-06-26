@@ -1,7 +1,16 @@
 import { Identifiable } from 'src/app/identifiable';
+import { User } from 'src/app/login/model/user';
 
 
 export class Donation implements Identifiable<Donation> {
+	id: string;
+	donor: string;
+	date: string;
+	amount: number;
+	modifiedBy: string;
+
+	modifiedByUser: User = new User();
+	
 	static create(other: Donation, id?: string): Donation {
 		var donation: Donation = new Donation();
 		donation.copy(other);
@@ -52,10 +61,4 @@ export class Donation implements Identifiable<Donation> {
 	static compareAmounts(a: Donation, b: Donation): number {
 		return a.amount - b.amount;
 	}
-
-	id: string;
-	donor: string;
-	date: string;
-	amount: number;
-	modifiedBy: string;
 }

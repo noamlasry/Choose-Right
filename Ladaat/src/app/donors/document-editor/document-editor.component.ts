@@ -14,7 +14,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./document-editor.component.css']
 })
 export class DocumentEditorComponent implements OnInit {
-  private recordsRef: firebase.database.Reference = firebase.database().ref("donor-records");
+	private recordsRef: firebase.database.Reference = firebase.database().ref("donor-records");
+	private usersRef: firebase.database.Reference = firebase.database().ref("users");
 
 	donor: Donor = new Donor();
 	record: DonorRecord = new DonorRecord();
@@ -22,7 +23,7 @@ export class DocumentEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private donorService: UpdaterService,
+		private updaterService: UpdaterService,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
@@ -37,8 +38,13 @@ export class DocumentEditorComponent implements OnInit {
 		}
 		
 		if (this.record.id) {
-			this.donorService.initializeSingle(this.recordsRef, this.record.id, this.record, new DonorRecord())
-			.then(snapshot => this.donorService.addSingleListener(this.recordsRef, this.record.id, this.record, new DonorRecord()));
+			this.updaterService.initializeAndListenSingle(this.recordsRef, this.record.id, this.record, new DonorRecord())
+			.then(snapshot => {
+				if (this.record.modifiedBy) {
+					this.record.modifiedByUser.id = this.record.modifiedBy;
+					this.updaterService.initializeSingle(this.usersRef, this.record.modifiedBy, this.record.modifiedByUser, this.record.modifiedByUser);
+				}
+			});
 		}
 	}
 
@@ -73,10 +79,15 @@ export class DocumentEditorComponent implements OnInit {
 	}
 
 	hasUpdates(): boolean {
-	return this.donorService.hasUpdates();
+		return this.updaterService.hasUpdates();
 	}
 
 	update(): void {
-	this.donorService.updateAll();
+		this.updaterService.updateAll();
+		
+		if (this.record.modifiedBy) {
+			this.record.modifiedByUser.id = this.record.modifiedBy;
+			this.updaterService.initializeSingle(this.usersRef, this.record.modifiedBy, this.record.modifiedByUser, this.record.modifiedByUser);
+		}
 	}
 }

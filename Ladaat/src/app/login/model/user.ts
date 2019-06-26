@@ -35,4 +35,20 @@ export class User implements Identifiable<User>{
     make(): User {
         return new User();
     }
+
+    getFullestName() {
+		if (this.firstName || this.lastName) {
+			return (this.firstName + " " + this.lastName).trim();
+
+		}
+		else if (this.name) {
+			return this.name;
+		}
+		else if (this.email) {
+			return this.email;
+		}
+		else {
+			return this.id;
+		}
+	}
 }

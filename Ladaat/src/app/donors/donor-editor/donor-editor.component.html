@@ -8,7 +8,7 @@
 	</small></p>
 	
 	<p *ngIf="donor.modifiedBy"><small>
-		עודכן לאחרונה ע"י {{ donor.modifiedBy }}
+		עודכן לאחרונה ע"י {{ donor.modifiedByUser.getFullestName() }}
 	</small></p>
 
 	<div class="row">
