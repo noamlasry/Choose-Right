@@ -7,6 +7,10 @@
 		<a (click)="update()">לרענן?</a>
 	</small></p>
 	
+	<p *ngIf="donor.modifiedBy"><small>
+		עודכן לאחרונה ע"י {{ donor.modifiedBy }}
+	</small></p>
+
 	<div class="row">
 		<div class="col-25">
 			<label for="orgName">שם ארגון</label>

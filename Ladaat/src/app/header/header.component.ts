@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Router } from '@angular/router';
-import { UserService, User } from '../login/user.service';
+import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { User } from '../login/model/user';
 
 @Component({
   selector: 'app-header',
@@ -14,16 +14,19 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private userAuth: AngularFireAuth,
-    private userService: UserService,
-		private router: Router
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.userService.onChange(user => {
-      if (user) {
-        this.user = user;
-      }
+    this.userAuth.auth.onAuthStateChanged(user => {
+      this.reloadUser();
     });
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.reloadUser();
+      }
+    })
   }
 
   logout() {
@@ -32,5 +35,26 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(["login"]);
     });
 
+  }
+
+  isLoggedIn(): boolean {
+    if (this.userAuth.auth && this.userAuth.auth.currentUser && this.userAuth.auth.currentUser.uid) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  private reloadUser() {
+    this.user = new User();
+    if (this.userAuth.auth.currentUser.photoURL) {
+      this.user.avatar = this.userAuth.auth.currentUser.photoURL;
+    }
+    else {
+      this.user.avatar = "src/assets/logos/Icon-turquiose-transparent.svg"
+    }
+    this.user.email = this.userAuth.auth.currentUser.email;
+    this.user.name = this.userAuth.auth.currentUser.displayName;
   }
 }

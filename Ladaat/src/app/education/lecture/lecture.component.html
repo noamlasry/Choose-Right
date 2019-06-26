@@ -49,20 +49,22 @@
 	<button class="button" routerLink="/listing-editor/{{lecture.id}}">הוסף רשומה</button>
 </div>
 
-<!--
 <h2>רשומות</h2>
-<p>
-	<b>סך כל התרומות:</b> ₪{{ donor.total }}
-</p>
-<table class="donations">
+
+<table class="listings">
 <tr>
-	<th (click)="sortDonations(compareDates)">תאריך</th>
-	<th (click)="sortDonations(compareAmounts)">סכום</th> 
+	<th (click)="sortListings(compareDates)">תאריך</th>
+  <th (click)="sortListings(compareSubjects)">נושא</th> 
+  <th (click)="sortListings(compareStatuses)">סטטוס</th> 
+	<th (click)="sortListings(compareLinks)">קישור</th> 
 </tr>
 
-<tr *ngFor="let donation of donor.donations" routerLink="/donation-editor/{{donor.id}}/{{donation.id}}">
-	<td>{{ donation.date }}</td>
-	<td>₪{{ donation.amount }}</td> 
-</tr>-->
+<tr *ngFor="let listing of listingsArr">
+	<td *ngIf="lecture.id == listing.lectureId">{{ listing.date }}</td>
+  <td *ngIf="lecture.id == listing.lectureId">{{ listing.subject }}</td>
+  <td *ngIf="lecture.id == listing.lectureId">{{ listing.status }}</td>
+  <td *ngIf="lecture.id == listing.lectureId">{{ listing.link }}</td> 
+</tr>
 
+</table>
 </div>

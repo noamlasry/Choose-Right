@@ -47,7 +47,7 @@ const routes: Routes = [
 	{ path: 'staff', canActivate: [AuthGuard], component: StaffComponent },
 	{ path: 'staff-editor', canActivate: [AuthGuard], component: StaffEditorComponent },
 
-	{ path: 'login', component: LoginComponent },
+	{ path: 'login', canActivate: [AuthGuard], component: LoginComponent },
 ];
 
 @NgModule({

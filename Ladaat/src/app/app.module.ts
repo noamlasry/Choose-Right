@@ -29,7 +29,7 @@ import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
 import { StaffComponent } from './staff/staff.component';
 import { StaffEditorComponent } from './staff/staff-editor/staff-editor.component';
-
+import { CommonModule } from '@angular/common'
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +62,8 @@ import { StaffEditorComponent } from './staff/staff-editor/staff-editor.componen
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    CommonModule,
   ],
   entryComponents: [
    TaskComponent,
