@@ -113,12 +113,12 @@ export class Donor implements Identifiable<Donor> {
 
 	
 	sortDonationsByDate() {
-		let result = this.sort<Donation>(this.donationSorting, Donation.compareDates);
+		this.sort<Donation>(this.donationSorting, Donation.compareDates);
 		this.donationSorting.current = "date";
 	}
 	
 	sortDonationsByAmount() {
-		let result = this.sort<Donation>(this.donationSorting, Donation.compareAmounts);
+		this.sort<Donation>(this.donationSorting, Donation.compareAmounts);
 		this.donationSorting.current = "amount";
 	}
 	
@@ -129,12 +129,12 @@ export class Donor implements Identifiable<Donor> {
 	};
 
 	sortConversationsByDate() {
-		let result = this.sort<DonorConversation>(this.conversationSorting, DonorConversation.compareDates);
+		this.sort<DonorConversation>(this.conversationSorting, DonorConversation.compareDates);
 		this.conversationSorting.current = "date";
 	}
 
 	sortConversationsBySummary() {
-		let result = this.sort<DonorConversation>(this.conversationSorting, DonorConversation.compareSummaries);
+		this.sort<DonorConversation>(this.conversationSorting, DonorConversation.compareSummaries);
 		this.conversationSorting.current = "summary";
 	}
 
@@ -145,22 +145,22 @@ export class Donor implements Identifiable<Donor> {
 	};
 
 	sortRecordsByDate() {
-		let result = this.sort<DonorRecord>(this.recordSorting, DonorRecord.compareDates);
+		this.sort<DonorRecord>(this.recordSorting, DonorRecord.compareDates);
 		this.recordSorting.current = "date";
 	}
 
 	sortRecordsByName() {
-		let result = this.sort<DonorRecord>(this.recordSorting, DonorRecord.compareNames);
+		this.sort<DonorRecord>(this.recordSorting, DonorRecord.compareNames);
 		this.recordSorting.current = "name";
 	}
 
 	sortRecordsByIncoming() {
-		let result = this.sort<DonorRecord>(this.recordSorting, DonorRecord.compareIncoming);
+		this.sort<DonorRecord>(this.recordSorting, DonorRecord.compareIncoming);
 		this.recordSorting.current = "incoming";
 	}
 
 	sortRecordsByUrl() {
-		let result = this.sort<DonorRecord>(this.recordSorting, DonorRecord.compareUrls);
+		this.sort<DonorRecord>(this.recordSorting, DonorRecord.compareUrls);
 		this.recordSorting.current = "url";
 	}
 

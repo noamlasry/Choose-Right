@@ -54,16 +54,24 @@ export class UpdaterService {
       .then(snap => this.addAllListeners<T>(ref, list, maker));
   }
 
+  /* 
+    ref: a reference to the root of where all objects of this type are stored. For example: /users
+    key: the identifier of a specific child of the ref
+    previous: the object that we want to update with the fetched data
+    maker: the object to use for creating client-side objects of this type
+  */
   initializeSingle<T extends Identifiable<T>> (
     ref: firebase.database.Reference,
     key: string,
     previous: Identifiable<T>,
     maker: T): Promise<firebase.database.DataSnapshot> {
       return ref.child(key).once("value", snapshot => {
-        let blank: Identifiable<T> = maker.make();
-        blank.copy(snapshot.toJSON() as T);
-        blank.id = snapshot.key;
-        previous.copy(blank);
+        if (snapshot.exists()) {
+          let blank: Identifiable<T> = maker.make();
+          blank.copy(snapshot.toJSON() as T);
+          blank.id = snapshot.key;
+          previous.copy(blank);
+        }
       });
   }
 

@@ -23,7 +23,7 @@ export class DonorEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private donorService: UpdaterService,
+		private updaterService: UpdaterService,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
@@ -33,8 +33,8 @@ export class DonorEditorComponent implements OnInit {
 		this.donor.id = this.route.snapshot.paramMap.get("id");
 		
 		if (this.donor.id) {
-			this.donorService.initializeSingle(this.donorsRef, this.donor.id, this.donor, new Donor())
-			.then(snapshot => this.donorService.addSingleListener(this.donorsRef, this.donor.id, this.donor, new Donor()));
+			this.updaterService.initializeSingle(this.donorsRef, this.donor.id, this.donor, new Donor())
+			.then(snapshot => this.updaterService.addSingleListener(this.donorsRef, this.donor.id, this.donor, new Donor()));
 
 			// this.donorsRef.child(this.donor.id).once("value", donor => {
 			// 	this.donor.copy(donor.toJSON() as Donor);
@@ -94,10 +94,10 @@ export class DonorEditorComponent implements OnInit {
 	}
 
 	hasUpdates(): boolean {
-		return this.donorService.hasUpdates();
+		return this.updaterService.hasUpdates();
 		}
 	
 		update(): void {
-		this.donorService.updateAll();
+		this.updaterService.updateAll();
 		}
 }

@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
       return new Promise(resolve => this.userAuth.auth.onAuthStateChanged(resolve))
       .then(user => {
         if (next.routeConfig.component == LoginComponent) {
-          console.log(next.routeConfig);
           if (user) {
             this.router.navigate(["tasks"]);
           }
