@@ -1,4 +1,5 @@
 <div class="container viewer">
+    
     <h1>משימות</h1>
 
     <div class="toolbar" >
@@ -11,6 +12,7 @@
             <th>לביצע עד</th>
             <th>מחק</th>
         </tr>
+       
         <tr *ngFor="let task of taskData; let i=index" routerLink="/task-detail/{{task.id}}">
             <td>{{task.description}}</td>
             <td>{{task.date| date:'short'}}</td>

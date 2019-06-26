@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import { UpdaterService } from '../../updater.service';
 import { Task } from '../model/Task';
 import { TaskService } from '../task.service';
+import { TaskDetailComponent } from '../task-detail/task-detail.component';
 
 @Component({
   selector: 'app-task-editor',
@@ -12,12 +13,10 @@ import { TaskService } from '../task.service';
   styleUrls: ['./task-editor.component.css']
 })
 export class TaskEditorComponent implements OnInit {
-	id: string;
-	doneBy: string;
-	description: string='';
-	executionDate: string='';
-	expireDate: string ='';
+
+
 	task: Task = new Task();
+	
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
   
@@ -30,18 +29,20 @@ export class TaskEditorComponent implements OnInit {
 	
 	ngOnInit(): void
 	{	
+	
 		this.task.id = this.route.snapshot.paramMap.get("id");
 		this.taskService.getTask(this.task.id, task => {
 			this.task.copy(task);
 		});
+	
+
+
 	}
 
 	onSubmit({value, valid}: { value: Task, valid: boolean }) 
 	{
-		this.task.doneBy = this.doneBy;
-		this.task.executionDate = new Date(this.executionDate);
-		this.task.description = this.description;
-		this.task.expireDate = this.expireDate;
+	alert
+		//this.task.executionDate = new Date(this.executionDate);
 
 		if (valid) {
 			this.taskService.updateTask(this.task, () => this.location.back()); 

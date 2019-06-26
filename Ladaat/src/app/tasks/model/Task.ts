@@ -6,7 +6,7 @@ export class Task
 	expireDate: string;
 	date: Date;
 	doneBy: string;
-	executionDate: Date;
+	executionDate: string;
 	
 	static create(other: Object, id?: string): Task 
 	{
