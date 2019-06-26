@@ -3,10 +3,10 @@ export class Task
 {
     id?: string;
 	description: string;
-	expireDate: string;
+	expireDate: Date;
 	date: Date;
 	doneBy: string;
-	executionDate: string;
+	executionDate: Date;
 	
 	static create(other: Object, id?: string): Task 
 	{

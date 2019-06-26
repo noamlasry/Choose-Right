@@ -38,6 +38,7 @@ export class DonorComponent implements OnInit {
     
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get("id");
+    
     const donorsRef = firebase.database().ref("donors");
     const donationsRef = firebase.database().ref("donations");
     const conversationsRef = firebase.database().ref("donor-conversations");

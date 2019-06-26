@@ -41,7 +41,6 @@ export class TaskEditorComponent implements OnInit {
 
 	onSubmit({value, valid}: { value: Task, valid: boolean }) 
 	{
-	alert
 		//this.task.executionDate = new Date(this.executionDate);
 
 		if (valid) {
