@@ -57,7 +57,7 @@
 
 	<div class="row submit">
 		<button class="button" type="submit" [disabled]="!eventForm.form.valid">שמור</button>
-		<div class="button" routerLink="/event/{{event.id}}">בטל</div>
+		<div class="button" (click)="back()">בטל</div>
 		<div class="button" (click)="delete()" *ngIf="event.id">מחק</div>
 	</div>
 </form>

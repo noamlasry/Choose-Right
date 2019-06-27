@@ -38,7 +38,19 @@ small {
 	width: 100%;
 }
 
+.long {
+    vertical-align: top;
+}
+
 /* Forms */
+
+textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+
+    height: 250px;
+}
 
 input {
 	width: 100%;

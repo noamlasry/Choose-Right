@@ -1,0 +1,72 @@
+<form class="container editor" (ngSubmit)="save()" #memberForm="ngForm">
+    <h1 *ngIf="member.id">עריכת חברת צוות</h1>
+    <h1 *ngIf="!member.id">הוספת חברת צוות</h1>
+    
+    <p *ngIf="hasUpdates()">
+      <a class="button" (click)="update()"><i class="fa fa-refresh" aria-hidden="true"></i> לרענן</a>
+    </p>
+  
+    <p *ngIf="member.modifiedBy"><small>
+        עודכן לאחרונה ע"י {{ member.modifiedByUser.getFullestName() }}
+    </small></p>
+    
+    <div class="row">
+      <div class="col-25">
+        <label for="firstName">שם פרטי</label>
+      </div>
+      <div class="col-75">
+        <input type="text" [(ngModel)]="member.firstName" name="firstName" id="firstName" required/>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-25">
+        <label for="lastName">שם משפחה</label>
+      </div>
+      <div class="col-75">
+        <input type="text" [(ngModel)]="member.lastName" name="lastName" id="lastName" required/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="phone">טלפון</label>
+      </div>
+      <div class="col-75">
+        <input type="text" [(ngModel)]="member.phone" name="phone" id="phone" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="email">אימייל</label>
+      </div>
+      <div class="col-75">
+        <input type="text" [(ngModel)]="member.email" name="email" id="email" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+        <label for="birthdate">תאריך לידה</label>
+      </div>
+      <div class="col-75">
+        <input type="date" [(ngModel)]="member.birthdate" name="birthdate" id="birthdate" />
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-25">
+        <label for="notes">הערות</label>
+      </div>
+      <div class="col-75">
+        <textarea [(ngModel)]="member.notes" name="notes" id="notes"></textarea>
+      </div>
+    </div>
+  
+    <div class="row submit">
+      <button class="button" type="submit" [disabled]="!memberForm.form.valid">שמור</button>
+      <div class="button" (click)="back()">בטל</div>
+      <div class="button" (click)="delete()" *ngIf="member.id">מחק</div>
+    </div>
+  </form>

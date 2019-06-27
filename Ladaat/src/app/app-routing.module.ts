@@ -17,13 +17,14 @@ import { ConversationEditorComponent } from './donors/conversation-editor/conver
 import { ListingEditorComponent } from "./education/listing-editor/listing-editor.component";
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
-import { StaffComponent } from "./staff/staff.component";
-import { StaffEditorComponent } from "./staff/staff-editor/staff-editor.component";
+import { StaffComponent } from "./staff/staff/staff.component";
 import { LectureEditorComponent } from "./education/lecture-editor/lecture-editor.component";
 import { ListingComponent } from "./education/listing/listing.component";
 import { EventsComponent } from './events/events/events.component';
 import { EventComponent } from './events/event/event.component';
 import { EventEditorComponent } from './events/event-editor/event-editor.component';
+import { MemberEditorComponent } from './staff/member-editor/member-editor.component';
+import { MemberComponent } from './staff/member/member.component';
 const routes: Routes = [
 	{ path: '', canActivate: [AuthGuard], component: TasksComponent },
 	{ path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
@@ -61,7 +62,9 @@ const routes: Routes = [
 	{ path: 'lecture-editor/:id', canActivate: [AuthGuard], component: LectureEditorComponent },
 	// Staff:
 	{ path: 'staff', canActivate: [AuthGuard], component: StaffComponent },
-	{ path: 'staff-editor', canActivate: [AuthGuard], component: StaffEditorComponent },
+	{ path: 'member-editor', canActivate: [AuthGuard], component: MemberEditorComponent },
+	{ path: 'member-editor/:id', canActivate: [AuthGuard], component: MemberEditorComponent },
+	{ path: 'member/:id', canActivate: [AuthGuard], component: MemberComponent },
 
 ];
 

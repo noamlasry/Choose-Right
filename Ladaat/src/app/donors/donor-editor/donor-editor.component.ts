@@ -102,6 +102,7 @@ export class DonorEditorComponent implements OnInit {
 			this.router.navigate(['donors']);
 		}
 	}
+	
 	hasUpdates(): boolean {
 		return this.updaterService.hasUpdates();
 	}

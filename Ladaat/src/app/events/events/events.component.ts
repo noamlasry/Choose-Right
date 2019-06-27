@@ -14,13 +14,13 @@ export class EventsComponent implements OnInit {
   events: Event[] = [];
   
   constructor(
-    private updateService: Updater
+    private updater: Updater
   ) { }
 
   ngOnInit() {
-    this.updateService.initializeAndListenAll<Event>(this.eventsRef, this.events, new Event())
+    this.updater.initializeAndListenAll<Event>(this.eventsRef, this.events, new Event())
 		.then(() => {
-			this.updateService.updateAll();
+			this.updater.updateAll();
 			this.events.sort(this.eventSorting.comparator);
 		});
   }
@@ -49,8 +49,7 @@ export class EventsComponent implements OnInit {
     this.sort<Event>(this.eventSorting, Event.compareNames);
     this.eventSorting.current = 'name';
   }
-
-
+  
   sortEventsByDate() {
     this.sort<Event>(this.eventSorting, Event.compareDates);
     this.eventSorting.current = 'date';
@@ -72,10 +71,10 @@ export class EventsComponent implements OnInit {
   }
 
   hasUpdates(): boolean {
-    return this.updateService.hasUpdates();
+    return this.updater.hasUpdates();
   }
 
   update(): void {
-    this.updateService.updateAll();
+    this.updater.updateAll();
   }
 }

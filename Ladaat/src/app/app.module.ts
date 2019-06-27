@@ -27,13 +27,14 @@ import { ConversationEditorComponent } from './donors/conversation-editor/conver
 import { DatePipe } from '@angular/common';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
-import { StaffComponent } from './staff/staff.component';
-import { StaffEditorComponent } from './staff/staff-editor/staff-editor.component';
+import { StaffComponent } from './staff/staff/staff.component';
 import { CommonModule } from '@angular/common';
 import { ListingComponent } from './education/listing/listing.component';
 import { EventsComponent } from './events/events/events.component';
 import { EventEditorComponent } from './events/event-editor/event-editor.component';
-import { EventComponent } from './events/event/event.component'
+import { EventComponent } from './events/event/event.component';
+import { MemberEditorComponent } from './staff/member-editor/member-editor.component';
+import { MemberComponent } from './staff/member/member.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,11 +57,12 @@ import { EventComponent } from './events/event/event.component'
     TaskDetailComponent,
     TaskEditorComponent,
     StaffComponent,
-    StaffEditorComponent,
     ListingComponent,
     EventsComponent,
     EventEditorComponent,
     EventComponent,
+    MemberEditorComponent,
+    MemberComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

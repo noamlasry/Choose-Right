@@ -12,23 +12,22 @@ import { Location } from '@angular/common';
   styleUrls: ['./event-editor.component.css']
 })
 export class EventEditorComponent implements OnInit {
-  private eventsRef: firebase.database.Reference = firebase.database().ref("events");
-  private usersRef: firebase.database.Reference = firebase.database().ref("users");
+	private eventsRef: firebase.database.Reference = firebase.database().ref("events");
+	private usersRef: firebase.database.Reference = firebase.database().ref("users");
 
-  event: Event = new Event();
+	event: Event = new Event();
 
-  constructor(
-    private router: Router,
-		private route: ActivatedRoute,
-		private updaterService: Updater,
-		private userAuth: AngularFireAuth,
-		private location: Location
-  ) { }
+	constructor(
+	private router: Router,
+	private route: ActivatedRoute,
+	private updaterService: Updater,
+	private userAuth: AngularFireAuth
+	) { }
 
-  ngOnInit() {
-    this.event.id = this.route.snapshot.paramMap.get("id");
-    
-    if (this.event.id) {
+	ngOnInit() {
+		this.event.id = this.route.snapshot.paramMap.get("id");
+
+		if (this.event.id) {
 			this.updaterService.initializeAndListenSingle(this.eventsRef, this.event.id, this.event, new Event())
 			.then(() => {
 				if (this.event.modifiedBy) {
@@ -37,9 +36,9 @@ export class EventEditorComponent implements OnInit {
 				}
 			});
 		}
-  }
+	}
 
-  save(): void {		
+	save(): void {		
 		if (!this.event.date || !this.event.name) {
 			return;
 		}
@@ -59,13 +58,22 @@ export class EventEditorComponent implements OnInit {
 				});
 			}
 		}
-  }
+	}
   
-  delete() {
+  	delete() {
 		if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
 			this.eventsRef.child(this.event.id).remove().then(() => {
 				this.router.navigate(['events']);
 			});
+		}
+	}
+
+	back() {
+		if (this.event.id) {
+			this.router.navigate(['/event/' + this.event.id]);
+		}
+		else {
+			this.router.navigate(['events']);
 		}
 	}
 

@@ -64,7 +64,7 @@ export class DocumentEditorComponent implements OnInit {
 				});
 			}
 			else {
-				var ref = this.recordsRef.push(this.record.toJSON());
+				let ref = this.recordsRef.push(this.record.toJSON());
 				ref.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
