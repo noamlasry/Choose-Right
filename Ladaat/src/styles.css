@@ -88,8 +88,8 @@ label {
 }
 
 img.avatar {
-	width: 50%;
-	height: 50%;
+	width: 128px;
+	height: 128px;
 	overflow: hidden;
 	border-radius: 50%;
 	text-align: center;
@@ -253,6 +253,11 @@ h3 {
 		font-size: 100%; 
 	}
 
+	img.avatar {
+		width: 64px;
+		height: 64px;
+	}
+	
 	.container {
 		margin-bottom: 33px;
 		min-width: 100%;

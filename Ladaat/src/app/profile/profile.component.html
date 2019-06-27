@@ -7,8 +7,7 @@
     <div class="col-75">
       <div class="imgcontainer">
         <label for="avatar">
-          <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-          <img [src]="user.avatar" #picture class="avatar" *ngIf="user.avatar || avatar">
+          <img src="{{ user.avatar ? user.avatar : '../../assets/logos/Icon-white-purple.svg' }}" #picture class="avatar" />
         </label>
         <input type="file" [(ngModel)]="avatar" name="avatar" id="avatar" (change)="onAvatarChanged($event)" hidden>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteAvatar()" *ngIf="user.avatar || avatar"></i>
