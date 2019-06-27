@@ -30,7 +30,10 @@ import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
 import { StaffComponent } from './staff/staff.component';
 import { StaffEditorComponent } from './staff/staff-editor/staff-editor.component';
 import { CommonModule } from '@angular/common';
-import { ListingComponent } from './education/listing/listing.component'
+import { ListingComponent } from './education/listing/listing.component';
+import { EventsComponent } from './events/events/events.component';
+import { EventEditorComponent } from './events/event-editor/event-editor.component';
+import { EventComponent } from './events/event/event.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,8 +46,6 @@ import { ListingComponent } from './education/listing/listing.component'
     ProfileComponent,
     TasksComponent,
     TaskComponent,
-    
- 
     DocumentEditorComponent,
     EducationComponent,
     NewLectureComponent,
@@ -57,6 +58,9 @@ import { ListingComponent } from './education/listing/listing.component'
     StaffComponent,
     StaffEditorComponent,
     ListingComponent,
+    EventsComponent,
+    EventEditorComponent,
+    EventComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { Donor } from '../model/donor';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -24,7 +24,7 @@ export class DonorEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private updaterService: UpdaterService,
+		private updaterService: Updater,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
@@ -53,10 +53,16 @@ export class DonorEditorComponent implements OnInit {
 			this.donor.modifiedBy = this.userAuth.auth.currentUser.uid;
 			
 			if (this.donor.id) {
-				this.donorsRef.child(this.donor.id).update(this.donor.toJSON(), () => this.location.back());
+				this.donorsRef.child(this.donor.id).update(this.donor.toJSON())
+				.then(() => {
+					this.router.navigate(['/donor/' + this.donor.id]);
+				});
 			}
 			else {
-				this.donorsRef.push(this.donor.toJSON(), () => this.location.back());
+				let ref = this.donorsRef.push(this.donor.toJSON());
+				ref.then(() => {
+					this.router.navigate(['/donor/' + ref.key]);
+				});
 			}
 		}
 	}
@@ -68,32 +74,34 @@ export class DonorEditorComponent implements OnInit {
 					donations.forEach(donation => {
 						this.donationsRef.child(donation.key).remove();
 					});
-					
-					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?
-					this.router.navigate(['donors'])
 				});
 
 				this.conversationsRef.orderByChild("donor").equalTo(this.donor.id).once("value", conversations => {
 					conversations.forEach(conversation => {
 						this.conversationsRef.child(conversation.key).remove();
 					});
-					
-					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?
-					this.router.navigate(['donors'])
 				});
 
 				this.recordssRef.orderByChild("donor").equalTo(this.donor.id).once("value", records => {
 					records.forEach(record => {
 						this.recordssRef.child(record.key).remove();
 					});
-					
-					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?
-					this.router.navigate(['donors'])
 				});
+			})
+			.then(() => {
+				this.router.navigate(['donors']);
 			});
 		}
 	}
 
+	back() {
+		if (this.donor.id) {
+			this.router.navigate(['/donor/' + this.donor.id]);
+		}
+		else {
+			this.router.navigate(['donors']);
+		}
+	}
 	hasUpdates(): boolean {
 		return this.updaterService.hasUpdates();
 	}

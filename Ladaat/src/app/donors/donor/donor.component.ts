@@ -20,7 +20,7 @@ import { Donation } from '../model/donation';
 import * as firebase from 'firebase';
 import { DonorConversation } from '../model/conversation';
 import { DonorRecord } from '../model/record';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 
 @Component({
   selector: 'app-donor',
@@ -38,7 +38,7 @@ export class DonorComponent implements OnInit {
   currentTab: string = "contact";
 
   constructor(
-    private updaterService: UpdaterService,
+    private updaterService: Updater,
     private route: ActivatedRoute
     ) {}
     

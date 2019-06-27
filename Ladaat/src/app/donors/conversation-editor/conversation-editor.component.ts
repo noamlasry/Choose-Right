@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Donor } from '../model/donor';
 import { DonorConversation } from '../model/conversation';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -23,7 +23,7 @@ export class ConversationEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private updaterService: UpdaterService,
+		private updaterService: Updater,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
@@ -56,12 +56,14 @@ export class ConversationEditorComponent implements OnInit {
 			this.conversation.modifiedBy = this.userAuth.auth.currentUser.uid;
 			
 			if (this.conversation.id) {
-				this.conversationsRef.child(this.conversation.id).update(this.conversation.toJSON(), () => {
+				this.conversationsRef.child(this.conversation.id).update(this.conversation.toJSON())
+				.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}
 			else {
-				var ref = this.conversationsRef.push(this.conversation.toJSON(), () => {
+				let ref = this.conversationsRef.push(this.conversation.toJSON());
+				ref.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 import { Task } from '../model/Task';
 import { TaskService } from '../task.service';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';

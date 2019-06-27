@@ -3,7 +3,7 @@ import { User } from '../login/model/user';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../updater.service';
+import { Updater } from '../updater';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private userAuth: AngularFireAuth,
-    private updaterService: UpdaterService,
+    private updaterService: Updater,
     private location: Location
   ) { }
 

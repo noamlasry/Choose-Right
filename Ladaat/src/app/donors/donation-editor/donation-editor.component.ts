@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Donor } from '../model/donor';
 import { Donation } from '../model/donation';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -23,7 +23,7 @@ export class DonationEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private updaterService: UpdaterService,
+		private updaterService: Updater,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
@@ -31,7 +31,6 @@ export class DonationEditorComponent implements OnInit {
 	ngOnInit(): void {
 		this.donor.id = this.route.snapshot.paramMap.get("donor");
 		this.donation.id = this.route.snapshot.paramMap.get("donation");
-		
 		
 		if (!this.donor.id) {
 			this.location.back(); //temporary fix;
@@ -58,12 +57,14 @@ export class DonationEditorComponent implements OnInit {
 			this.donation.modifiedBy = this.userAuth.auth.currentUser.uid;
 
 			if (this.donation.id) {
-				this.donationsRef.child(this.donation.id).update(this.donation.toJSON(), () => {
+				this.donationsRef.child(this.donation.id).update(this.donation.toJSON())
+				.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}
 			else {
-				var ref = this.donationsRef.push(this.donation.toJSON(), () => {
+				let ref = this.donationsRef.push(this.donation.toJSON());
+				ref.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}

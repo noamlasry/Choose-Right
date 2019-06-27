@@ -1,0 +1,36 @@
+<div class="container viewer" *ngIf="!event.id">
+	<h1>האירוע המבוקש לא קיים</h1>
+</div>
+
+<div class="container viewer" *ngIf="event.id">
+<h1>הפרטים של {{event.name}}</h1>
+
+<p *ngIf="hasUpdates()">
+	<a class="button" (click)="update()"><i class="fa fa-refresh" aria-hidden="true"></i> לרענן</a>
+</p>
+
+<p>
+  <button class="button" routerLink="/event-editor/{{ event.id }}">עריכה</button>
+</p>
+<p *ngIf="event.modifiedBy"><small>
+  עודכן לאחרונה ע"י {{ event.modifiedByUser.getFullestName() }}
+</small></p>
+<table>
+  <tr>
+    <td>תאריך</td>
+    <td>{{ event.date }}</td>
+  </tr>
+  <tr>
+    <td>תיאור</td>
+    <td>{{ event.description }}</td>
+  </tr>
+  <tr>
+    <td>מיקום</td>
+    <td>{{ event.location }}</td>
+  </tr>
+  <tr>
+    <td class="long">הערות</td>
+    <td>{{ event.notes }}</td>
+  </tr>
+</table>
+</div>

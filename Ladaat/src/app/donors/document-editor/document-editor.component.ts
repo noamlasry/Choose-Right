@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Donor } from '../model/donor';
 import { DonorRecord } from '../model/record';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -23,7 +23,7 @@ export class DocumentEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private updaterService: UpdaterService,
+		private updaterService: Updater,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
@@ -58,12 +58,14 @@ export class DocumentEditorComponent implements OnInit {
 			this.record.modifiedBy = this.userAuth.auth.currentUser.uid;
 
 			if (this.record.id) {
-				this.recordsRef.child(this.record.id).update(this.record.toJSON(), () => {
+				this.recordsRef.child(this.record.id).update(this.record.toJSON())
+				.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}
 			else {
-				var ref = this.recordsRef.push(this.record.toJSON(), () => {
+				var ref = this.recordsRef.push(this.record.toJSON());
+				ref.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}

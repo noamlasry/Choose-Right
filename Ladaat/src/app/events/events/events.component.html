@@ -1,0 +1,44 @@
+<div class="container viewer">
+	<h1>אירועים</h1>
+	
+	<p *ngIf="hasUpdates()">
+		<a class="button" (click)="update()"><i class="fa fa-refresh" aria-hidden="true"></i> לרענן</a>
+	</p>
+
+	<div class="toolbar">
+		<button class="button" routerLink="/event-editor">הוסף אירוע</button>
+	</div>
+	
+	<table>
+	<tr>
+    <th></th>
+    <th (click)="sortEventsByDate()">
+			תאריך 
+			<i *ngIf="eventSorting.current == 'date' && eventSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
+			<i *ngIf="eventSorting.current == 'date' && !eventSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
+		</th>
+		<th (click)="sortEventsByName()">
+			שם 
+			<i *ngIf="eventSorting.current == 'name' && eventSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
+			<i *ngIf="eventSorting.current == 'name' && !eventSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
+		</th>
+		<th (click)="sortEventsByDescription()">
+			תיאור 
+			<i *ngIf="eventSorting.current == 'description' && eventSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
+			<i *ngIf="eventSorting.current == 'description' && !eventSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
+		</th> 
+		<th (click)="sortEventsByLocation()">
+			מיקום 
+			<i *ngIf="eventSorting.current == 'location' && eventSorting.ascending" class="fa fa-caret-up" aria-hidden="true"></i>
+			<i *ngIf="eventSorting.current == 'location' && !eventSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
+		</th>
+	</tr>
+	<tr *ngFor="let e of events">
+    <td><i routerLink="/event/{{e.id}}" class="fa fa-eye" aria-hidden="true"></i></td>
+    <td>{{ e.date }}</td>
+	<td>{{ e.name }}</td>
+    <td>{{ e.description }}</td>
+    <td>{{ e.location }}</td>
+	</tr>
+	</table>
+</div>

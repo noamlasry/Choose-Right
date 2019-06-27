@@ -7,6 +7,7 @@ export class User implements Identifiable<User>{
     avatar: string = "";
     firstName: string = "";
     lastName: string = "";
+    modifiedBy: string;
 
     toJSON() {
         return {

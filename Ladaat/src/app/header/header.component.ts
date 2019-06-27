@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { User } from '../login/model/user';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../updater.service';
+import { Updater } from '../updater';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private userAuth: AngularFireAuth,
-    private updaterService: UpdaterService,
+    private updaterService: Updater,
     private router: Router
   ) {}
 

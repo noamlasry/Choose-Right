@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Donor } from '../model/donor';
 import * as firebase from 'firebase';
 import { Donation } from '../model/donation';
-import { UpdaterService } from 'src/app/updater.service';
+import { Updater } from 'src/app/updater';
 
 @Component({
 	selector: 'app-donors',
@@ -17,16 +17,16 @@ export class DonorsComponent implements OnInit {
 	donors: Donor[] = [];
 	
 	constructor(
-		private updateService: UpdaterService
+		private updateService: Updater
 	) {}
 	
 	ngOnInit() {
 		this.updateService.initializeAndListenAll<Donor>(this.donorRef, this.donors, new Donor())
-		.then(snapshot => {
+		.then(() => {
 			this.donors.forEach(donor => {
 				this.updateService.initializeAndListenList<Donation>(this.donationsRef, "donor", donor.id, donor.donations, new Donation());
 			});
-		}).then(snapshot => {
+		}).then(() => {
 			this.updateService.updateAll();
 			this.donors.sort(this.donorSorting.comparator);
 		});
