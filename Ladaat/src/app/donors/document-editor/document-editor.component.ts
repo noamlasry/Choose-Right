@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -20,6 +20,8 @@ export class DocumentEditorComponent implements OnInit {
 	donor: Donor = new Donor();
 	record: DonorRecord = new DonorRecord();
 	
+	@ViewChild('url') url;
+
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -31,7 +33,6 @@ export class DocumentEditorComponent implements OnInit {
 	ngOnInit(): void {
 		this.donor.id = this.route.snapshot.paramMap.get("donor");
 		this.record.id = this.route.snapshot.paramMap.get("record");
-		
 		
 		if (!this.donor.id) {
 			this.location.back(); //temporary fix;
@@ -48,7 +49,9 @@ export class DocumentEditorComponent implements OnInit {
 		}
 	}
 
-	save(): void {		
+	save(): void {
+		this.record.url = (document.getElementById('url') as HTMLInputElement).value;
+		
 		if (!this.record.date || !this.record.url) {
 			return;
 		}

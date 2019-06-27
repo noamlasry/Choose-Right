@@ -31,14 +31,19 @@
       <label for="url">כתובת המסמך</label>
     </div>
     <div class="col-75">
-      <input type="url" [(ngModel)]="record.url" name="url" id="url" required/>
+      <input type="url" [(ngModel)]="record.url" name="url" id="url" hidden />
       
       <button type="button" class="button" id="auth" onclick="
-        gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
-          googleAuth.signIn({ scope: scope }).then(function(result) {
-            handleAuthResult(result.getAuthResponse());
+        if(!picker) {
+          gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
+            googleAuth.signIn({ scope: scope }).then(function(result) {
+              handleAuthResult(result.getAuthResponse());
+            })
           })
-        })
+        }
+        else {
+          picker.setVisible(true);
+        }
       ">בחרי</button>
     </div>
   </div>

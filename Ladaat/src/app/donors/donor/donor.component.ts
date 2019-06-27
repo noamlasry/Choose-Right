@@ -71,6 +71,10 @@ export class DonorComponent implements OnInit {
 
   }
 
+  openLink(url: string) {
+    window.open(url, '_blank');
+  }
+
   hasUpdates(): boolean {
     return this.updaterService.hasUpdates();
   }

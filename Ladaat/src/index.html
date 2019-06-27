@@ -42,17 +42,12 @@
 
 	var pickerApiLoaded = false;
 	var oauthToken;
+	var picker;
 
 	// Use the API Loader script to load google.picker and gapi.auth.
 	function onApiLoad() {
-		gapi.load('auth2', onAuthApiLoad);
+		gapi.load('auth2');
 		gapi.load('picker', onPickerApiLoad);
-	}
-	
-	function onAuthApiLoad() {
-		// var authBtn = document.getElementById('auth');
-		// authBtn.disabled = false;
-		// authBtn.addEventListener('click', );
 	}
 		
 	function onPickerApiLoad() {
@@ -70,12 +65,14 @@
 	// Create and render a Picker object for picking user Photos.
 	function createPicker() {
 		if (pickerApiLoaded && oauthToken) {
-			var picker = new google.picker.PickerBuilder().
-			addView(google.picker.ViewId.DOCS).
-			setOAuthToken(oauthToken).
-			setDeveloperKey(developerKey).
-			setCallback(pickerCallback).
-			build();
+			if (!picker) {
+				picker = new google.picker.PickerBuilder().
+				addView(google.picker.ViewId.DOCS).
+				setOAuthToken(oauthToken).
+				setDeveloperKey(developerKey).
+				setCallback(pickerCallback).
+				build();
+			}
 			picker.setVisible(true);
 		}
 	}
