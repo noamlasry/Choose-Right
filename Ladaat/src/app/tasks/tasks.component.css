@@ -3,9 +3,12 @@ table tr.highlight {
     color: #ffffff;
 }
 
-.overdue {
-    color: red;
+.overdue td {
+    background-color: red;
+    border-radius: unset;
 }
-.completed {
-    color: green;
+
+.completed td {
+    background-color: green;
+    border-radius: unset;
 }
