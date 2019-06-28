@@ -50,6 +50,9 @@ export class LectureComponent implements OnInit {
 		  });
 	  }
   }
+  openLink(url: string) {
+    window.open(url, '_blank');
+  }
   sortListings(compareFunction: (a: Listing, b: Listing) => number): void {
 		if (!this.currentSort || compareFunction != this.currentSort) {
 			this.listingsArr.sort(compareFunction);
