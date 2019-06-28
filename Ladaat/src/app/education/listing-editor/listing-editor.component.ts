@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListingEditorComponent implements OnInit {
     
-  listing: Listing;
+  listing: Listing = new Listing();
 
   constructor(
     private educationService: EducationService,
