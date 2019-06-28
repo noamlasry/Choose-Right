@@ -65,7 +65,10 @@
 	<td *ngIf="lecture.id == listing.lectureId">{{ listing.date }}</td>
   <td *ngIf="lecture.id == listing.lectureId">{{ listing.subject }}</td>
   <td *ngIf="lecture.id == listing.lectureId">{{ listing.status }}</td>
-  <td *ngIf="lecture.id == listing.lectureId">{{ listing.link }}</td> 
+  <td *ngIf="lecture.id == listing.lectureId">
+    <i (click)="openLink(listing.link)"
+      class="fa fa-external-link" aria-hidden="true"></i>
+    </td> 
 </tr>
 
 </table>

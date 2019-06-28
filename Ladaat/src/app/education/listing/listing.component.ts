@@ -21,21 +21,25 @@ export class ListingComponent implements OnInit {
   
   lecture: Lecture = new Lecture();
 
-constructor(
-  private educationService: EducationService,
-   private location: Location,
-   private route: ActivatedRoute,
-   ) { }
+  constructor(
+    private educationService: EducationService,
+    private location: Location,
+    private route: ActivatedRoute,
+    ) { }
 
-ngOnInit() {
-  this.educationService.getLecture(this.route.snapshot.paramMap.get('id'), 
-      lecture => { this.lecture = lecture;});
-}
-onSubmit({value, valid}: { value: Listing, valid: boolean }) {
-  value.lectureId = this.lecture.id;
-  if (valid) {
-    this.educationService.addListing(value, () => this.location.back());
-    }
-   
-}
+  ngOnInit() {
+    this.educationService.getLecture(this.route.snapshot.paramMap.get('id'), 
+        lecture => { this.lecture = lecture;});
+  }
+  onSubmit({value, valid}: { value: Listing, valid: boolean }) {
+    this.link = (document.getElementById('url') as HTMLInputElement).value;
+    
+    value.lectureId = this.lecture.id;
+    value.link = this.link;
+    
+    if (valid) {
+      this.educationService.addListing(value, () => this.location.back());
+      }
+    
+  }
 }

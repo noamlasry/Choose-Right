@@ -33,11 +33,24 @@
 
 	<div class="row">
 		<div class="col-25">
-			<label for="link">קישור</label>
+			<label for="url">קישור</label>
 		</div>
 		<div class="col-75">
-			<input [(ngModel)]="listing.link" type="text" name="link" id="link"
-			class="form-control" required/>
+			<input [(ngModel)]="listing.link" type="url" name="url" id="url"
+			class="form-control" hidden/>
+      
+			<button type="button" class="button" id="auth" onclick="
+			if(!picker) {
+				gapi.auth2.init({ client_id: clientId }).then(function(googleAuth) {
+				googleAuth.signIn({ scope: scope }).then(function(result) {
+					handleAuthResult(result.getAuthResponse());
+				})
+				})
+			}
+			else {
+				picker.setVisible(true);
+			}
+			">בחרי</button>
     </div>
 	</div>
   

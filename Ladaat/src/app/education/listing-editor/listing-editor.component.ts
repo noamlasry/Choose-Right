@@ -28,9 +28,10 @@ export class ListingEditorComponent implements OnInit {
 
 
   onSubmit({value, valid}: { value: Listing, valid: boolean }) {
-    alert
+    this.listing.link = (document.getElementById('url') as HTMLInputElement).value;
+    
     if (valid) {
-      this.educationService.updateListing(value, () => this.location.back());
+      this.educationService.updateListing(this.listing, () => this.location.back());
       }
      
   }
