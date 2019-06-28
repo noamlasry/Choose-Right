@@ -19,6 +19,8 @@ import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 import { TaskEditorComponent } from './tasks/task-editor/task-editor.component';
 import { StaffComponent } from "./staff/staff.component";
 import { StaffEditorComponent } from "./staff/staff-editor/staff-editor.component";
+import { StaffBarComponent } from "./staff/staff-bar/staff-bar.component";
+
 import { LectureEditorComponent } from "./education/lecture-editor/lecture-editor.component";
 import { ListingComponent } from "./education/listing/listing.component";
 const routes: Routes = [
@@ -50,6 +52,7 @@ const routes: Routes = [
 
 	{ path: 'staff', canActivate: [AuthGuard], component: StaffComponent },
 	{ path: 'staff-editor', canActivate: [AuthGuard], component: StaffEditorComponent },
+	{ path: 'staffBar', canActivate: [AuthGuard], component: StaffBarComponent },
 
 	{ path: 'login', canActivate: [AuthGuard], component: LoginComponent },
 ];

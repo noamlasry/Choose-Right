@@ -1,0 +1,86 @@
+<form class="container editor" (ngSubmit)="onSubmit(staffForm)" #staffForm="ngForm">
+  <h4>שדות אדומים עם * הם חובה</h4>  
+  <div class="row">
+      <div class="col-25">
+        <label for="firstName" style="color: darkred">* שם פרטי</label>
+      </div>
+      <div class="col-75">
+        <input [(ngModel)]="firstName" type="text" name="firstName" 
+        id="firstName" 
+        class="form-control" required>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-25">
+        <label for="lastName" style="color: darkred">* שם משפחה</label>
+      </div>
+      <div class="col-75">
+        <input [(ngModel)]="lastName" type="text" name="lastName" id="lastName" 
+        class="form-control" required/>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-25">
+        <label for="phone">טלפון</label>
+      </div>
+      <div class="col-75">
+        <input [(ngModel)]="phone" type="text" name="phone" id="phone" 
+        class="form-control"/>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-25">
+        <label for="email"> מייל</label>
+      </div>
+      <div class="col-75">
+        <input [(ngModel)]="email" type="text" name="email" id="email"
+        class="form-control"/>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-25">
+        <label for="dob">תאריך לידה</label>
+      </div>
+      <div class="col-75">
+        <input [(ngModel)]="dob" type="text" name="dob" id="dob"
+        class="form-control" />
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-25">
+        <label for="notes">הערות</label>
+      </div>
+      <div class="col-75">
+        <input [(ngModel)]="notes" type="text" name="notes" 
+        id="notes" 
+        class="form-control" />
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-25">
+        <label for="belonging" style="color: darkred">* שייכות</label>
+      </div>
+      <div class="col-75">
+        <select matNativeControl required 
+          [(ngModel)]="belonging" type="text" name="belonging" id="belonging" 
+          class="form-control" placeholder="pppp">
+          <option value="orgstaff">צוות העמותה</option>
+          <option value="lecturer">מרצה</option>
+          <option value="volunteer">מתנדב/ת</option>
+        </select>  
+      </div>   
+    </div>
+
+    <div class="row submit">
+      <button class="button" name="submit" type="submit" [disabled]="!lectureForm.form.valid">שמור</button>
+      <div class="button" routerLink="/education">בטל</div>
+      <div class="button" (click)="delete()" *ngIf="update">מחק</div>
+    </div>
+  </form>
+  
