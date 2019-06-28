@@ -33,7 +33,7 @@
 			<i *ngIf="donorSorting.current == 'amount' && !donorSorting.ascending" class="fa fa-caret-down" aria-hidden="true"></i>
 		</th>
 	</tr>
-	<tr *ngFor="let d of donorData">
+	<tr *ngFor="let d of donors">
 		<td><i routerLink="/donor/{{d.id}}" class="fa fa-eye" aria-hidden="true"></i></td>
 		<td>{{ d.orgName ? d.orgName : "תורם פרטי" }}</td> 
 		<td>{{ d.lastName }}</td> 

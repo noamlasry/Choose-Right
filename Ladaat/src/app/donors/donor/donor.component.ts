@@ -20,7 +20,7 @@ import { Donation } from '../model/donation';
 import * as firebase from 'firebase';
 import { DonorConversation } from '../model/conversation';
 import { DonorRecord } from '../model/record';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 
 @Component({
   selector: 'app-donor',
@@ -28,45 +28,63 @@ import { UpdaterService } from '../../updater.service';
   styleUrls: ['./donor.component.css']
 })
 export class DonorComponent implements OnInit {
+  private donorsRef: firebase.database.Reference = firebase.database().ref("donors");
+  private donationsRef: firebase.database.Reference = firebase.database().ref("donations");
+  private conversationsRef: firebase.database.Reference = firebase.database().ref("donor-conversations");
+  private recordsRef: firebase.database.Reference = firebase.database().ref("donor-records");
+  private usersRef: firebase.database.Reference = firebase.database().ref("users");
+
   donor: Donor = new Donor();
   currentTab: string = "contact";
 
   constructor(
-    private donorService: UpdaterService,
+    private updaterService: Updater,
     private route: ActivatedRoute
     ) {}
     
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get("id");
-    const donorsRef = firebase.database().ref("donors");
-    const donationsRef = firebase.database().ref("donations");
-    const conversationsRef = firebase.database().ref("donor-conversations");
-    const recordsRef = firebase.database().ref("donor-records");
     
-    this.donorService.initializeAndListenSingle(donorsRef, id, this.donor, new Donor()).then(snapshot => this.donorService.updateAll());
     
-    this.donorService.initializeAndListenList(donationsRef, "donor", id, this.donor.donations, new Donation()).then(snapshot => {
-      this.donorService.updateAll();
+    this.updaterService.initializeAndListenSingle(this.donorsRef, id, this.donor, new Donor()).then(snapshot => this.updaterService.updateAll())
+    .then(snapshot => {
+      if (this.donor.modifiedBy) {
+        this.donor.modifiedByUser.id = this.donor.modifiedBy;
+        this.updaterService.initializeSingle(this.usersRef, this.donor.modifiedBy, this.donor.modifiedByUser, this.donor.modifiedByUser);
+      }
+    });
+    
+    this.updaterService.initializeAndListenList(this.donationsRef, "donor", id, this.donor.donations, new Donation()).then(snapshot => {
+      this.updaterService.updateAll();
       this.donor.donations.sort(this.donor.donationSorting.comparator);
     });
 
-    this.donorService.initializeAndListenList(conversationsRef, "donor", id, this.donor.conversations, new DonorConversation()).then(snapshot => {
-      this.donorService.updateAll();
+    this.updaterService.initializeAndListenList(this.conversationsRef, "donor", id, this.donor.conversations, new DonorConversation()).then(snapshot => {
+      this.updaterService.updateAll();
       this.donor.conversations.sort(this.donor.conversationSorting.comparator);
     });
 
-    this.donorService.initializeAndListenList(recordsRef, "donor", id, this.donor.records, new DonorRecord()).then(snapshot => {
-      this.donorService.updateAll();
+    this.updaterService.initializeAndListenList(this.recordsRef, "donor", id, this.donor.records, new DonorRecord()).then(snapshot => {
+      this.updaterService.updateAll();
       this.donor.records.sort(this.donor.recordSorting.comparator);
     });
 
   }
 
+  openLink(url: string) {
+    window.open(url, '_blank');
+  }
+
   hasUpdates(): boolean {
-    return this.donorService.hasUpdates();
+    return this.updaterService.hasUpdates();
   }
 
   update(): void {
-    this.donorService.updateAll();
+    this.updaterService.updateAll();
+
+    if (this.donor.modifiedBy) {
+      this.donor.modifiedByUser.id = this.donor.modifiedBy;
+      this.updaterService.initializeSingle(this.usersRef, this.donor.modifiedBy, this.donor.modifiedByUser, this.donor.modifiedByUser);
+    }
   }
 }

@@ -8,7 +8,7 @@
 	</small></p>
 	
 	<p *ngIf="donor.modifiedBy"><small>
-		עודכן לאחרונה ע"י {{ donor.modifiedBy }}
+		עודכן לאחרונה ע"י {{ donor.modifiedByUser.getFullestName() }}
 	</small></p>
 
 	<div class="row">
@@ -61,7 +61,7 @@
 	</div>
 	<div class="row submit">
 		<button class="button" type="submit" [disabled]="!donorForm.form.valid">שמור</button>
-		<div class="button" (click)="this.location.back()">בטל</div>
+		<div class="button" (click)="back()">בטל</div>
 		<div class="button" (click)="delete()" *ngIf="donor.id">מחק</div>
 	</div>
 </form>

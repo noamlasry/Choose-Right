@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { Donor } from '../model/donor';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -16,29 +16,30 @@ export class DonorEditorComponent implements OnInit {
 	private donorsRef: firebase.database.Reference = firebase.database().ref("donors");
 	private donationsRef: firebase.database.Reference = firebase.database().ref("donations");
 	private conversationsRef = firebase.database().ref("donor-conversations");
-    private recordssRef = firebase.database().ref("donor-records");
+	private recordssRef = firebase.database().ref("donor-records");
+	private usersRef: firebase.database.Reference = firebase.database().ref("users");
 
 	donor: Donor = new Donor();
 
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private donorService: UpdaterService,
+		private updaterService: Updater,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
 
 	ngOnInit(): void {
-		
 		this.donor.id = this.route.snapshot.paramMap.get("id");
 		
 		if (this.donor.id) {
-			this.donorService.initializeSingle(this.donorsRef, this.donor.id, this.donor, new Donor())
-			.then(snapshot => this.donorService.addSingleListener(this.donorsRef, this.donor.id, this.donor, new Donor()));
-
-			// this.donorsRef.child(this.donor.id).once("value", donor => {
-			// 	this.donor.copy(donor.toJSON() as Donor);
-			// });
+			this.updaterService.initializeAndListenSingle(this.donorsRef, this.donor.id, this.donor, new Donor())
+			.then(snapshot => {
+				if (this.donor.modifiedBy) {
+					this.donor.modifiedByUser.id = this.donor.modifiedBy;
+					this.updaterService.initializeSingle(this.usersRef, this.donor.modifiedBy, this.donor.modifiedByUser, this.donor.modifiedByUser);
+				}
+			});
 		}
 	}
 	
@@ -52,10 +53,16 @@ export class DonorEditorComponent implements OnInit {
 			this.donor.modifiedBy = this.userAuth.auth.currentUser.uid;
 			
 			if (this.donor.id) {
-				this.donorsRef.child(this.donor.id).update(this.donor.toJSON(), () => this.location.back());
+				this.donorsRef.child(this.donor.id).update(this.donor.toJSON())
+				.then(() => {
+					this.router.navigate(['/donor/' + this.donor.id]);
+				});
 			}
 			else {
-				this.donorsRef.push(this.donor.toJSON(), () => this.location.back());
+				let ref = this.donorsRef.push(this.donor.toJSON());
+				ref.then(() => {
+					this.router.navigate(['/donor/' + ref.key]);
+				});
 			}
 		}
 	}
@@ -67,37 +74,45 @@ export class DonorEditorComponent implements OnInit {
 					donations.forEach(donation => {
 						this.donationsRef.child(donation.key).remove();
 					});
-					
-					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?
-					this.router.navigate(['donors'])
 				});
 
 				this.conversationsRef.orderByChild("donor").equalTo(this.donor.id).once("value", conversations => {
 					conversations.forEach(conversation => {
 						this.conversationsRef.child(conversation.key).remove();
 					});
-					
-					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?
-					this.router.navigate(['donors'])
 				});
 
 				this.recordssRef.orderByChild("donor").equalTo(this.donor.id).once("value", records => {
 					records.forEach(record => {
 						this.recordssRef.child(record.key).remove();
 					});
-					
-					// this.donationsRef.orderByChild("donor").equalTo(this.donor.id).off(); //Is this needed?
-					this.router.navigate(['donors'])
 				});
+			})
+			.then(() => {
+				this.router.navigate(['donors']);
 			});
 		}
 	}
 
-	hasUpdates(): boolean {
-		return this.donorService.hasUpdates();
+	back() {
+		if (this.donor.id) {
+			this.router.navigate(['/donor/' + this.donor.id]);
 		}
+		else {
+			this.router.navigate(['donors']);
+		}
+	}
 	
-		update(): void {
-		this.donorService.updateAll();
+	hasUpdates(): boolean {
+		return this.updaterService.hasUpdates();
+	}
+
+	update(): void {
+		this.updaterService.updateAll();
+
+		if (this.donor.modifiedBy) {
+			this.donor.modifiedByUser.id = this.donor.modifiedBy;
+			this.updaterService.initializeSingle(this.usersRef, this.donor.modifiedBy, this.donor.modifiedByUser, this.donor.modifiedByUser);
 		}
+	}
 }

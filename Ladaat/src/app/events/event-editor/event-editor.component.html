@@ -1,0 +1,63 @@
+<form class="container editor" (ngSubmit)="save()" #eventForm="ngForm">
+	<h1 *ngIf="event.id">עריכת אירוע</h1>
+	<h1 *ngIf="!event.id">הוספת אירוע</h1>
+	
+	<p *ngIf="hasUpdates()">
+		<a class="button" (click)="update()"><i class="fa fa-refresh" aria-hidden="true"></i> לרענן</a>
+	</p>
+
+	<p *ngIf="event.modifiedBy"><small>
+			עודכן לאחרונה ע"י {{ event.modifiedByUser.getFullestName() }}
+	</small></p>
+
+	<div class="row">
+		<div class="col-25">
+			<label for="date">תאריך</label>
+		</div>
+		<div class="col-75">
+			<input type="date" [(ngModel)]="event.date" name="date" id="date" required/>
+		</div>
+  </div>
+  
+  <div class="row">
+		<div class="col-25">
+			<label for="name">שם</label>
+		</div>
+		<div class="col-75">
+			<input type="text" [(ngModel)]="event.name" name="name" id="name" required/>
+		</div>
+  </div>
+  
+  <div class="row">
+		<div class="col-25">
+			<label for="description">תיאור</label>
+		</div>
+		<div class="col-75">
+			<input type="text" [(ngModel)]="event.description" name="description" id="description"/>
+		</div>
+  </div>
+
+  <div class="row">
+		<div class="col-25">
+			<label for="location">מיקום</label>
+		</div>
+		<div class="col-75">
+			<input type="text" [(ngModel)]="event.location" name="location" id="location"/>
+		</div>
+  </div>
+  
+  <div class="row">
+		<div class="col-25">
+			<label for="notes">הערות</label>
+		</div>
+		<div class="col-75">
+			<textarea [(ngModel)]="event.notes" name="notes" id="notes"></textarea>
+		</div>
+  </div>
+
+	<div class="row submit">
+		<button class="button" type="submit" [disabled]="!eventForm.form.valid">שמור</button>
+		<div class="button" (click)="back()">בטל</div>
+		<div class="button" (click)="delete()" *ngIf="event.id">מחק</div>
+	</div>
+</form>

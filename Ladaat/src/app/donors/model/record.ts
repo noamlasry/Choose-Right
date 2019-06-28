@@ -1,7 +1,18 @@
 import { Identifiable } from 'src/app/identifiable';
+import { User } from 'src/app/login/model/user';
 
 
 export class DonorRecord implements Identifiable<DonorRecord> {
+	id: string;
+	donor: string;
+	date: string;
+	name: string;
+	url: string;
+	incoming: boolean = false;
+	modifiedBy: string;
+
+	modifiedByUser: User = new User();
+	
 	static create(other: DonorRecord, id?: string): DonorRecord {
 		var record: DonorRecord = new DonorRecord();
 		record.copy(other);
@@ -64,12 +75,4 @@ export class DonorRecord implements Identifiable<DonorRecord> {
 	static compareIncoming(a: DonorRecord, b: DonorRecord): number {
 		return a.incoming > b.incoming ? 1 : -1;
 	}
-
-	id: string;
-	donor: string;
-	date: string;
-	name: string;
-	url: string;
-	incoming: boolean = false;
-	modifiedBy: string;
 }

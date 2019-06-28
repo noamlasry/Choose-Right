@@ -3,6 +3,7 @@ import { User } from '../login/model/user';
 import { Location } from '@angular/common';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase';
+import { Updater } from '../updater';
 
 @Component({
   selector: 'app-profile',
@@ -14,21 +15,22 @@ export class ProfileComponent implements OnInit {
   file: File;
   avatar: String;
 
+  private usersRef: firebase.database.Reference = firebase.database().ref("users");
+
   @ViewChild('picture') img;
   @ViewChild('avatar') input;
 
   constructor(
     private userAuth: AngularFireAuth,
+    private updaterService: Updater,
     private location: Location
   ) { }
 
   ngOnInit() {
-    this.userAuth.auth.onAuthStateChanged(user => {
-      this.user = new User();
-      this.user.avatar = user.photoURL;
-      this.user.email = user.email;
-      this.user.name = user.displayName;
-    });
+      this.user.id = this.userAuth.auth.currentUser.uid;
+  
+      //We don't need to make this live since only the current user will update her own profile and no one else:
+      this.updaterService.initializeSingle(this.usersRef,this.user.id, this.user, this.user);
   }
 
 	onAvatarChanged(event) {
@@ -39,21 +41,24 @@ export class ProfileComponent implements OnInit {
   }
   
   onSave() {
-    if (this.file) {
-      var storageRef = firebase.storage().ref("users/" + this.userAuth.auth.currentUser.uid + "/avatar");
+    const storageRef = firebase.storage().ref("users/" + this.user.id + "/avatar");
 
+    if (this.file) {
       storageRef.put(this.file).then(() => {
         storageRef.getDownloadURL().then(url => {
-          this.userAuth.auth.currentUser.updateProfile({photoURL: url, displayName: this.user.name}).then(() => {
-            this.location.back();
-          });
+          this.user.avatar = url;
+          this.usersRef.child(this.user.id).set(this.user.toJSON()).then(() => this.location.back());
         });
       });
     }
-    else {
-        this.userAuth.auth.currentUser.updateProfile({photoURL: null, displayName: this.user.name}).then(() => {
-        this.location.back();
+    else if (!this.user.avatar || this.user.avatar == "") {
+      storageRef.delete().then(() => {
+        this.user.avatar = null;
+        this.usersRef.child(this.user.id).set(this.user.toJSON()).then(() => this.location.back());
       });
+    }
+    else {
+      this.usersRef.child(this.user.id).set(this.user.toJSON()).then(() => this.location.back());
     }
   }
 

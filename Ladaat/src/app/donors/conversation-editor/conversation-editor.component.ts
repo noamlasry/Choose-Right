@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Donor } from '../model/donor';
 import { DonorConversation } from '../model/conversation';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -14,7 +14,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./conversation-editor.component.css']
 })
 export class ConversationEditorComponent implements OnInit {
-  private conversationsRef: firebase.database.Reference = firebase.database().ref("donor-conversations");
+	private conversationsRef: firebase.database.Reference = firebase.database().ref("donor-conversations");
+	private usersRef: firebase.database.Reference = firebase.database().ref("users");
 
 	donor: Donor = new Donor();
 	conversation: DonorConversation = new DonorConversation();
@@ -22,7 +23,7 @@ export class ConversationEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private donorService: UpdaterService,
+		private updaterService: Updater,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
@@ -31,14 +32,18 @@ export class ConversationEditorComponent implements OnInit {
 		this.donor.id = this.route.snapshot.paramMap.get("donor");
 		this.conversation.id = this.route.snapshot.paramMap.get("conversation");
 		
-		
 		if (!this.donor.id) {
 			this.location.back(); //temporary fix;
 		}
 		
 		if (this.conversation.id) {
-			this.donorService.initializeSingle(this.conversationsRef, this.conversation.id, this.conversation, new DonorConversation())
-			.then(snapshot => this.donorService.addSingleListener(this.conversationsRef, this.conversation.id, this.conversation, new DonorConversation()));
+			this.updaterService.initializeAndListenSingle(this.conversationsRef, this.conversation.id, this.conversation, new DonorConversation())
+			.then(snapshot => {
+				if (this.conversation.modifiedBy) {
+					this.conversation.modifiedByUser.id = this.conversation.modifiedBy;
+					this.updaterService.initializeSingle(this.usersRef, this.conversation.modifiedBy, this.conversation.modifiedByUser, this.conversation.modifiedByUser);
+				}
+			});
 		}
 	}
 
@@ -51,12 +56,14 @@ export class ConversationEditorComponent implements OnInit {
 			this.conversation.modifiedBy = this.userAuth.auth.currentUser.uid;
 			
 			if (this.conversation.id) {
-				this.conversationsRef.child(this.conversation.id).update(this.conversation.toJSON(), () => {
+				this.conversationsRef.child(this.conversation.id).update(this.conversation.toJSON())
+				.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}
 			else {
-				var ref = this.conversationsRef.push(this.conversation.toJSON(), () => {
+				let ref = this.conversationsRef.push(this.conversation.toJSON());
+				ref.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}
@@ -72,10 +79,15 @@ export class ConversationEditorComponent implements OnInit {
 	}
 
 	hasUpdates(): boolean {
-	return this.donorService.hasUpdates();
+		return this.updaterService.hasUpdates();
 	}
 
 	update(): void {
-	this.donorService.updateAll();
+		this.updaterService.updateAll();
+		
+		if (this.conversation.modifiedBy) {
+			this.conversation.modifiedByUser.id = this.conversation.modifiedBy;
+			this.updaterService.initializeSingle(this.usersRef, this.conversation.modifiedBy, this.conversation.modifiedByUser, this.conversation.modifiedByUser);
+		}
 	}
 }

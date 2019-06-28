@@ -5,7 +5,7 @@ import { Identifiable } from './identifiable';
 @Injectable({
   providedIn: 'root'
 })
-export class UpdaterService {
+export class Updater {
   donorsRef = firebase.database().ref("donors");
   donationsRef = firebase.database().ref("donations");
   conversationsRef = firebase.database().ref("donor-conversations");
@@ -54,16 +54,24 @@ export class UpdaterService {
       .then(snap => this.addAllListeners<T>(ref, list, maker));
   }
 
+  /* 
+    ref: a reference to the root of where all objects of this type are stored. For example: /users
+    key: the identifier of a specific child of the ref
+    previous: the object that we want to update with the fetched data
+    maker: the object to use for creating client-side objects of this type
+  */
   initializeSingle<T extends Identifiable<T>> (
     ref: firebase.database.Reference,
     key: string,
     previous: Identifiable<T>,
     maker: T): Promise<firebase.database.DataSnapshot> {
       return ref.child(key).once("value", snapshot => {
-        let blank: Identifiable<T> = maker.make();
-        blank.copy(snapshot.toJSON() as T);
-        blank.id = snapshot.key;
-        previous.copy(blank);
+        if (snapshot.exists()) {
+          let blank: Identifiable<T> = maker.make();
+          blank.copy(snapshot.toJSON() as T);
+          blank.id = snapshot.key;
+          previous.copy(blank);
+        }
       });
   }
 
@@ -139,7 +147,7 @@ export class UpdaterService {
           if (!exists) {
             blank.copy(snapshot.toJSON() as T);
             blank.id = snapshot.key;
-            this.notifyUser(blank, list, UpdaterService.add);
+            this.notifyUser(blank, list, Updater.add);
           }
         });
         
@@ -156,7 +164,7 @@ export class UpdaterService {
         if (exists) {
           blank.copy(snapshot.toJSON() as T);
           blank.id = snapshot.key;
-          this.notifyUser(blank, list, UpdaterService.change);
+          this.notifyUser(blank, list, Updater.change);
         }
       });
       
@@ -174,7 +182,7 @@ export class UpdaterService {
         if (exists) {
           blank.copy(snapshot.toJSON() as T);
           blank.id = snapshot.key;
-          this.notifyUser(blank, list, UpdaterService.remove);
+          this.notifyUser(blank, list, Updater.remove);
         }
       });
     }
@@ -197,7 +205,7 @@ export class UpdaterService {
           if (!exists) {
             blank.copy(snapshot.toJSON() as T);
             blank.id = snapshot.key;
-            this.notifyUser(blank, list, UpdaterService.add);
+            this.notifyUser(blank, list, Updater.add);
           }
         });
         
@@ -214,7 +222,7 @@ export class UpdaterService {
         if (exists) {
           blank.copy(snapshot.toJSON() as T);
           blank.id = snapshot.key;
-          this.notifyUser(blank, list, UpdaterService.change);
+          this.notifyUser(blank, list, Updater.change);
         }
       });
       
@@ -232,20 +240,20 @@ export class UpdaterService {
         if (exists) {
           blank.copy(snapshot.toJSON() as T);
           blank.id = snapshot.key;
-          this.notifyUser(blank, list, UpdaterService.remove);
+          this.notifyUser(blank, list, Updater.remove);
         }
       });
     }
     
     private notifySingle<T>(previous: Identifiable<T>, next: Identifiable<T>) {
     if (previous.id == null || previous.equals(next)) {
-      UpdaterService.changeOne(next, previous);
+      Updater.changeOne(next, previous);
     }
     else {
       this.updates.push({
         'previous': previous,
         'next': next,
-        'function': UpdaterService.changeOne
+        'function': Updater.changeOne
       });
     }
   }

@@ -1,0 +1,36 @@
+<div class="container viewer" *ngIf="!member.id">
+    <h1>חברת הצוות המבוקשת לא קיימת</h1>
+  </div>
+  
+  <div class="container viewer" *ngIf="member.id">
+  <h1>הפרטים של {{ member.firstName + " " + member.lastName }}</h1>
+  
+  <p *ngIf="hasUpdates()">
+    <a class="button" (click)="update()"><i class="fa fa-refresh" aria-hidden="true"></i> לרענן</a>
+  </p>
+  
+  <p>
+    <button class="button" routerLink="/member-editor/{{ member.id }}">עריכה</button>
+  </p>
+  <p *ngIf="member.modifiedBy"><small>
+    עודכן לאחרונה ע"י {{ member.modifiedByUser.getFullestName() }}
+  </small></p>
+  <table>
+    <tr>
+      <td>טלפון</td>
+      <td>{{ member.phone }}</td>
+    </tr>
+    <tr>
+      <td>אימייל</td>
+      <td>{{ member.email }}</td>
+    </tr>
+    <tr>
+      <td>תאריך לידה</td>
+      <td>{{ member.birthdate }}</td>
+    </tr>
+    <tr>
+      <td class="long">הערות</td>
+      <td>{{ member.notes }}</td>
+    </tr>
+  </table>
+  </div>

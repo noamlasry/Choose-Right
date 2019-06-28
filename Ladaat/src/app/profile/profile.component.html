@@ -7,8 +7,7 @@
     <div class="col-75">
       <div class="imgcontainer">
         <label for="avatar">
-          <i class="fa fa-plus-square-o" aria-hidden="true"></i>
-          <img [src]="user.avatar" #picture class="avatar" *ngIf="user.avatar || avatar">
+          <img src="{{ user.avatar ? user.avatar : '../../assets/logos/Icon-white-purple.svg' }}" #picture class="avatar" />
         </label>
         <input type="file" [(ngModel)]="avatar" name="avatar" id="avatar" (change)="onAvatarChanged($event)" hidden>
         <i class="fa fa-trash-o" aria-hidden="true" (click)="deleteAvatar()" *ngIf="user.avatar || avatar"></i>
@@ -18,13 +17,48 @@
   
   <div class="row">
     <div class="col-25">
-      כינוי
+      <label for="nick">
+        כינוי
+      </label>
     </div>
     <div class="col-75">
       <input type="text" [(ngModel)]="user.name" name="nick" id="nick">
     </div>
   </div>
   
+  <div class="row">
+    <div class="col-25">
+      <label for="firstName">
+        שם פרטי
+      </label>
+    </div>
+    <div class="col-75">
+      <input type="text" [(ngModel)]="user.firstName" name="firstName" id="firstName">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="lastName">
+        שם משפחה
+      </label>
+    </div>
+    <div class="col-75">
+      <input type="text" [(ngModel)]="user.lastName" name="lastName" id="lastName">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-25">
+      <label for="email">
+        אימייל
+      </label>
+    </div>
+    <div class="col-75">
+      <input type="text" [(ngModel)]="user.email" name="email" id="email">
+    </div>
+  </div>
+
   <div class="row submit">
     <button class="button" type="submit" [disabled]="!profileForm.form.valid">שמור</button>
     <div class="button" (click)="this.location.back()">בטל</div>

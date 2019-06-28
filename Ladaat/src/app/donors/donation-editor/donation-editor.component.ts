@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
 import { Donor } from '../model/donor';
 import { Donation } from '../model/donation';
 import * as firebase from 'firebase';
-import { UpdaterService } from '../../updater.service';
+import { Updater } from '../../updater';
 import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
@@ -15,6 +15,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class DonationEditorComponent implements OnInit {
 	private donationsRef: firebase.database.Reference = firebase.database().ref("donations");
+	private usersRef: firebase.database.Reference = firebase.database().ref("users");
 
 	donor: Donor = new Donor();
 	donation: Donation = new Donation();
@@ -22,7 +23,7 @@ export class DonationEditorComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private donorService: UpdaterService,
+		private updaterService: Updater,
 		private userAuth: AngularFireAuth,
 		private location: Location
 	) {}
@@ -31,18 +32,18 @@ export class DonationEditorComponent implements OnInit {
 		this.donor.id = this.route.snapshot.paramMap.get("donor");
 		this.donation.id = this.route.snapshot.paramMap.get("donation");
 		
-		
 		if (!this.donor.id) {
 			this.location.back(); //temporary fix;
 		}
 		
 		if (this.donation.id) {
-			this.donorService.initializeSingle(this.donationsRef, this.donation.id, this.donation, new Donation())
-			.then(snapshot => this.donorService.addSingleListener(this.donationsRef, this.donation.id, this.donation, new Donation()));
-
-			// this.donationsRef.child(this.donation.id).once("value", donation => {
-			// 	this.donation.copy(donation.toJSON() as Donation);
-			// });
+			this.updaterService.initializeAndListenSingle(this.donationsRef, this.donation.id, this.donation, new Donation())
+			.then(snapshot => {
+				if (this.donation.modifiedBy) {
+					this.donation.modifiedByUser.id = this.donation.modifiedBy;
+					this.updaterService.initializeSingle(this.usersRef, this.donation.modifiedBy, this.donation.modifiedByUser, this.donation.modifiedByUser);
+				}
+			});
 		}
 	}
 
@@ -56,12 +57,14 @@ export class DonationEditorComponent implements OnInit {
 			this.donation.modifiedBy = this.userAuth.auth.currentUser.uid;
 
 			if (this.donation.id) {
-				this.donationsRef.child(this.donation.id).update(this.donation.toJSON(), () => {
+				this.donationsRef.child(this.donation.id).update(this.donation.toJSON())
+				.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}
 			else {
-				var ref = this.donationsRef.push(this.donation.toJSON(), () => {
+				let ref = this.donationsRef.push(this.donation.toJSON());
+				ref.then(() => {
 					this.router.navigate(['/donor/' + this.donor.id]);
 				});
 			}
@@ -77,10 +80,15 @@ export class DonationEditorComponent implements OnInit {
 	}
 
 	hasUpdates(): boolean {
-	return this.donorService.hasUpdates();
+		return this.updaterService.hasUpdates();
 	}
 
 	update(): void {
-	this.donorService.updateAll();
+		this.updaterService.updateAll();
+
+		if (this.donation.modifiedBy) {
+			this.donation.modifiedByUser.id = this.donation.modifiedBy;
+			this.updaterService.initializeSingle(this.usersRef, this.donation.modifiedBy, this.donation.modifiedByUser, this.donation.modifiedByUser);
+		}
 	}
 }

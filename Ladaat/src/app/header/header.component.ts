@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { User } from '../login/model/user';
+import * as firebase from 'firebase';
+import { Updater } from '../updater';
 
 @Component({
   selector: 'app-header',
@@ -9,29 +11,37 @@ import { User } from '../login/model/user';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  user: User;
+  user: User = new User();
   show: boolean = false;
+
+  private usersRef: firebase.database.Reference = firebase.database().ref("users");
 
   constructor(
     private userAuth: AngularFireAuth,
+    private updaterService: Updater,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.userAuth.auth.onAuthStateChanged(user => {
-      this.reloadUser();
-    });
+      if (user) {
+        this.user.id = user.uid;
+      
+        //We don't need to make this live since only the current user will update her own profile and no one else:
+        this.updaterService.initializeSingle(this.usersRef,this.user.id, this.user, this.user);
+      }
+    })
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.reloadUser();
+        this.updaterService.initializeSingle(this.usersRef,this.user.id, this.user, this.user);
       }
     })
   }
 
   logout() {
     this.userAuth.auth.signOut().then(user => {
-      this.user = null;
+      this.user = new User();
       this.router.navigate(["login"]);
     });
 
@@ -44,17 +54,5 @@ export class HeaderComponent implements OnInit {
     else {
       return false;
     }
-  }
-
-  private reloadUser() {
-    this.user = new User();
-    if (this.userAuth.auth.currentUser.photoURL) {
-      this.user.avatar = this.userAuth.auth.currentUser.photoURL;
-    }
-    else {
-      this.user.avatar = "src/assets/logos/Icon-turquiose-transparent.svg"
-    }
-    this.user.email = this.userAuth.auth.currentUser.email;
-    this.user.name = this.userAuth.auth.currentUser.displayName;
   }
 }
