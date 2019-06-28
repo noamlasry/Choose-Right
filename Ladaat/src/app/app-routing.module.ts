@@ -60,7 +60,7 @@ const routes: Routes = [
 	{ path: 'listing/:id', canActivate: [AuthGuard], component: ListingComponent },
 	{ path: 'listing-editor/:id', canActivate: [AuthGuard], component: ListingEditorComponent },
 	{ path: 'lecture-editor/:id', canActivate: [AuthGuard], component: LectureEditorComponent },
-	// Staff:
+	// Staff: 
 	{ path: 'staff', canActivate: [AuthGuard], component: StaffComponent },
 	{ path: 'member-editor', canActivate: [AuthGuard], component: MemberEditorComponent },
 	{ path: 'member-editor/:id', canActivate: [AuthGuard], component: MemberEditorComponent },

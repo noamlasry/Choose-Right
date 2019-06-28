@@ -29,7 +29,7 @@ export class LectureEditorComponent implements OnInit {
   }
   onSubmit({value, valid}: { value: Lecture, valid: boolean }) 
 	{
-	alert
+	
 		if (valid) {
 			this.educationService.updateLecture(this.lecture, () => this.location.back()); 
 		}

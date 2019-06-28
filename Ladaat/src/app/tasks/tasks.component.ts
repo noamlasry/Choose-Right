@@ -50,13 +50,12 @@ export class TasksComponent implements OnInit
   {
     
     if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
-      this.tasksRef.child(task.id).remove(() => {this.router.navigate(['/tasks/']);});
-      return;
+			this.tasksRef.child(task.id).remove(() => {	
+			}).then(() => {
+				this.router.navigate(['/tasks/']);
+			});
     }
-    else{
-      this.router.navigate(['/tasks/']);
-    }
-      
+    this.router.navigate(['/tasks/']);
   }
 
   getClass(task: Task) 

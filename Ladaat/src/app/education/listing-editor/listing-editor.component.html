@@ -5,7 +5,7 @@
 			<label for="subject">נושא</label>
 		</div>
 		<div class="col-75">
-			<input [(ngModel)]="subject" type="text" name="subject" 
+			<input [(ngModel)]="listing.subject" type="text" name="subject" 
 			id="subject" 
 			class="form-control" required>
 		</div>
@@ -26,7 +26,7 @@
 			<label for="date" >תאריך</label>
 		</div>
 		<div class="col-75">
-			<input [(ngModel)]="date" type="text" name="date" id="date" 
+			<input [(ngModel)]="listing.date" type="text" name="date" id="date" 
 			class="form-control" required/>
 		</div>
 	</div>
@@ -36,7 +36,7 @@
 			<label for="link">קישור</label>
 		</div>
 		<div class="col-75">
-			<input [(ngModel)]="link" type="text" name="link" id="link"
+			<input [(ngModel)]="listing.link" type="text" name="link" id="link"
 			class="form-control" required/>
     </div>
 	</div>

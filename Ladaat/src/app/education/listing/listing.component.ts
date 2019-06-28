@@ -15,7 +15,7 @@ export class ListingComponent implements OnInit {
   id?: string;
   lectureId: string = '';
   subject: string = '';
-  status: string = '';
+  status: string ;
   date: string = '';
   link: string = '';
   
