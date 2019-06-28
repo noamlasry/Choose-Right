@@ -27,57 +27,45 @@ export class TasksComponent implements OnInit
     private taskService : TaskService ,private router: Router,	private route: ActivatedRoute,public datepipe: DatePipe) { }
 
 
-  ngOnInit() {
-   // this.taskData.length = 0;
+  ngOnInit() 
+  {
 		this.taskService.getTasks(tasks => {
 			this.taskData = tasks;
-      console.log(this.taskData);
-      console.log(this.taskService.tasksRef);
     });  
-    
-   // this.taskAlert();
-
   }
   
   taskAlert(task: Task) 
   {
-
-      let temp = false;
-     
+      let temp = false; 
       this.dateToCompare  = new Date(task.expireDate).valueOf();
       this.currDate = new Date().valueOf();
-      console.log("the expire date: "+this.dateToCompare+ " "+this.dateToCompare);
-      console.log("the current date: "+this.currDate+" "+new Date());
+      
       if(this.currDate >= this.dateToCompare )
-      {
-        console.log("the current date is bigger");
         temp = true;
-      }  
-      else
-      {
-        console.log("the expire date is bigger");
-      }
 
      return temp;
-  
   }
   
   removeTask(task: Task)
   {
     
     if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
-			this.tasksRef.child(task.id).remove(() => {this.router.navigate(['/tasks/']);});
+      this.tasksRef.child(task.id).remove(() => {this.router.navigate(['/tasks/']);});
+      return;
     }
-    else
-    this.router.navigate(['/tasks/']);
+    else{
+      this.router.navigate(['/tasks/']);
+    }
+      
   }
 
-  getClass(task: Task) {
-    if (task.doneBy) {
+  getClass(task: Task) 
+  {
+    if (task.doneBy) 
       return 'completed';
-    }
-    else if (this.taskAlert(task)) {
+    
+    else if (this.taskAlert(task)) 
       return 'overdue';
-    }
+    
   }
 }

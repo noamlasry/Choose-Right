@@ -1,26 +1,32 @@
 <div class="container viewer">
     
     <h1>משימות</h1>
+  
+   
+    <h2>* משימות שבוצעו</h2>
+    <br>
+    <h3>* משימות שלא נעשו בזמן</h3>
 
     <div class="toolbar" >
         <button class="button" routerLink="/task">הוסף משימה</button>
       
     </div>
-    <table border="1">
+    <table >
         <tr>
             <th>תאור</th>
             <th>תאריך</th>
             <th>לביצע עד</th>
             <th>מחק</th>
         </tr>
-
-        <tbody *ngFor="let task of taskData">
-            <tr routerLink="/task-detail/{{task.id}}" class="{{ getClass(task) }}">                                         
+    
+            <tr *ngFor="let task of taskData" routerLink="/task-detail/{{task.id}}" class="{{ getClass(task) }}" >                                         
               <td>{{task.description}}</td>
               <td>{{task.date| date:'short'}}</td>
               <td>{{task.expireDate| date:'short'}}</td>
               <td class="remove-task" (click)="removeTask(task)"><i class="fa fa-trash" aria-hidden="true"></i></td>
             </tr>   
-        </tbody>        
+            
     </table>
+
+    
 </div>

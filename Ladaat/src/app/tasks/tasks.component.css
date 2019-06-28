@@ -1,11 +1,29 @@
-table tr.highlight {
-    background-color: #4CAF50 !important;
-    color: #ffffff;
+
+
+.overdue td {
+    background-color: rgba(255, 0, 0, 0.199);
+    border-radius: unset;
+}
+.completed td {
+    background-color: rgba(0, 128, 0, 0.384);
+    border-radius: unset;
 }
 
-.overdue {
-    color: red;
-}
-.completed {
+h2{
+    position: relative;
+    float: left;
+    right:-3.4%;
+    font-size: 60%;
     color: green;
 }
+
+h3{
+    position: relative;
+    float: left;
+    right: 8%;
+    font-size: 60%;
+    color: red;
+}
+
+.pointer {cursor: pointer;}
+ /* tr:hover {background-color:#f5f5f5;}*/

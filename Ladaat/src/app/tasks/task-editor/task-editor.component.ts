@@ -51,9 +51,12 @@ export class TaskEditorComponent implements OnInit {
 	delete() 
 	{
 		if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
-			this.tasksRef.child(this.task.id).remove(() => {
-				this.router.navigate(['/tasks/']);
+			this.tasksRef.child(this.task.id).remove(() => {	
+			}).then(() => {
+				this.router.navigate(['tasks']);
 			});
 		}
+		this.router.navigate(['tasks']);
 	}
+
 }
