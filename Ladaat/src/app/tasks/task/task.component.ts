@@ -13,6 +13,7 @@ export class TaskComponent implements OnInit
 {
   id?: string;
   description: string = '';
+  doJob: string ;
   date: Date;
   expireDate: DatePipe;
   executionDate: DatePipe;

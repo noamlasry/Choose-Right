@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as firebase from 'firebase';
 import {DatePipe} from '@angular/common';
+import { refreshDescendantViews } from '@angular/core/src/render3/instructions';
 
 
 @Component({
@@ -15,6 +16,16 @@ import {DatePipe} from '@angular/common';
 })
 export class TasksComponent implements OnInit 
 {
+  id?: string = '';
+	description: string ='';
+	expireDate: Date;
+	date: Date;
+	doneBy: string ='';
+	executionDate: Date;
+	doJob: string ='';
+
+
+
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
   private taskDetailRef: firebase.database.Reference = firebase.database().ref("taskEdit");
   dateToCompare: number;
@@ -24,7 +35,8 @@ export class TasksComponent implements OnInit
   
   currentSort: (a: Task, b: Task,) => number; 
   constructor(
-    private taskService : TaskService ,private router: Router,	private route: ActivatedRoute,public datepipe: DatePipe) { }
+    private taskService : TaskService ,private router: Router,	
+    private route: ActivatedRoute,public datepipe: DatePipe,private location: Location) { }
 
 
   ngOnInit() 
@@ -48,14 +60,17 @@ export class TasksComponent implements OnInit
   
   removeTask(task: Task)
   {
-    
+  //  this.taskData.splice(this.taskData.indexOf(),1)
+    //'  this.tasks.splice(this.tasks.indexOf(deletedTask), 1)
+      
     if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
 			this.tasksRef.child(task.id).remove(() => {	
 			}).then(() => {
-				this.router.navigate(['/tasks/']);
+       
 			});
     }
-    this.router.navigate(['/tasks/']);
+    
+    
   }
 
   getClass(task: Task) 

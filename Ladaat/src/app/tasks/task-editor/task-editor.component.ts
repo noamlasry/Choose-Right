@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import * as firebase from 'firebase';
@@ -15,11 +15,21 @@ import { TaskDetailComponent } from '../task-detail/task-detail.component';
 export class TaskEditorComponent implements OnInit {
 
 
+	id?: string = '';
+	description: string ='';
+	expireDate: Date;
+	date: Date;
+	doneBy: string ='';
+	executionDate: Date;
+	doJob: string ='';
+
 	task: Task = new Task();
+	currTask : Task;
+	
 	
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
-  
+ 
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -30,9 +40,14 @@ export class TaskEditorComponent implements OnInit {
 	ngOnInit(): void
 	{	
 	
+      //   this.taskService.getTask(this.route.snapshot.paramMap.get('id'), 
+	//	 task => { this.task = task;});
+		
 		this.task.id = this.route.snapshot.paramMap.get("id");
 		this.taskService.getTask(this.task.id, task => {
 			this.task.copy(task);
+
+			
 		});
 	
 
@@ -41,8 +56,7 @@ export class TaskEditorComponent implements OnInit {
 
 	onSubmit({value, valid}: { value: Task, valid: boolean }) 
 	{
-		//this.task.executionDate = new Date(this.executionDate);
-
+		
 		if (valid) {
 			this.taskService.updateTask(this.task, () => this.location.back()); 
 		}

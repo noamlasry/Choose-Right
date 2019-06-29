@@ -4,7 +4,7 @@
           <label for="description">ערוך משימה:</label>
       </div>
       <div class="col-75">
-        <input [(ngModel)]="task.description" type="text" name="description" id="description"  required/>
+        <input [(ngModel)]="task.description" type="text" name="description" id="description"  required class="form-control"/>
        
       </div>
     </div>
@@ -14,7 +14,7 @@
         <label for="doneBy">המשימה בוצעה על ידי:</label>
       </div>
       <div class="col-75">
-        <input [(ngModel)]="task.doneBy" type="text" name="doneBy" id="doneBy" required/>
+        <input  [(ngModel)]="task.doneBy" type="text" name="doneBy" id="doneBy"   class="form-control"/>
       </div>
     </div>
 
@@ -23,22 +23,34 @@
           <label for="expireDate">לביצוע עד</label>
         </div>
         <div class="col-75">
-          <input [(ngModel)]="task.expireDate" type="datetime-local" name="expireDate" id="expireDate" required/>
+          <input [(ngModel)]="task.expireDate" type="datetime-local" name="expireDate" id="expireDate" required class="form-control"/>
         </div>
       </div>
+  
+ <div class="row">
+          <div class="col-25">
+            <label for="doJob">בשלבי ביצוע המשימה:</label>
+          </div>
+          <div class="col-75">
+            <input [(ngModel)]="task.doJob" type="text" name="doJob" id="doJob" class="form-control"/>
+          </div>
+        </div>
       
+     
+
+
       <div class="row">
         <div class="col-25">
           <label for="executionDate">תאריך ביצוע המשימה:</label>
         </div>
         <div class="col-75">
-          <input [(ngModel)]="task.executionDate" type="datetime-local" name="executionDate" id="executionDate" required/>
+          <input [(ngModel)]="task.executionDate" type="datetime-local" name="executionDate" id="executionDate" required  class="form-control"/>
         </div>
       </div>
 
     
     <div class="row submit">
-      <button class="button" type="submit" [disabled]="!taskEditForm.form.valid">שמור</button>
+      <button class="button" type="submit" [disabled]="!taskEditForm.form.valid" >שמור</button>
       <div class="button" (click)="this.location.back()">בטל</div>
       <div class="button" (click)="delete()">מחק</div>
     </div>

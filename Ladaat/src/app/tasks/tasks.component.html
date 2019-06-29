@@ -13,17 +13,22 @@
     </div>
     <table >
         <tr>
+            <th></th>
+            <th></th>
             <th>תאור</th>
             <th>תאריך</th>
             <th>לביצע עד</th>
-            <th>מחק</th>
+            <th>בטיפול על ידי</th>
+            
         </tr>
     
-            <tr *ngFor="let task of taskData" routerLink="/task-detail/{{task.id}}" class="{{ getClass(task) }}" >                                         
+            <tr *ngFor="let task of taskData"  class="{{ getClass(task) }}" >  
+              <td class="remove-task" (click)="removeTask(task)"><i class="fa fa-trash" aria-hidden="true"></i></td>
+              <td><i routerLink="/task-detail/{{task.id}}" class="fa fa-eye" aria-hidden="true"></i></td>                                       
               <td>{{task.description}}</td>
               <td>{{task.date| date:'short'}}</td>
               <td>{{task.expireDate| date:'short'}}</td>
-              <td class="remove-task" (click)="removeTask(task)"><i class="fa fa-trash" aria-hidden="true"></i></td>
+              <td>{{task.doJob}}</td>   
             </tr>   
             
     </table>

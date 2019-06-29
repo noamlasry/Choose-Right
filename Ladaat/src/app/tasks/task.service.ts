@@ -70,7 +70,7 @@ export class TaskService
       'date':task.date,
       'description': task.description,
       'executionDate': task.executionDate,
-      
+      'doJob':task.doJob,
       'doneBy': task.doneBy,
       'expireDate': task.expireDate
       });

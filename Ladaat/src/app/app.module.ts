@@ -35,6 +35,7 @@ import { EventEditorComponent } from './events/event-editor/event-editor.compone
 import { EventComponent } from './events/event/event.component';
 import { MemberEditorComponent } from './staff/member-editor/member-editor.component';
 import { MemberComponent } from './staff/member/member.component'
+import { RouterModule, ROUTES } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,6 +72,7 @@ import { MemberComponent } from './staff/member/member.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+   
     CommonModule,
   ],
   entryComponents: [
