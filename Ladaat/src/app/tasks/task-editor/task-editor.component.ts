@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import * as firebase from 'firebase';
 import { Updater } from '../../updater';
 import { Task } from '../model/Task';
@@ -39,14 +39,13 @@ export class TaskEditorComponent implements OnInit {
 	
 	ngOnInit(): void
 	{	
-	
-      //   this.taskService.getTask(this.route.snapshot.paramMap.get('id'), 
-	//	 task => { this.task = task;});
-		
+ 
 		this.task.id = this.route.snapshot.paramMap.get("id");
 		this.taskService.getTask(this.task.id, task => {
 			this.task.copy(task);
-
+			this.task.doJob = "";
+			this.task.doneBy = "";
+			this.task.executionDate = new Date();
 			
 		});
 	

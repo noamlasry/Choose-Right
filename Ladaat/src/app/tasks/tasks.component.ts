@@ -60,8 +60,6 @@ export class TasksComponent implements OnInit
   
   removeTask(task: Task)
   {
-  //  this.taskData.splice(this.taskData.indexOf(),1)
-    //'  this.tasks.splice(this.tasks.indexOf(deletedTask), 1)
       
     if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
 			this.tasksRef.child(task.id).remove(() => {	
@@ -81,5 +79,7 @@ export class TasksComponent implements OnInit
     else if (this.taskAlert(task)) 
       return 'overdue';
     
+    else if (task.doJob) 
+      return 'handle';
   }
 }
