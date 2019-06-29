@@ -63,16 +63,12 @@ export class TasksComponent implements OnInit
 
   filterTasks()
   {
-    console.log("the day: ");
-
     for(let i =0; i<this.taskData.length; i++)
     {
       this.executionToCompare = new Date(this.taskData[i].executionDate).valueOf();
       if(new Date().valueOf() >= this.executionToCompare + this.deleteMisiionTimer)
         this.tasksRef.child(this.taskData[i].id).remove();
-  
     }
-  
   }
   deleteAll()
   {
