@@ -27,9 +27,11 @@ export class TasksComponent implements OnInit
 
 
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
-  private taskDetailRef: firebase.database.Reference = firebase.database().ref("taskEdit");
   dateToCompare: number;
   currDate: number;
+  executionToCompare: number;
+  deleteMisiionTimer: number = 259200000;
+
 
   taskData: Task [];
   
@@ -42,7 +44,8 @@ export class TasksComponent implements OnInit
   ngOnInit() 
   {
 		this.taskService.getTasks(tasks => {
-			this.taskData = tasks;
+      this.taskData = tasks;
+      this.filterTasks();
     });  
   }
   
@@ -57,7 +60,25 @@ export class TasksComponent implements OnInit
 
      return temp;
   }
+
+  filterTasks()
+  {
+    console.log("the day: ");
+
+    for(let i =0; i<this.taskData.length; i++)
+    {
+      this.executionToCompare = new Date(this.taskData[i].executionDate).valueOf();
+      if(new Date().valueOf() >= this.executionToCompare + this.deleteMisiionTimer)
+        this.tasksRef.child(this.taskData[i].id).remove();
   
+    }
+  
+  }
+  deleteAll()
+  {
+    for(let i =0; i<this.taskData.length; i++)
+        this.tasksRef.child(this.taskData[i].id).remove();
+  }
   removeTask(task: Task)
   {
       

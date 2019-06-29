@@ -19,6 +19,16 @@
     </div>
 
     <div class="row">
+      <div class="col-25">
+        <label for="executionDate">המשימה בוצע בתאריך: </label>
+      </div>
+      <div class="col-75">
+        <input [(ngModel)]="task.executionDate" type="datetime-local" name="executionDate" id="executionDate"  class="form-control"/>
+      </div>
+    </div>
+    
+
+    <div class="row">
         <div class="col-25">
           <label for="expireDate">לביצוע עד</label>
         </div>
@@ -36,19 +46,6 @@
           </div>
         </div>
       
-     
-
-
-      <div class="row">
-        <div class="col-25">
-          <label for="executionDate">תאריך ביצוע המשימה:</label>
-        </div>
-        <div class="col-75">
-          <input [(ngModel)]="task.executionDate "  type="datetime-local" name="executionDate" id="executionDate"  class="form-control"/>
-        </div>
-      </div>
-
-    
     <div class="row submit">
       <button class="button" type="submit" [disabled]="!taskEditForm.form.valid" >שמור</button>
       <div class="button" (click)="this.location.back()">בטל</div>

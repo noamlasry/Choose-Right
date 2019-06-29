@@ -64,14 +64,15 @@ export class TaskService
 
   updateTask(task: Task, callback: (task: Task) => void): void 
   {
-    //let latest_date =this.datepipe.transform(task.executionDate, 'M/d/yy, h:mm a');
-   // task.executionDate = latest_date;
+  
     var ref = this.tasksRef.child(task.id).set({
       'date':task.date,
       'description': task.description,
       'executionDate': task.executionDate,
+      
       'doJob':task.doJob,
       'doneBy': task.doneBy,
+      
       'expireDate': task.expireDate
       });
 		ref.then(d => {

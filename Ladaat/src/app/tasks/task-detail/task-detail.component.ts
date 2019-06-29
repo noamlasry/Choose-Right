@@ -11,7 +11,7 @@ import { TaskService } from '../task.service';
 export class TaskDetailComponent implements OnInit 
 {
   task: Task;
-
+  myDate: Date = new Date();
   constructor(
     private route: ActivatedRoute,
     private taskService: TaskService,
@@ -19,9 +19,12 @@ export class TaskDetailComponent implements OnInit
   
   ngOnInit() 
   {
+   
     this.taskService.getTask(this.route.snapshot.paramMap.get('id'), 
     task => { this.task = task;}); 
-    
+   
   }
+ 
+  
 
 }
