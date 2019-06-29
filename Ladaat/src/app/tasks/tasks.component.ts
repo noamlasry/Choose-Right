@@ -30,7 +30,7 @@ export class TasksComponent implements OnInit
   dateToCompare: number;
   currDate: number;
   executionToCompare: number;
-  deleteMisiionTimer: number = 259200000;
+  deleteMisiionTimer: number = 259200000;//three days in millisecound
 
 
   taskData: Task [];
@@ -72,16 +72,24 @@ export class TasksComponent implements OnInit
   }
   deleteAll()
   {
-    for(let i =0; i<this.taskData.length; i++)
-        this.tasksRef.child(this.taskData[i].id).remove();
+        if (confirm("האם את בטוחה שאת רוצה למחוק את כל המשימות?"))
+        {
+          for(let i =0; i<this.taskData.length; i++)
+          {
+            this.tasksRef.child(this.taskData[i].id).remove(() => {	
+            }).then(() => {
+             this.taskData.splice(this.taskData.indexOf(this.taskData[i]),1);
+            });
+          }
+        }    
   }
   removeTask(task: Task)
   {
-      
+   
     if (confirm("האם את בטוחה שאת רוצה למחוק?")) {
 			this.tasksRef.child(task.id).remove(() => {	
 			}).then(() => {
-       
+       this.taskData.splice(this.taskData.indexOf(task),1);
 			});
     }
     
