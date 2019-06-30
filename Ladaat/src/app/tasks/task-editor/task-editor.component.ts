@@ -14,20 +14,9 @@ import { TaskDetailComponent } from '../task-detail/task-detail.component';
 })
 export class TaskEditorComponent implements OnInit {
 
-
-	id?: string = '';
-	description: string ='';
-	expireDate: Date;
-	date: Date;
-	doneBy: string ='';
-	executionDate: Date;
-	doJob: string ='';
-
 	task: Task = new Task();
 	currTask : Task;
 	
-	
-
   private tasksRef: firebase.database.Reference = firebase.database().ref("tasks");
  
 	constructor(
@@ -48,6 +37,7 @@ export class TaskEditorComponent implements OnInit {
 			this.task.executionDate = new Date();
 			
 		});
+		
 	}
 
 	onSubmit({value, valid}: { value: Task, valid: boolean }) 

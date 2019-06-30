@@ -1,17 +1,17 @@
 
 
 .overdue td {
-    background-color: rgba(230, 17, 17, 0.514);
+    background-color: rgba(218, 90, 90, 0.288);
     border-radius: unset;
  
 }
 .completed td {
-    background-color: rgba(0, 128, 0, 0.384);
+    background-color: rgba(0, 128, 0, 0.055);
     border-radius: unset;
  
 }
 .handle td{
-    background-color: rgba(211, 247, 12, 0.521);
+    background-color: rgba(212, 247, 12, 0.137);
     border-radius: unset;
 }
 
